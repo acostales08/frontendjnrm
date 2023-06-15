@@ -48,7 +48,7 @@ const NavBar = () => {
                 color: '#C88EA7',
                 fontWeight: '600',
                 fontSize: '16px'
-            }}>Login</Button>            
+            }}><Link to='/login'>Login</Link></Button>            
         </div>
 
         <div onClick={() => setNav(!nav)} className="md:hidden">

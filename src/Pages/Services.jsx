@@ -1,10 +1,10 @@
 import React from 'react'
-import DasboardLayout from '../Components/Dashboard-layout/DasboardLayout'
+import DashboardLayout from '../Components/Dashboard-layout/DashboardLayout'
 
 const Services = () => {
   return (
     <div name='Services' className=' h-screen w-full '>
-        <DasboardLayout/>
+        <DashboardLayout/>
     </div>
   )
 }

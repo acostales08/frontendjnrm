@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const Contact = () => {
@@ -26,7 +26,7 @@ const Contact = () => {
   })
 
   return (
-    <div  name='Services' className='bg-gray-700 h-screen w-full '>
+    <div  name='Services' className='bg-white h-screen w-full '>
       <table>
         <thead>
           <tr>

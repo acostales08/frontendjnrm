@@ -7,23 +7,9 @@ import ControlledTexField from '../Components/TextField/TextField'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
-  const [password, setPassword] = useState('admin123456789')
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
 
   const haddleOnChangeToggle = () => {
     setShowPassword(!showPassword)
-  }
-
-  const handdlePasswordChande = (e) => {
-    setPassword(e.target.value)
   }
   return (
       <div className='bg-[#fffff] h-screen w-full flex justify-center items-center'>
@@ -55,7 +41,6 @@ const Login = () => {
                     variant='standard'
                     label="Password"
                     type={showPassword ? 'text' : 'password'}
-                    onChange={handdlePasswordChande}
                     id="standard-basic"
                     sx={{
                       width: '350px',

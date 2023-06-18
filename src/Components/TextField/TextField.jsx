@@ -1,25 +1,27 @@
 import React from 'react'
-import { TextField } from '@mui/material'
-import ControlledTypography from '../Typography/Typography'
+import { Box, TextField } from '@mui/material'
 
 
 const ControlledTextField  = (props) => {
-    const { handleChange, variant, label, style, variantTextfield, isGutterBottom, disable } = props
+    const { handleChange, label, style, variantTextfield, disable } = props
 
     return (
-        <>
-            <ControlledTypography 
-            variant={variant}
-            isGutterBottom={isGutterBottom}
-            text={label}
-            />
+        <Box
+        component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+        >
             <TextField
             style={style}
             onChange={handleChange}
             variant={variantTextfield}
+            label={label}
             disabled={disable}
             ></TextField>
-        </>
+        </Box>
     )
 }
 export default ControlledTextField

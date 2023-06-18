@@ -1,15 +1,27 @@
-import React, { useState } from 'react'
+import React, {useState } from 'react'
 import { TextField, IconButton, InputAdornment } from '@mui/material'
 import { FaEye, FaEyeSlash, FaRegUser} from 'react-icons/fa'
-import { BiLock, BiMessageRoundedMinus } from 'react-icons/bi'
+import { BiLock } from 'react-icons/bi'
 import BasicButtons from '../Components/Button/Button'
-import ControlledTexField from '../Components/TextField/TextField'
+
+
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState('')
+  const [pwd, setPwd] =useState('')
 
   const haddleOnChangeToggle = () => {
     setShowPassword(!showPassword)
+  }
+
+
+  const handdleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(user, pwd)
+    setUser("");
+    setPwd("");
+
   }
   return (
       <div className='bg-[#fffff] h-screen w-full flex justify-center items-center'>
@@ -18,7 +30,7 @@ const Login = () => {
             <img className='w-[250px]' src="\logo2.png" alt="logo" />
           </div>
           <div className="">
-            <form action="">
+            <form onSubmit={handdleSubmit}>
                 <div className=" h-16 p-0 flex justify-center items-center gap-4 mx-4 ml-0">
                   <FaRegUser size={25} style={{color: 'rgba(46, 32, 38, .7)'}}/>
                   <div className=' -translate-y-2'>
@@ -26,6 +38,8 @@ const Login = () => {
                     variant='standard'
                     label='Username'
                     type='text'
+                    onChange={(e)=> setUser(e.target.value)}
+                    value={user}
                     sx={{
                       width: '350px',
                       fontWeight: '400'
@@ -42,6 +56,8 @@ const Login = () => {
                     label="Password"
                     type={showPassword ? 'text' : 'password'}
                     id="standard-basic"
+                    onChange={(e) => setPwd(e.target.value)}
+                    value={pwd}
                     sx={{
                       width: '350px',
                       fontWeight: '400'

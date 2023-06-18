@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { ControlledContainer, ControlledCard, ControlledTypography, ControlledGrid, ControlledTextField } from '../Components'
 
 export const Services = () => {
@@ -39,7 +39,7 @@ export const Services = () => {
                                                 marginBottom: '10px',
                                                 width: '100%'
                                             }}
-                                            variantTextfield="outlined"
+                                            variantTextfield="standard"
                                             isgutterbottom={false}
                                         />
                                     </>
@@ -57,7 +57,7 @@ export const Services = () => {
                                                     marginBottom: '10px',
                                                     width: '100%'
                                                 }}
-                                                variantTextfield="outlined"
+                                                variantTextfield="standard"
                                                 isgutterbottom={false}
                                             />
                                         </>

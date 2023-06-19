@@ -12,7 +12,7 @@ const SideBar = () => {
         <h3 className="text-center text-3xl py-4 font-semibold text-[#787878]">Administrator</h3>
           <div className="h-full flex flex-col justify-start items-center my-4 px-3 overflow-hidden"> 
           {Links.map(({index, link, path, img}) => (
-            <h3 key={index} className="w-full p-2 px-4 text-2xl text-[#787878] cursor-pointer flex gap-2 rounded-[-10px] hover:scale-105 duration-200 hover:bg-[#C88EA7] hover:text-white">
+            <h3 key={index} className="w-full p-2 px-4 text-2xl text-[#787878] cursor-pointer flex gap-2  hover:scale-105 duration-200 hover:bg-[#C88EA7] rounded-xl hover:text-white">
               <div className="flex justify-center items-center h-full w-auto ">
                 {img}
               </div>

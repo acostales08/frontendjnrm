@@ -22,6 +22,7 @@ const App = () => {
           <Route path='product' element={<ProductPage />} />
           <Route path='reservation' element={<ReservationPage />} />
         </Route>
+       
       </Routes>
     </Router>
   )

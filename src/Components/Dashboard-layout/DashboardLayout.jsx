@@ -1,17 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import SideBar from '../SideBar/SideBar'
 import ButtonAppBar from '../AppBar/AppBar'
 import { Outlet } from 'react-router-dom'
 
 
 const DasboardLayout = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <main className="h-screen w-auto overflow-hidden flex flex-row">
+    <main className="flex">
       <div className="h-screen hidden md:flex">
-        <SideBar/>
+        <SideBar />
       </div>
         <div className="flex flex-col flex-1">
-            <ButtonAppBar/>
+            <ButtonAppBar onToggle={toggleSidebar}/>
               <Outlet/>
         </div>
     </main>

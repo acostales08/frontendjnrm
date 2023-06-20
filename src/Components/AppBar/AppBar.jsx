@@ -8,12 +8,13 @@ import IconButton from '@mui/material/IconButton';
 import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({onToggle }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{backgroundColor: '#F8E8EE', color: '#787878'}}>
         <Toolbar>
           <IconButton
+            onClick={onToggle}
             size="large"
             edge="start"
             color="inherit"
@@ -22,9 +23,6 @@ export default function ButtonAppBar() {
           >
             <FaBars />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
           <Button color="inherit">
             <Link to='/login'>Login</Link>
           </Button>

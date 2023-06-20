@@ -1,11 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Links } from '../../Routes/Sidebar/SideLinks'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Links } from '../../Routes/Sidebar/SideLinks';
+import { Drawer, List, ListItem, ListItemText,  } from '@mui/material';
 
-const SideBar = ({ isOpen, onClose }) => {
-    
+const MockSide = ({ isOpen, onClose }) => {
   return (
-    <div  className='w-[260px] bg-[#F2D8D8] flex flex-col justify-between'>
+    <Drawer open={isOpen} onClose={onClose}>
+      <div className='w-[260px] h-full bg-[#F2D8D8] flex flex-col justify-between'>
         <div className="flex justify-center items-center my-1">
           <img className='w-[130px]' src="\logo2.png" alt="logo" />
         </div>
@@ -22,8 +23,8 @@ const SideBar = ({ isOpen, onClose }) => {
               </div>
         <h3 className='text-[#787878] p-5 text-start'>Powered by: JNRM corp.</h3>
     </div>
-  )
-}
+    </Drawer>
+  );
+};
 
-export default SideBar
-
+export default MockSide;

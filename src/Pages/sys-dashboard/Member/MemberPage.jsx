@@ -47,7 +47,7 @@ const MemberContent = () => {
     {name: 'email', selector: row => row.email, sortable: true},
     {name: 'username', selector: row => row.username, sortable: true},
     {name: 'action', cell: row => <div className="flex gap-2"><button className='px-3 py-2 bg-[yellow] rounded-lg font-semibold hover:scale-110 duration-200'>edit</button>
-    <button className='px-3 py-2 bg-[red] text-white rounded-lg font-semibold hover:scale-110 duration-200'>delete</button>
+    <button className='px-3 py-2 bg-[red] text-white rounded-md font-semibold hover:scale-110 duration-200'>delete</button>
     </div>}
     
     
@@ -56,9 +56,9 @@ const MemberContent = () => {
 
   return (
     <div className="h-full w-auto p-8 flex flex-col justify-center items-center bg-[#F9F5F6]">
-      <div className="bg-white h-auto w-full p-4 overflow-hidden "style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)', borderRadius: '25px'}}>
+      <div className="bg-white h-auto w-full p-4 overflow-hidden "style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)', borderRadius: '10px'}}>
         <div className="flex justify-between items-center p-5 pb-0">
-        <button className="bg-[#C88EA7] text-white p-2 rounded-lg hover:scale-105 duration-75">Add Member</button>
+        <button className="bg-[#C88EA7] text-white p-2 rounded-md hover:scale-105 duration-75 hover:animate-pulse ">Add Member</button>
         <div className="flex">
           <div className="text-[#787878] p-2 rounded-l-md flex justify-center items-center border border-gray-300">
               <LuSearch className='hover:scale-100 cursor-pointer' />

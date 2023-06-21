@@ -3,8 +3,10 @@ import NavBar from '../Components/NavBar';
 
 const Home = () => {
   return (
-
-    <NavBar/>
+      <div className="relative h-screen bg-[#bbb4bf]  w-full">
+        <img className='absolute w-full h-screen opacity-50' src="\bg.jpeg" alt="" />
+        <NavBar/>
+      </div>
   );
 };
 

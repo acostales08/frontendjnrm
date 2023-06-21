@@ -46,7 +46,9 @@ const MemberContent = () => {
     {name: 'fullname', selector: row => row.fullname, sortable: true},
     {name: 'email', selector: row => row.email, sortable: true},
     {name: 'username', selector: row => row.username, sortable: true},
-    {name: 'password', selector: row => row.password, sortable: true},
+    {name: 'action', cell: row => <div className="flex gap-2"><button className='px-3 py-2 bg-[yellow] rounded-lg font-semibold hover:scale-110 duration-200'>edit</button>
+    <button className='px-3 py-2 bg-[red] text-white rounded-lg font-semibold hover:scale-110 duration-200'>delete</button>
+    </div>}
     
     
   ]

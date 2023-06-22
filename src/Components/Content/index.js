@@ -1,2 +1,5 @@
-export { default as HomeFirstlayer } from './Home/firstLayer'
-export {default as HomeSecondLayer} from './Home/HomeSecondLayer'
+export { default as HomeHero } from './Home/HomeHero'
+export {default as HomePromoContent} from './Home/HomePromoContent'
+export { default as HomeServicesContent} from './Home/HomeServicesContent'
+export { default as HomeAboutContent } from './Home/HomeAboutContent'
+export {default as HomeContactContent} from './Home/HomeContactContent'

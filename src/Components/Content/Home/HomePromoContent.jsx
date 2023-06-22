@@ -1,6 +1,6 @@
 import React from 'react'
 
-const HomeSecondLayer = () => {
+const HomePromoContent = () => {
   return (
     <div className='border border-black w-full bg-gray flex-col justify-center items-center'>
         <h3 className="border border-black text-4xl font-bold w-full text-center text-[#4d494f]">Our Promo</h3>
@@ -14,4 +14,4 @@ const HomeSecondLayer = () => {
   )
 }
 
-export default HomeSecondLayer
+export default HomePromoContent

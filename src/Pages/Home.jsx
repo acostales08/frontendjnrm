@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../Components/NavBar';
-import { HomeFirstlayer, HomeSecondLayer } from '../Components/Content';
+import { HomeHero, HomePromoContent, HomeServicesContent, HomeAboutContent, HomeContactContent } from '../Components/Content';
+
 
 
 const Home = () => {
@@ -9,8 +10,11 @@ const Home = () => {
       <div className=" h-screen w-full ">
         {/* <img src="\bg.jpeg" alt="" /> */}
         <NavBar/>
-        <HomeFirstlayer/>
-        <HomeSecondLayer/>
+        <HomeHero/>
+        <HomePromoContent/>
+        <HomeServicesContent/>
+        <HomeAboutContent/>
+        <HomeContactContent/>
       </div>
     </>
 

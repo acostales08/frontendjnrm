@@ -46,18 +46,19 @@ export const Links = [
   export const navLinks = [
     {
         id:1,
-        path: '/',
+        path: '/home',
         link: 'Home'
     },
     {
         id: 2,
-        path: '/Services',
-        link: 'Services'
+        path: '/Promos',
+        link: 'Promos'
     },
     {
         id: 3,
-        path: '/Promos',
-        link: 'Promos'
+
+        path: '/Services',
+        link: 'Services'
     },
     {
         id: 4,

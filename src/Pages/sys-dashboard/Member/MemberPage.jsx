@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import {LuSearch} from 'react-icons/lu'
 import DataTable from 'react-data-table-component'
+import { ControlledContainer, ControlledCard, ControlledTextField } from '../../../Components'
+import ReusableModal from '../../../Components/Modal/modal'
 
 
 const MemberContent = () => {
@@ -9,6 +11,15 @@ const MemberContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     fetchData()
@@ -29,10 +40,22 @@ const MemberContent = () => {
     
     }
   }
+
+  const updateData = async () => {
+    try {
+      const response = await axios.put('http://localhost:8000/api/member')
+      // const updatedData = data.map(item => (item.id===id? response.data:item));
+
+      // setData(updatedData);
+
+    } catch (error) {
+      setError('error updating')
+    }
+  }
   if (loading) {
     return(
-      <div className="bg-[gray] flex justify-center items-center h-full w-full">
-        <p>Loading...</p>
+      <div className='h-screen w-full fles justify-center items-center'>
+
       </div>
     ) 
   }
@@ -46,8 +69,8 @@ const MemberContent = () => {
     {name: 'fullname', selector: row => row.fullname, sortable: true},
     {name: 'email', selector: row => row.email, sortable: true},
     {name: 'username', selector: row => row.username, sortable: true},
-    {name: 'action', cell: row => <div className="flex gap-2"><button className='px-3 py-2 bg-[yellow] rounded-lg font-semibold hover:scale-110 duration-200'>edit</button>
-    <button className='px-3 py-2 bg-[red] text-white rounded-md font-semibold hover:scale-110 duration-200'>delete</button>
+    {name: 'action', cell: row => <div className="flex gap-2"><button onClick={handleModalOpen} className='px-3 py-2 bg-[yellow] rounded-lg font-semibold hover:scale-110 duration-200'>edit</button>
+    <button onClick={handleModalOpen} className='px-3 py-2 bg-[red] text-white rounded-md font-semibold hover:scale-110 duration-200'>delete</button>
     </div>}
     
     
@@ -55,20 +78,9 @@ const MemberContent = () => {
   
 
   return (
-    <div className="h-full w-auto p-8 flex flex-col justify-center items-center bg-[#F9F5F6]">
-      <div className="bg-white h-auto w-full p-4 overflow-hidden "style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)', borderRadius: '10px'}}>
-        <div className="flex justify-between items-center p-5 pb-0">
-        <button className="bg-[#C88EA7] text-white p-2 rounded-md hover:scale-105 duration-75 hover:animate-pulse ">Add Member</button>
-        <div className="flex">
-          <div className="text-[#787878] p-2 rounded-l-md flex justify-center items-center border border-gray-300">
-              <LuSearch className='hover:scale-100 cursor-pointer' />
-            </div>
-            <input className='border rounded-r-md border-gray-300 px-4' type="text" placeholder='Search ...' />
-          </div>
-        </div>          
-        <div className=" h-auto w-full flex justify-center items-start">
-            <div className="w-full m-5 border border-gray rounded-lg mb-8">
-              <DataTable
+    <main className='px-4 py-40 '>
+      <ControlledCard >
+          <DataTable
               title="Member's List"
               columns={columns}
               data={data}
@@ -76,11 +88,51 @@ const MemberContent = () => {
               pagination
               fixedHeader
               >
-              </DataTable>
+            </DataTable>
+        </ControlledCard>
+        <ReusableModal open={modalOpen} onClose={handleModalClose} title="Edit Member">
+          <div className="flex py-8 flex-col justify-center items-center">
+            <div className="w-full px-6">
+              <ControlledTextField 
+                  variant="subtitle1"
+                  label="Fullname"
+                  style={{
+                    margin: '5px',
+                    width: '100%'
+                  }}
+                  variantTextfield="standard"
+                  isgutterbottom={false}
+              />              
+            </div>
+            <div className="w-full px-6">
+              <ControlledTextField 
+                  variant="subtitle1"
+                  label="Email"
+                  style={{
+                      marginTop: '10px',
+                      marginBottom: '10px',
+                      width: '100%'
+                  }}
+                  variantTextfield="standard"
+                  isgutterbottom={false}
+              />              
+            </div>
+            <div className="w-full px-6">
+              <ControlledTextField 
+                variant="subtitle1"
+                label="Username"
+                style={{
+                    marginTop: '10px',
+                    marginBottom: '10px',
+                    width: '100%'
+                }}
+                variantTextfield="standard"
+                isgutterbottom={false}
+            />
             </div>
           </div>
-      </div>
-    </div>
+        </ReusableModal>
+    </main>
   )
 }
 

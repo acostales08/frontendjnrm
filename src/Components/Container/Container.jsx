@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 const ControlledContainer = ({style, children}) => {
 
     return (
-        <Container style={{style,}}>
+        <Container style={{style}}>
             {children}
         </Container>
     )

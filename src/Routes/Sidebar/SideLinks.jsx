@@ -42,3 +42,31 @@ export const Links = [
       img: <LuSettings size={20}/>
     }
   ]
+
+  export const navLinks = [
+    {
+        id:1,
+        path: '/',
+        link: 'Home'
+    },
+    {
+        id: 2,
+        path: '/Services',
+        link: 'Services'
+    },
+    {
+        id: 3,
+        path: '/Promos',
+        link: 'Promos'
+    },
+    {
+        id: 4,
+        path: '/About',
+        link: 'About'
+    },
+    {
+        id: 5,
+        path: '/Contact',
+        link: 'Contact'
+    },
+]

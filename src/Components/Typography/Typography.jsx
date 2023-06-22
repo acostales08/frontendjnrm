@@ -13,7 +13,7 @@ const ControlledTypography = (props) => {
             gutterBottom = {isGutterBottom}
             style= {style}
             >
-                {text}
+            {text}
             </Typography>
         </>
     )

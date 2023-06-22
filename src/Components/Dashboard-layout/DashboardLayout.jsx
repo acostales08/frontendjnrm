@@ -12,10 +12,10 @@ const DasboardLayout = () => {
   };
   return (
     <main className="flex">
-      <div className="h-screen hidden md:flex">
+      <div className="hidden md:flex">
         <SideBar />
       </div>
-        <div className="flex flex-col flex-1">
+        <div className="flex-1">
             <ButtonAppBar onToggle={toggleSidebar}/>
               <Outlet/>
         </div>

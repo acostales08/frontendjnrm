@@ -42,63 +42,62 @@ const LoginFom = () => {
   }
 
   return (
+      <div className='bg-[#fffff] h-screen w-full flex justify-center items-center'>
+        <div className="w-auto h-auto bg-[#F2D8D8] rounded-[100px] px-10 pb-20" style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)'}}>
+          <div className=" h-60 flex justify-center items-center">
+            <img className='w-[250px]' src="\logo2.png" alt="logo" />
+          </div>
+          <div className="">
+            <form onSubmit={handleSubmit}>
+                <div className=" h-16 p-0 flex justify-center items-center gap-4 mx-4 ml-0">
+                  <FaRegUser size={25} style={{color: 'rgba(46, 32, 38, .7)'}}/>
+                  <div className=' -translate-y-2'>
+                  <TextField
+                    variant='standard'
+                    label='Username'
+                    type='text'
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                    sx={{
+                      width: '350px',
+                      fontWeight: '400'
+                    }}
+                  />
+                  </div>
 
-            <div className='bg-[#fffff] h-screen w-full flex justify-center items-center'>
-              <div className="w-auto h-auto bg-[#F2D8D8] rounded-[100px] px-10 pb-20" style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)'}}>
-                <div className=" h-60 flex justify-center items-center">
-                  <img className='w-[250px]' src="\logo2.png" alt="logo" />
                 </div>
-                <div className="">
-                  <form onSubmit={handleSubmit}>
-                      <div className=" h-16 p-0 flex justify-center items-center gap-4 mx-4 ml-0">
-                        <FaRegUser size={25} style={{color: 'rgba(46, 32, 38, .7)'}}/>
-                        <div className=' -translate-y-2'>
-                        <TextField
-                          variant='standard'
-                          label='Username'
-                          type='text'
-                          onChange={(e) => setUsername(e.target.value)}
-                          value={username}
-                          sx={{
-                            width: '350px',
-                            fontWeight: '400'
-                          }}
-                        />
-                        </div>
-      
-                      </div>
-                      <div className=" h-16 p-0 flex flex-row justify-center items-center gap-4 m-4 ml-0">
-                        <BiLock size={25} style={{color: 'rgba(46, 32, 38, .7)'}}/>
-                        <div className=' -translate-y-2 text-2xl'>
-                        <TextField
-                          variant='standard'
-                          label="Password"
-                          type={showPassword ? 'text' : 'password'}
-                          id="standard-basic"
-                          onChange={(e) => setPassword(e.target.value)}
-                          value={password}
-                          sx={{
-                            width: '350px',
-                            fontWeight: '400'
-                          }}
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <IconButton onClick={haddleOnChangeToggle} edge="end">
-                                  {showPassword ? <FaEye size={25}/> : <FaEyeSlash size={25}/>}
-                                </IconButton>
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                       </div>
-                      </div>
-                      <button className=' mx-2 w-full text-[20px] text-white bg-[#C88EA7] py-2 rounded-[25px] hover:bg-[#c9a7b6]' style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.2)'}}>Login</button>
+                <div className=" h-16 p-0 flex flex-row justify-center items-center gap-4 m-4 ml-0">
+                  <BiLock size={25} style={{color: 'rgba(46, 32, 38, .7)'}}/>
+                  <div className=' -translate-y-2 text-2xl'>
+                  <TextField
+                    variant='standard'
+                    label="Password"
+                    type={showPassword ? 'text' : 'password'}
+                    id="standard-basic"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    sx={{
+                      width: '350px',
+                      fontWeight: '400'
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={haddleOnChangeToggle} edge="end">
+                            {showPassword ? <FaEye size={25}/> : <FaEyeSlash size={25}/>}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  </div>
+                </div>
+                <button className=' mx-2 w-full text-[20px] text-white bg-[#C88EA7] py-2 rounded-[25px] hover:bg-[#c9a7b6]' style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.2)'}}>Login</button>
 
-                  </form>
-                </div>
-              </div>
-            </div>
+            </form>
+          </div>
+        </div>
+      </div>
         )
   }
 

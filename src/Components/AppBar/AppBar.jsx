@@ -23,7 +23,8 @@ export default function ButtonAppBar({onToggle }) {
           >
             <FaBars />
           </IconButton>
-          <Button color="inherit">
+          
+          <Button color="inherit" >
             <Link to='/login'>Login</Link>
           </Button>
         </Toolbar>

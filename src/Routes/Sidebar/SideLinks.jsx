@@ -52,13 +52,13 @@ export const Links = [
     {
         id: 2,
         path: 'promo',
-        link: 'Promos'
+        link: 'Promo'
     },
     {
         id: 3,
 
         path: 'service',
-        link: 'Services'
+        link: 'Service'
     },
     {
         id: 4,

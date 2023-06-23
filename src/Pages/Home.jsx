@@ -7,7 +7,7 @@ import { HomeHero, HomePromoContent, HomeServicesContent, HomeAboutContent, Home
 const Home = () => {
   return (
     <>
-      <div className=" h-screen w-full ">
+      <div className=" h-screen w-full relative">
         {/* <img src="\bg.jpeg" alt="" /> */}
         <NavBar/>
         <HomeHero/>

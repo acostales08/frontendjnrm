@@ -20,12 +20,12 @@ const NavBar = () => {
                 </li> 
             ))}
         </ul>
-        <div className='hidden md:flex gap-1'>
+        <div className='hidden md:flex gap-2'>
         <button className='px-2 py-1 rounded-md text-1xl border border-[#d19db3] hover:scale-105 duration-400 shadow-md'>
-            <Link to='/login'>LOGIN</Link>
+            <Link to='/login'>Login</Link>
         </button> 
         <button className='bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#d19db3] hover:scale-105 duration-400 shadow-md'>
-            SIGN-IN
+            Sign-in
         </button> 
         </div>
         <div onClick={handleClick} className="md:hidden p-4">

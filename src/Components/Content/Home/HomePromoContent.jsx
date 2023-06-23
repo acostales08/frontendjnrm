@@ -2,7 +2,7 @@ import React from 'react'
 
 const HomePromoContent = () => {
   return (
-    <div className='border border-black h-screen w-full bg-gray flex-col justify-center items-center'>
+    <div name="promo" className='border border-black h-screen w-full bg-gray flex-col justify-center items-center'>
       <img src="" alt="" />
         <h3 className="border border-black text-4xl font-bold w-full text-center text-[#4d494f] flex flex-col">Our Promo</h3>
         <div className="h-[460px] w-full border border-black bg-[gray] flex justify-center items-center">

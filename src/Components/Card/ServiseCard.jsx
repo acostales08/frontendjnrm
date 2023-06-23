@@ -1,14 +1,14 @@
 import React from 'react'
 
-const ServiseCard = ({}) => {
+const ServiseCard = ({description, img}) => {
   return (
-    <div className='border border-black h-[60%] w-[25%] shadow-lg rounded-[15px]'>
-        <div className="border border-black h-[55%] w-full">
-            <img className='w-full h-full' src="\Home.png" alt="" />
-        </div>
-        <div className="border border-black h-[45%] w-full">
-            <div className="">description</div>
-        <button>button</button>
+    <div className="h-[660px] w-[440px] rounded-[20px] overflow-hidden shadow-lg gap-1">
+        <img src={img} alt="" className="h-[60%]" />
+        <div className="flex justify-center items-center w-full h-[40%]">
+            <div className="flex-col w-full  text-center text-[#4d494f]">
+            <h6 className=" text-4xl mx-4 my-4">{description}</h6>
+            <button className=" bg-[#C88EA7] rounded-md text-white py-2 px-4 m-4">View Details</button>
+            </div>
         </div>
     </div>
   )

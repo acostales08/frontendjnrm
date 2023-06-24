@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../Components/NavBar';
-import { HomeHero, HomePromoContent, HomeServicesContent, HomeAboutContent, HomeContactContent } from '../Components/Content';
+import { HomeHero, HomePromoContent, HomeServicesContent, HomeAboutContent, HomeContactContent, Footer } from '../Components/Content';
 
 
 
@@ -13,6 +13,7 @@ const Home = () => {
       <HomeServicesContent/>
       <HomeAboutContent/>
       <HomeContactContent/>
+      <Footer/>
     </>
 
   );

@@ -3,7 +3,7 @@ import SimpleButton from '../Button/simpleButton'
 
 const ServiseCard = ({text, img}) => {
   return (
-    <div className="h-[60vh] w-full bg-white rounded-[20px] overflow-hidden shadow-lg">
+    <div className="h-[60vh] w-full bg-[#F9F5F6] rounded-[20px] overflow-hidden shadow-lg">
       <div className="h-[55%] w-full">
         <img src={img} alt="image" className="h-full w-full" />
       </div>

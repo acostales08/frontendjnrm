@@ -1,17 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { navLinks } from '../Routes/Sidebar/SideLinks'
 
 import {Link} from 'react-scroll'
 
 const NavBar = () => {
-    const [click, setClick] = useState(false)
+    const [click, setClick] = useState(false);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [visible, setVisible] = useState(true);
 
+    
     const handleClick = () => setClick(!click)
     const closeMenu = () => setClick(false)
+  //FOR SCROLL HIDE OF NAVBAR
+    useEffect(() => {
+      const handleScroll = () => {
+        const currentScrollPos = window.pageYOffset;
+        const visible = prevScrollPos > currentScrollPos;
+  
+        setPrevScrollPos(currentScrollPos);
+        setVisible(visible);
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, [prevScrollPos]);
+
 
   return (
-    <nav className="w-full h-auto bg-transparent font-bold flex justify-between items-center px-5 md:px-20 py-4 text-[18px] fixed text-[#4d494f] bg-white bg-opacity-20 shadow-lg backdrop-blur-5 webkit-backdrop-blur-5">
+    <nav className={`w-full h-auto font-bold flex justify-between items-center px-5 md:px-20 py-4 text-[18px] fixed  bg-opacity-50 shadow-lg backdrop-blur-5 webkit-backdrop-blur-5 transition-transform duration-300 transform ${
+        visible ? 'translate-y-0' : '-translate-y-full'
+      }  bg-white text-[#4d494f] p-4`}>
         <img className='w-[120px] md:w-[180px] ' src="\logo2.png" alt="logo" />
         <ul className="lg:flex hidden">
             {navLinks.map(({id, path, link}) => (
@@ -24,7 +43,7 @@ const NavBar = () => {
         <button className='px-2 py-1 rounded-md text-1xl border border-[#d19db3] hover:scale-105 duration-400 shadow-md'>
             <Link to='/login'>Login</Link>
         </button> 
-        <button className='bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#d19db3] hover:scale-105 duration-400 shadow-md'>
+        <button className=' bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#d19db3] hover:scale-105 duration-400 shadow-md'>
             Sign-in
         </button> 
         </div>

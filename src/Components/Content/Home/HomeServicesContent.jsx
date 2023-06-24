@@ -25,7 +25,12 @@ const HomeServicesContent = () => {
   ]
 
   return (
-    <div name="service" className="h-auto w-full bg-[#F9F5F6] p-16 ease-in-out duration-150">
+    <div name="service" className="h-auto w-full bg-gradient-to-t from-[#F9F5F6] to-[hsl(346,37%,78%)] rounded-bl-full p-16 ease-in-out duration-150 shadow-2xl">
+      <div className="h-[100px] w-full flex justify-center items-center my-8">
+        <h4 className="text-4xl tracking-[.40em] font-bold text-[#c7941e] text-shadow">
+        Our Services
+        </h4>
+      </div>
       <div className="h-full flex  justify-center items-center w-full flex-col  md:flex-row  lg:flex-row  gap-4">
         {cards.map(({img, description})=> (
             <ServiseCard
@@ -35,9 +40,9 @@ const HomeServicesContent = () => {
           ))}
       </div>
       <div className="h-[50px] w-full my-5 flex justify-center items-center mt-12">
-        <button className="border-2 border-[#C88EA7] text-2xl py-1 px-4 font-semibold rounded-[15px] flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white ">
+        <button className="border-2 border-[#C88EA7] text-xl px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white ">
           See more 
-          <LuArrowRight size={30} className='m-1 mx-4'/>
+          <LuArrowRight size={20} className=' m-[6px] '/>
         </button>
       </div>
     </div>

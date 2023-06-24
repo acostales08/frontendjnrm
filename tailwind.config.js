@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        wiggle: 'wiggle 10s ease-in-out infinite',
+      }
+    },
     screens: {
       'sm': {'min': '640px', 'max': '767px'},
       // => @media (min-width: 640px and max-width: 767px) { ... }

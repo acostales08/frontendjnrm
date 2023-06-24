@@ -41,17 +41,6 @@ const MemberContent = () => {
     }
   }
 
-  const updateData = async () => {
-    try {
-      const response = await axios.put('http://localhost:8000/api/member')
-      // const updatedData = data.map(item => (item.id===id? response.data:item));
-
-      // setData(updatedData);
-
-    } catch (error) {
-      setError('error updating')
-    }
-  }
   if (loading) {
     return(
       <div className='h-screen w-full fles justify-center items-center'>
@@ -78,7 +67,7 @@ const MemberContent = () => {
   
 
   return (
-    <main className='px-4 py-40 '>
+    <main className='px-4 py-40 bg-[#F9F5F6]'>
       <ControlledCard >
           <DataTable
               title="Member's List"

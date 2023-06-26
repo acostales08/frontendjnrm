@@ -67,7 +67,7 @@ const MemberContent = () => {
   
 
   return (
-    <main className='px-4 py-40 bg-[#F9F5F6]'>
+    <main className='h-full px-4 py-40 bg-[#F9F5F6]'>
       <ControlledCard >
           <DataTable
               title="Member's List"

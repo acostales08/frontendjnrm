@@ -31,7 +31,7 @@ const HomeServicesContent = () => {
         Our Services
         </h4>
       </div>
-      <div className="h-full flex  justify-center items-center w-full flex-col  md:flex-row  lg:flex-row  gap-4">
+      <div className="h-full flex  justify-center items-center w-full grid sm:grid-cols-1  md:grid-cols-2 lg:grid-cols-4  gap-4">
         {cards.map(({img, description})=> (
             <ServiseCard
             img={img}
@@ -40,7 +40,7 @@ const HomeServicesContent = () => {
           ))}
       </div>
       <div className="h-[50px] w-full my-5 flex justify-center items-center mt-12">
-        <button className="border-2 border-[#C88EA7] text-xl px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white ">
+        <button className="border-2 border-[#C88EA7] text-xl px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white duration-500">
           See more 
           <LuArrowRight size={20} className=' m-[6px] '/>
         </button>

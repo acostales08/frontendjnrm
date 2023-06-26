@@ -40,17 +40,17 @@ const NavBar = () => {
             ))}
         </ul>
         <div className='hidden lg:flex gap-2'>
-        <button className='px-2 py-1 rounded-md text-1xl border border-[#d19db3] hover:scale-105 duration-400 shadow-md'>
+        <button className='px-2 py-1 rounded-md text-1xl border border-[#d19db3] hover:bg-[#C88EA7] hover:text-white duration-500 shadow-md'>
             <Link to='/login'>Login</Link>
         </button> 
-        <button className=' bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#d19db3] hover:scale-105 duration-400 shadow-md'>
+        <button className=' bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#c9a7b6] duration-500 shadow-md'>
             Sign-in
         </button> 
         </div>
         <div onClick={handleClick} className="lg:hidden p-4">
             {click? <FaTimes size={30}/> : <FaBars size={30}/> }
         </div>
-        <div className={click ? "lg:hidden fixed left-0 top-0 pl-5 pt-8 h-screen w-full rounded-lg border border-gray-300 bg-[#F2D8D8] ease-in-out duration-700" : "hidden"}>
+        <div className={click ? "lg:hidden fixed left-0 top-0 pl-5 pt-8 h-screen w-[50%] rounded-lg border border-gray-300 bg-[#F2D8D8] ease-in-out duration-700" : "hidden"}>
         <img className='w-[120px]' src="\logo2.png" alt="logo" />
             <ul className="text-left lg:hidden flex-col pl-4 gap-4 overflow-hidden">
                 {navLinks.map(({id, path, link}) => (
@@ -60,10 +60,10 @@ const NavBar = () => {
                 ))}
             </ul>
             <div className='hidden lg:flex gap-2'>
-                <button className='px-2 py-1 rounded-md text-1xl border border-[#d19db3] hover:scale-105 duration-400 shadow-md'>
+                <button className='px-2 py-1 rounded-md text-1xl border border-[#d19db3] hover:bg-[#C88EA7] hover:text-white duration-500 shadow-md'>
                     <Link to='/login'>Login</Link>
                 </button> 
-                <button className='bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#d19db3] hover:scale-105 duration-400 shadow-md'>
+                <button className='bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#c9a7b6] duration-500 shadow-md'>
                     Sign-in
                 </button> 
             </div>

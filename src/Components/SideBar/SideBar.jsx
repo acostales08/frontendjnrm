@@ -5,7 +5,7 @@ import { Links } from '../../Routes/Sidebar/SideLinks'
 const SideBar = ({ isOpen, onClose }) => {
     
   return (
-    <div  className='h-full w-[260px] bg-[#F2D8D8] flex flex-col justify-between'>
+    <div className='h-screen w-[260px] bg-[#F2D8D8] flex flex-col justify-between'>
         <div className="flex justify-center items-center my-1">
           <img className='w-[130px]' src="\logo2.png" alt="logo" />
         </div>

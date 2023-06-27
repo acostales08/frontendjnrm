@@ -14,7 +14,7 @@ const HomeHero = () => {
           <button className="border-2 border-[#C88EA7] text-xl px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white duration-500">
           Book now 
           <LuArrowRight size={20} className=' m-[6px] '/>
-        </button>
+          </button>
           </div>
         </div>        
     </div>    

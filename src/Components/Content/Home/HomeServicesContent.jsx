@@ -45,7 +45,7 @@ const HomeServicesContent = () => {
           ))}
       </div>
       <div className="h-[50px] w-full my-5 flex justify-center items-center mt-12">
-        <button className="border-2 border-[#C88EA7] text-xl px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white duration-500">
+        <button className="border-2 border-[#C88EA7] lg:text-xl justify-center items-center text-[16px] px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white duration-500">
           See more 
           <LuArrowRight size={20} className=' m-[6px] '/>
         </button>

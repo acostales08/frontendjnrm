@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Button, TextField } from '@mui/material'
-import ControlledTextField from '../../TextField/TextField'
 
 const HomeContactContent = () => {
   return (
@@ -9,7 +8,7 @@ const HomeContactContent = () => {
             <div className=" w-full h-full flex flex-col lg:flex-row justify-center items-center">
               <div className="w-[75%] h-[80%] mb-10 lf-mb-0">
                 <h3 className="  mt-16 py-3 tracking-widest text-[#C88EA7] font-semibold">Contact Us</h3>
-                <p className=" text-3xl tracking-widest">Email us with any question or inquiries.We would be happy to answer your question and set up a meeting with you.</p>               
+                <p className="text-1xl lg:text-3xl tracking-widest">Email us with any question or inquiries.We would be happy to answer your question and set up a meeting with you.</p>               
               </div>
             </div>
             <div className=" w-full h-full flex justify-center items-center">

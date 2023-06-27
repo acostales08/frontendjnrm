@@ -7,7 +7,7 @@ import backgroundImage from '../../../assets/bg.jpeg'
 
 const HomeAboutContent = () => {
   return (
-    <div name="about" className='h-auto sm:h-auto md:h-auto lg:h-screen w-full bg-fixed' style={{ backgroundImage: `url(${backgroundImage})`}}>
+    <div name="about" className=' lg:h-screen w-full bg-fixed' style={{ backgroundImage: `url(${backgroundImage})`}}>
         <div className="p-2 md:p-8 lg:p-10 h-full w-full  flex-col  bg-[#523240] bg-opacity-80 shadow-lg backdrop-blur-5 webkit-backdrop-blur-5">
           <div className="h-[50%] w-full bg-[#fff3f6] my-5 rounded-[25px] shadow-lg">
             <h2 className="text-1xl lg:text-4xl font-semibold tracking-[.35em] text-[#c7941e] text-shadow  w-full text-center py-2">Announcement</h2>
@@ -18,13 +18,13 @@ const HomeAboutContent = () => {
                 </div>
             </div>
           </div>
-           <div className=" h-[100px] w-full flex flex-col justify-center items-center">
+           <div className="h-[60px] lg:h-[100px] w-full flex flex-col justify-center items-center">
               <h4 className="text-2xl md:text-3xl lg:text-4xl tracking-[.40em] font-bold text-[#c7941e] text-shadow ">
                Our Products
               </h4>
             </div>
-          <div className=" h-auto w-full rounded-[25px] bg-[#fff3f6] shadow-lg p-2 md:p-5 lg:p-10">
-            <div className="w-full h-full text-center gap-8 flex flex-col lg:flex-row pt-8">
+          <div className="h-auto w-full rounded-[25px] bg-[#fff3f6] shadow-lg p-2 md:p-5 lg:p-10">
+            <div className="w-full h-full text-center gap-8 grid grid grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 pt-8">
               <div className="h-full w-full flex flex-col lg:flex-row justify-center items-center">
                   <ControlledCard
                   style={{
@@ -119,9 +119,9 @@ const HomeAboutContent = () => {
               </div>
             </div>
             <div className="w-full flex justify-center p-5 pt-10">
-              <button className="border-2 border-[#C88EA7] text-xl px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white duration-500">
+              <button className="border-2 border-[#C88EA7] justify-center items-center text-[16px] lg:text-xl px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white duration-500">
                       See more
-                <LuArrowRight size={20} className=' m-[6px]'/>
+                <LuArrowRight size={20} className='m-[6px]'/>
               </button>              
             </div>
 

@@ -50,7 +50,7 @@ const NavBar = () => {
         <div onClick={handleClick} className="lg:hidden p-4">
             {click? <FaTimes size={30}/> : <FaBars size={30}/> }
         </div>
-        <div className={click ? "lg:hidden fixed left-0 top-0 pl-5 pt-8 h-screen w-[50%] rounded-lg border border-gray-300 bg-[#F2D8D8] ease-in-out duration-700" : "hidden"}>
+        <div className={click ? "lg:hidden fixed left-0 top-0 pl-5 pt-8 h-screen w-[50%] rounded-lg border border-gray-300 bg-[#F2D8D8] ease-in-out duration-500" : "hidden"}>
         <img className='w-[120px]' src="\logo2.png" alt="logo" />
             <ul className="text-left lg:hidden flex-col pl-4 gap-4 overflow-hidden">
                 {navLinks.map(({id, path, link}) => (

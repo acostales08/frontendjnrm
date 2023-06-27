@@ -13,7 +13,7 @@ const ServiseCard = ({text, img}) => {
         </div>
         <div className="w-full flex justify-center items-center">
           <SimpleButton
-          className= 'px-2 py-1 bg-[#C88EA7] hover:bg-[#d19db3] rounded-md text-[#3b3a3b] shadow-xl'
+          className= 'px-2 py-1 bg-[#C88EA7] hover:bg-[#d19db3] text-[14px] lg:text-2xl rounded-md text-[#3b3a3b] shadow-xl'
           text='View Details'
           />
         </div>

@@ -20,6 +20,7 @@ const ControlledTextField  = (props) => {
             variant={variantTextfield}
             label={label}
             disabled={disable}
+            fullWidth
             ></TextField>
         </Box>
     )

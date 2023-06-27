@@ -6,11 +6,9 @@ const ControlledCard = (props) => {
 
     return (
         <>
-            <Card style={style}>
-                <CardContent>
-                    {children}
-                </CardContent>
-            </Card>
+        <Card style={style}>
+          {children}
+        </Card>
         </>
     )
 }

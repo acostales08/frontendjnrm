@@ -48,12 +48,12 @@ const HomePromoContent = () => {
   return (
     <div name="promo" className='h-auto w-full bg-gradient-to-b from-[#F9F5F6] to-[hsl(346,37%,78%)] rounded-tr-full p-10 px-5 lg:px-10'>
       <div className="h-[100px] w-full flex justify-center items-center">
-        <h4 className="text-4xl tracking-[.40em] font-bold text-[#c7941e] text-shadow">
+        <h4 className="text-2xl lg:text-4xl tracking-[.40em] font-bold text-[#c7941e] text-shadow">
           Our Promos
         </h4>
       </div>
       <div
-        className="flex justify-between items-center rounded-xl text-[#4d494f] h-screen w-full bg-fit bg-no-repeat bg-center"
+        className="flex justify-between items-center rounded-xl text-[#4d494f] h-[70vh] lg:h-[100vh] w-full bg-fit bg-no-repeat bg-center"
         style={{ backgroundImage: `url(${sliders[currentIndex].img})` }}
         ref={slideRef}
       >

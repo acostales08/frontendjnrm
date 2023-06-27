@@ -15,36 +15,30 @@ export const Links = [
     },
     {
       id: '3',
-      link: 'Client',
-      path: '/client',
-      img: <LuUser size={20}/>
-    },
-    {
-      id: '4',
       link: 'Member',
       path: '/member',
       img: <LuUsers size={20}/>
     },
     {
-      id: '5',
+      id: '4',
       link: 'Promo',
       path: '/promo',
       img: <LuTicket size={20}/>
     },
     {
-      id: '6',
+      id: '5',
       link: 'Product',
       path: '/product',
       img: <LuBox size={20}/>
     },
     {
-      id: '7',
+      id: '6',
       link: 'Reservations',
       path: '/reservation',
       img: <LuCalendarRange size={20}/>
     },
     {
-      id: '8',
+      id: '7',
       link: 'Setting',
       path: '/',
       img: <LuSettings size={20}/>
@@ -71,11 +65,11 @@ export const Links = [
     {
         id: 4,
         path: 'about',
-        link: 'About'
+        link: 'Product'
     },
     {
         id: 5,
         path: 'contact',
-        link: 'Contact'
+        link: 'Contact Us'
     },
 ]

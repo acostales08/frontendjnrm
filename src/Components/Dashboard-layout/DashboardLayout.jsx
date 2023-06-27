@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import SideBar from '../SideBar/SideBar'
+import MockSide from '../SideBar/mockbar'
 import ButtonAppBar from '../AppBar/AppBar'
 import { Outlet } from 'react-router-dom'
 
@@ -12,9 +13,9 @@ const DasboardLayout = () => {
   };
   return (
     <main className="flex">
-      <div className="hidden lg:flex">
-        <SideBar />
-      </div>
+        <div className="hidden lg:flex">
+        <SideBar/>
+        </div>
         <div className="flex-1">
             <ButtonAppBar/>
               <Outlet/>

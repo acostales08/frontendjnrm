@@ -28,17 +28,17 @@ const LoginFom = () => {
         password
       })
 
-      const { status, message, admin } = response.data;
+  
       
-      if (status === 200) {
+      if (response.data.status === 200) {
         // Login successful
         // Store the token or handle the response accordingly
-        const token = response.data.token;
+;
         // Navigate to the home screen or any other screen upon successful login
         navigate('/');
       } else {
         // Login failed
-        alert('Error', message || 'Incorrect Username or Password!');
+        alert('Error',  'Incorrect Username or Password!');
       }
     } catch (error) {
       setError(error)
@@ -47,8 +47,8 @@ const LoginFom = () => {
 
   return (
       <div className='bg-[#fffff] h-screen w-full flex justify-center items-center'>
-        <div className="w-auto h-auto bg-[#F2D8D8] rounded-[100px] px-10 pb-20" style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)'}}>
-          <div className=" h-60 flex justify-center items-center">
+        <div className="w-auto h-auto bg-[#F2D8D8] rounded-[80px] px-5 pb-20" style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)'}}>
+          <div className="h-60 flex justify-center items-center">
             <img className='w-[250px]' src="\logo2.png" alt="logo" />
           </div>
           <div className="">

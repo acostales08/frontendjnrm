@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import { FaEye, FaEyeSlash, FaRegUser} from 'react-icons/fa'
 import { TextField, IconButton, InputAdornment } from '@mui/material'
 import { BiLock } from 'react-icons/bi'
+import backgroundImage from '../assets/Homebg.png'
 import BasicButtons from '../Components/Button/Button'
 
 import axios from 'axios'
@@ -46,8 +47,8 @@ const LoginFom = () => {
   }
 
   return (
-      <div className='bg-[#fffff] h-screen w-full flex justify-center items-center'>
-        <div className="w-auto h-auto bg-[#F2D8D8] rounded-[80px] px-5 pb-20" style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)'}}>
+    <div name="home" className='h-screen w-full flex justify-center items-center  px-0 md:px-20 bg-cover bg-center bg-fixed' style={{ backgroundImage: `url(${backgroundImage})`}}>
+        <div className="w-auto h-auto bg-[#F2D8D8] rounded-[25px] px-5 pb-20" style={{boxShadow: '0px 8px 8px rgba(0, 0, 0, 0.4)'}}>
           <div className="h-60 flex justify-center items-center">
             <img className='w-[250px]' src="\logo2.png" alt="logo" />
           </div>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Home,Services, About, Contact, Login } from './Pages'
+import { Home, Samplelogin, Sample } from './Pages'
+// import { Sample } from './Pages/Sample'
 import { DashboardContent, MemberContent, SalesContent, ClientPage, PromoPage, ProductPage, ReservationPage } from './Pages/sys-dashboard'
 import DashboardLayout from './Components/Dashboard-layout/DashboardLayout'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -8,9 +9,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/Home" element={<Home />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/" element={<DashboardLayout />} >
+        <Route path="/" element={<Home />} />
+        <Route path="/Sample" element={<Sample />} />
+        <Route path="/login" element={<Samplelogin />} />
+        <Route path="dashboard" element={<DashboardLayout />} >
           <Route index element={<DashboardContent />} />
           <Route path='sales' element={<SalesContent />} />
           <Route path='client' element={<ClientPage />} />

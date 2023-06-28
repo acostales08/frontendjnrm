@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { navLinks } from '../Routes/Sidebar/SideLinks'
-
 import {Link} from 'react-scroll'
 
 const NavBar = () => {
@@ -41,7 +40,7 @@ const NavBar = () => {
         </ul>
         <div className='hidden lg:flex gap-2'>
         <button className='px-2 py-1 rounded-md text-1xl border border-[#d19db3] hover:bg-[#C88EA7] hover:text-white duration-500 shadow-md'>
-            <Link to='/login'>Login</Link>
+           <a href="/login">Login</a>
         </button> 
         <button className=' bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#c9a7b6] duration-500 shadow-md'>
             Sign-in

@@ -1,26 +1,26 @@
-import React, {useState} from 'react'
+import React, {useState, createContext} from 'react'
 import SideBar from '../SideBar/SideBar'
 import MockSide from '../SideBar/mockbar'
 import ButtonAppBar from '../AppBar/AppBar'
 import { Outlet } from 'react-router-dom'
 
+export const dashboardContext = createContext({})
 
 const DasboardLayout = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
   return (
+    <dashboardContext.Provider value={{open, setOpen}}>
     <main className="flex">
         <div className="hidden lg:flex">
         <SideBar/>
         </div>
         <div className="flex-1">
-            <ButtonAppBar/>
+            <ButtonAppBar />
               <Outlet/>
         </div>
     </main>
+    </dashboardContext.Provider>
   )
 }
 

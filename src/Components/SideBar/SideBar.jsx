@@ -1,26 +1,35 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { Links } from '../../Routes/Sidebar/SideLinks'
+import { dashboardContext } from '../Dashboard-layout/DashboardLayout'
 
-const SideBar = ({ isOpen, onClose }) => {
+const SideBar = () => {
+
+  const {open} = useContext(dashboardContext)
     
   return (
-    <div className='h-screen w-[260px] bg-[#F2D8D8] flex flex-col justify-between'>
-        <div className="flex justify-center items-center my-1">
-          <img className='w-[130px]' src="\logo2.png" alt="logo" />
+    <div className={`${open ? 'w-16' : 'w-64'} h-screen bg-[#F2D8D8] text-[#787878] flex flex-col justify-between duration-700 overflow-hidden px-2`}>
+        <div>
+          <div className="h-[68px]  flex justify-center items-center">
+          <img className={`${open ? 'w-[80px] h-[55px] py-2' : 'w-[112px]'}`} src="\logo2.png" alt="logo" />
+          </div>
+      <h3 className="text-center my-1 font-serif font-semibold">Admin<span className={`${open ? 'hidden' : ''}`}>istrator</span></h3>
+      <lu className="px-2">
+      {Links.map(({id, link, path, img}) => (
+        <Link to={path}>
+          <li key={id} className='flex items-center gap-x-2 cursor-pointer p-1 hover:bg-[#C88EA7] hover:text-white rounded-sm'>
+            {img}
+            <span className={`${open && 'hidden'} 'origin-left duration-200`}>{link}</span>
+          </li>
+        </Link>
+      ))}
+      </lu>  
+      </div> 
+      <div className=' my-4 w-full text-center '>
+        <span className={`${open && 'hidden'}`}>
+        Powered by: JNRM corp.
+        </span>
         </div>
-        <h3 className="text-center text-3xl py-4 font-semibold text-[#787878]">Administrator</h3>
-          <div className="h-full flex flex-col justify-start items-center my-4 px-3 overflow-hidden"> 
-          {Links.map(({id, link, path, img}) => (
-            <h3 key={id} className="w-full p-2 px-4 text-1xl text-[#787878] cursor-pointer flex gap-2 hover:scale-105 duration-200 hover:bg-[#C88EA7] rounded-xl hover:text-white"> 
-            <Link className='flex w-full hover:animate-pulse' to={path}>
-              <div className="flex justify-center px-2 items-center h-full w-auto ">
-                {img}
-              </div>
-              {link}</Link></h3>
-              ))}
-              </div>
-        <h3 className='text-[#787878] p-5 text-start'>Powered by: JNRM corp.</h3>
     </div>
   )
 }

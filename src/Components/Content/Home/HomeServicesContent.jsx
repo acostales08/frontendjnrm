@@ -36,7 +36,7 @@ const HomeServicesContent = () => {
         Our Services
         </h4>
       </div>
-      <div className="h-full flex  justify-center items-center w-full grid grid-cols-2 lg:grid-cols-4 grid-rows-1  lg:flex-row gap-4">
+      <div className="h-full justify-center items-center w-full grid grid-cols-2 lg:grid-cols-4 grid-rows-1  lg:flex-row gap-4">
         {cards.slice(0, 4).map(({img, description})=> (
             <ServiseCard
             img={img}

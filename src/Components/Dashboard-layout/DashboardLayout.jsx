@@ -1,6 +1,5 @@
 import React, {useState, createContext} from 'react'
 import SideBar from '../SideBar/SideBar'
-import MockSide from '../SideBar/mockbar'
 import ButtonAppBar from '../AppBar/AppBar'
 import { Outlet } from 'react-router-dom'
 

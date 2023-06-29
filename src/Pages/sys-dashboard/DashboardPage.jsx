@@ -5,11 +5,14 @@ import { ControlledContainer, ControlledCard } from '../../Components'
 
 const DashboardContent = () => {
   return (
-    <ControlledContainer>
-      <ControlledCard>
+    <div className="bg-black">
 
-      </ControlledCard>
-    </ControlledContainer>
+    </div>
+    // <ControlledContainer>
+    //   <ControlledCard>
+
+    //   </ControlledCard>
+    // </ControlledContainer>
   )
 }
 

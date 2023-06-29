@@ -14,9 +14,11 @@ const Footer = () => {
           <h6 className="text-[#C88EA7] flex"><MdOutlineEmail size={15}  className='m-1'/>theroyalcharm@gmail.com</h6>
         </div>
         <div className=" w-full h-[50px] flex justify-center items-center gap-4 py-5">
-          <div className="border-2 border-[#C88EA7] text-[#C88EA7] rounded-full p-1 hover:bg-[#C88EA7] hover:border-white hover:shadow-md hover:shadow-[#C88EA7] hover:text-white duration-300 cursor-pointer">
-            <FaFacebookF size={20}/>
-          </div>
+          <a href="https://www.facebook.com/profile.php?id=100090850991125">
+            <div className="border-2 border-[#C88EA7] text-[#C88EA7] rounded-full p-1 hover:bg-[#C88EA7] hover:border-white hover:shadow-md hover:shadow-[#C88EA7] hover:text-white duration-300 cursor-pointer">
+              <FaFacebookF size={20}/>
+            </div>
+          </a>
           <div className="border-2 border-[#C88EA7] text-[#C88EA7] rounded-full p-1 hover:bg-[#C88EA7] hover:border-white hover:shadow-md hover:shadow-[#C88EA7] hover:text-white duration-300 cursor-pointer">
             <FaTwitter size={20}/>
           </div>

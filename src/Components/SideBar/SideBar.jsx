@@ -5,10 +5,10 @@ import { dashboardContext } from '../Dashboard-layout/DashboardLayout'
 
 const SideBar = () => {
 
-  const {open} = useContext(dashboardContext)
+  const {open, setOpen} = useContext(dashboardContext)
     
   return (
-    <div className={`${open ? 'w-16' : 'w-64'} h-screen bg-[#F2D8D8] text-[#787878] flex flex-col justify-between duration-700 overflow-hidden px-2`}>
+    <div className={`${open ? 'w-16' : 'w-64'} h-screen bg-[#F2D8D8] text-[#787878] flex flex-col justify-between duration-700 overflow-hidden px-2 hover:w-64`}>
         <div>
           <div className="h-[68px]  flex justify-center items-center">
           <img className={`${open ? 'w-[80px] h-[55px] py-2' : 'w-[112px]'}`} src="\logo2.png" alt="logo" />
@@ -19,7 +19,12 @@ const SideBar = () => {
         <Link to={path}>
           <li key={id} className='flex items-center gap-x-2 cursor-pointer p-1 hover:bg-[#C88EA7] hover:text-white rounded-sm'>
             {img}
-            <span className={`${open && 'hidden'} 'origin-left duration-200`}>{link}</span>
+            <span
+              className={`${open ? 'hidden' : 'origin-left duration-200'}`}
+              onMouseEnter={() => setOpen(true)}
+            >
+              {link}
+            </span>
           </li>
         </Link>
       ))}

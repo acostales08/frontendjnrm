@@ -41,13 +41,13 @@ const MemberContent = () => {
     }
   }
 
-  if (loading) {
-    return(
-      <div className='h-screen w-full fles justify-center items-center'>
-
-      </div>
-    ) 
+  const rowDisable =(row) => {
+    if (row.status === 'active') {
+    return false;
+  }else{
+    return true;
   }
+  };
 
   if (error) {
     return <p>{error}</p>;
@@ -65,10 +65,10 @@ const MemberContent = () => {
     
   ]
   
-
+ const pgSize = (data.length > 10) ? 5 : data.length;
   return (
-    <main className='h-full px-4 py-40 bg-[#F9F5F6]'>
-      <ControlledCard >
+    <main className='h-[897px] p-8 bg-[#F9F5F6] overflow-scroll'>
+      <ControlledCard>
           <DataTable
               title="Member's List"
               columns={columns}
@@ -76,6 +76,9 @@ const MemberContent = () => {
               selectableRows
               pagination
               fixedHeader
+              progressPending={loading}
+              progressComponent={<h2 className='text-gray-900'>loading please wait ...</h2>}
+              expandableRowDisabled={rowDisable}
               >
             </DataTable>
         </ControlledCard>

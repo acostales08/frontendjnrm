@@ -4,43 +4,43 @@ export const Links = [
     {
       id: '1',
       link: 'Dashboard',
-      path: '/dashboard',
+      path: '/admin',
       img: <LuLayoutDashboard size={25} className='m-1'/>
     },
     {
       id: '2',
         link: 'Sales',
-        path: '/dashboard/sales',
+        path: '/admin/sales',
         img: <LuBarChart4 size={25} className='m-1'/>
     },
     {
       id: '3',
       link: 'Member',
-      path: '/dashboard/member',
+      path: '/admin/member',
       img: <LuUsers size={25} className='m-1' border border-black/>
     },
     {
       id: '4',
       link: 'Promo',
-      path: '/dashboard/promo',
+      path: '/admin/promo',
       img: <LuTicket size={25} className='m-1' border border-black />
     },
     {
       id: '5',
       link: 'Product',
-      path: '/dashboard/product',
+      path: '/admin/product',
       img: <LuBox size={25} className='m-1' border border-black/>
     },
     {
       id: '6',
       link: 'Reservations',
-      path: '/dashboard/reservation',
+      path: '/admin/reservation',
       img: <LuCalendarRange size={25} className='m-1' border border-black/>
     },
     {
       id: '7',
       link: 'Setting',
-      path: '/dashboard/',
+      path: '/admin/',
       img: <LuSettings size={25} className='m-1' border border-black/>
     }
   ]

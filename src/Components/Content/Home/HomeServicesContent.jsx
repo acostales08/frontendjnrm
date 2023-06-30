@@ -1,5 +1,7 @@
 import React from 'react'
 import ServiseCard from '../../Card/ServiseCard'
+import ControlledCard from '../../Card/Card'
+import { Button } from '@mui/material'
 import { LuArrowRight } from 'react-icons/lu'
 
 
@@ -22,10 +24,6 @@ const HomeServicesContent = () => {
     {
       img: 'Home.png',
       description: 'Royal Laser Hair Removal with Whitening',
-    },
-    {
-      img: 'Home.png',
-      description: 'Royal Miracle White Glutathione',
     }
   ]
 
@@ -36,20 +34,42 @@ const HomeServicesContent = () => {
         Our Services
         </h4>
       </div>
-      <div className="h-full justify-center items-center w-full grid grid-cols-2 lg:grid-cols-4 grid-rows-1  lg:flex-row gap-4">
-        {cards.slice(0, 4).map(({img, description})=> (
-            <ServiseCard
-            img={img}
-            text={description}
-            />
+        <div className="h-[full] w-full grid grid-cols-2 lg:grid-cols-4 grid-rows-2 lg:grid-rows-1 gap-5 flex-col lg:flex-row justify-center items-center">
+          {cards.map(({img, description}) => (
+            <ControlledCard
+            style={{
+              borderRadius: '25px'
+              
+            }}
+              children = {
+                <>
+                <div className='h-[280px] lg:h-full w-full overflow-hidden'>
+                  <div className="h-[50%] w-full">
+                    <img className='h-[15vh] lg:h-[30vh] w-full' src={img} />                          
+                  </div>
+                  <div className="gap-2 h-[50%] w-full flex flex-col justify-center items-center">
+                    <div className=" h-[40px] lg:h-[80px] w-full flex justify-center items-center">
+                      <h3 className="text-[16px] lg:text-1xl text-center font-semibold text-shadow">{description}</h3>
+                    </div>  
+                    <div className=" h-[40px] lg:h-[80px] w-full flex justify-center items-center">
+                    <Button
+                        style={{
+                          backgroundColor: '#C88EA7'
+                        }}
+                          variant="contained"
+                          type="submit"
+                        >
+                          View
+                        </Button>
+                    </div>                      
+                  </div>
+                  </div>
+                </>
+              }
+            />            
           ))}
-      </div>
-      <div className="h-[50px] w-full my-5 flex justify-center items-center mt-12">
-        <button className="border-2 border-[#C88EA7] lg:text-xl justify-center items-center text-[16px] px-4 font-semibold rounded-full flex text-[#4d494f] hover:bg-[#C88EA7] hover:text-white duration-500">
-          See more 
-          <LuArrowRight size={20} className=' m-[6px] '/>
-        </button>
-      </div>
+
+        </div>  
     </div>
   )
 }

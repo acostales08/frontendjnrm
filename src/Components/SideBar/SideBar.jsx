@@ -8,7 +8,7 @@ const SideBar = () => {
   const {open, setOpen} = useContext(dashboardContext)
     
   return (
-    <div className={`${open ? 'w-16' : 'w-64'} h-screen bg-[#F2D8D8] text-[#787878] flex flex-col justify-between duration-700 overflow-hidden px-2 hover:w-64`}>
+    <div className={`${open ? 'w-16' : 'w-64'} h-screen bg-[#F2D8D8] text-[#787878] flex flex-col justify-between duration-700 overflow-hidden px-2 `}>
         <div>
           <div className="h-[68px]  flex justify-center items-center">
           <img className={`${open ? 'w-[80px] h-[55px] py-2' : 'w-[112px]'}`} src="\logo2.png" alt="logo" />
@@ -21,7 +21,6 @@ const SideBar = () => {
             {img}
             <span
               className={`${open ? 'hidden' : 'origin-left duration-200'}`}
-              onMouseEnter={() => setOpen(true)}
             >
               {link}
             </span>

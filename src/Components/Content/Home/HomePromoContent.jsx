@@ -57,7 +57,7 @@ const HomePromoContent = () => {
       <div className=" h-[45vh] lg:h-[80vh] w-full lg:w-[80%]  flex justify-between items-center overflow-hidden">
         <div className=" h-full flex justify-center items-center z-30">
         <button
-          onClick={handleNext}
+          onClick={handleBack}
           className="static rounded-[50%] m-0 lg:m-2 h-14 w-14 cursor-pointer bg-white bg-opacity-40 backdrop-blur-5 webkit-backdrop-blur-5 hover:bg-opacity-60"
         >
           <LuChevronLeft size={50} />
@@ -75,7 +75,7 @@ const HomePromoContent = () => {
                 <div key={index}>
                   {Math.abs(activeStep - index) <= 2 ? (
                     <div className=' flex justify-center items-center w-full  '>
-                      <img className="h-[42vh] lg:h-[80vh] w-full lg:w-full z-10" src={img} alt={label} />
+                      <img className="h-[42vh]  lg:h-[77vh] w-full lg:w-full z-10" src={img} alt={label} />
                     </div>
                   ) : null}
                 </div>
@@ -102,7 +102,7 @@ const HomePromoContent = () => {
 
         <div className="h-full flex justify-center items-center z-30">
           <button
-            onClick={handleBack}
+            onClick={handleNext}
             className="static rounded-[50%] m-0 lg:m-2 h-14 w-14  cursor-pointer bg-white bg-opacity-40 shadow-lg backdrop-blur-5 webkit-backdrop-blur-5 hover:bg-opacity-60"
           >
             <LuChevronRight size={50} />

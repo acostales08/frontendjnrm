@@ -25,9 +25,12 @@ const Footer = () => {
           <div className="border-2 border-[#C88EA7] text-[#C88EA7] rounded-full p-1 hover:bg-[#C88EA7] hover:border-white hover:shadow-md hover:shadow-[#C88EA7] hover:text-white duration-300 cursor-pointer">
             <FaInstagram size={20}/>
           </div>
+          <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#search/theroyalcharm9%40gmail.com?compose=new" className="">
           <div className="border-2 border-[#C88EA7] text-[#C88EA7] rounded-full p-1 hover:bg-[#C88EA7] hover:border-white hover:shadow-md hover:shadow-[#C88EA7] hover:text-white duration-300 cursor-pointer">
             <MdOutlineEmail size={20}/>
-          </div> 
+          </div>             
+          </a>
+
         </div>
         <div className="h-[65px] w-full flex justify-center items-center border-t-2 border-[#C88EA7] mt-2">
           <h6 className="text-[#C88EA7] text-1xl">Copyright © 2023 The Royal Charm. All Rights Reserved</h6>

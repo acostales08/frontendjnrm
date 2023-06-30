@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "@mui/material";
+import { Card } from "@mui/material";
 
 const ControlledCard = (props) => {
     const {children, style} = props

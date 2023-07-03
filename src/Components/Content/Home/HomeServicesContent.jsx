@@ -35,7 +35,7 @@ const HomeServicesContent = () => {
         </h4>
       </div>
         <div className="h-[full] w-full grid grid-cols-2 lg:grid-cols-4 grid-rows-2 lg:grid-rows-1 gap-5 flex-col lg:flex-row justify-center items-center">
-          {cards.map(({img, description}) => (
+          {cards.slice(0, 4).map(({img, description}) => (
             <ControlledCard
             style={{
               borderRadius: '25px'

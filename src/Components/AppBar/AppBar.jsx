@@ -25,7 +25,7 @@ export default function ButtonAppBar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <FaBars />
+            <FaBars  className='cursor-pointer'/>
           </IconButton>
           
           <Button color="inherit" >

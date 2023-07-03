@@ -35,7 +35,7 @@ const MemberContent = () => {
 
     }catch (error) {
 
-      setError('error message')
+
       setLoading(false)
     
     }
@@ -67,7 +67,7 @@ const MemberContent = () => {
   
  const pgSize = (data.length > 10) ? 5 : data.length;
   return (
-    <main className='h-[897px] p-8 bg-[#F9F5F6] overflow-scroll'>
+    <main name="member" className='h-[897px] p-8 bg-[#F9F5F6] overflow-scroll'>
       <ControlledCard>
           <DataTable
               title="Member's List"

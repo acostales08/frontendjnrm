@@ -43,7 +43,7 @@ const NavBar = () => {
            <a href="/login">Login</a>
         </button> 
         <button className=' bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#c9a7b6] duration-500 shadow-md'>
-            Sign-in
+            Sign-Up
         </button> 
         </div>
         <div onClick={handleClick} className="lg:hidden p-4">
@@ -63,7 +63,7 @@ const NavBar = () => {
                     <Link to='/login'>Login</Link>
                 </button> 
                 <button className='bg-[#C88EA7] text-white px-2 py-1 rounded-md text-1xl hover:bg-[#c9a7b6] duration-500 shadow-md'>
-                    Sign-in
+                    Sign-Up
                 </button> 
             </div>
         </div>

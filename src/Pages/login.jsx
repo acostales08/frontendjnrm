@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import backgroundImage from '../assets/Homebg.png'
 import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material'
 
@@ -50,7 +51,7 @@ const Samplelogin = () => {
                 <div className="text-[#4d494f] flex justify-center items-center flex-col m-4">
                   <p className="">Don't have an account? <a href="" className="text-[#C88EA7]">Register here</a></p>
                   <p className="">OR</p>
-                  <p className="">Back to <a href="" className="text-[#C88EA7]">Homepage</a> </p>
+                  <p className="">Back to <Link to="/"><span href="" className="text-[#C88EA7]">Homepage</span></Link>  </p>
                 </div>
               </div>
             </div>

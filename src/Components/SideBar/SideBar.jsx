@@ -9,7 +9,7 @@ const SideBar = () => {
   const {open, setOpen} = useContext(dashboardContext)
 
   const onClose = () => {
-    setOpen(false)
+    setOpen(!open)
   }
     
   return (

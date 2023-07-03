@@ -34,8 +34,6 @@ const MemberContent = () => {
     setLoading(false);
 
     }catch (error) {
-
-
       setLoading(false)
     
     }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Home, Samplelogin, Login } from './Pages'
+import { Home, Samplelogin, Login, ReservationForm } from './Pages'
 // import { Sample } from './Pages/Sample'
 import { DashboardContent, MemberContent, SalesContent, PromoPage, ProductPage, ReservationPage} from './Pages/sys-dashboard'
 import {ProductList} from './Components/Content'
@@ -14,6 +14,7 @@ const App = () => {
         <Route path="/ProductList" element={<ProductList />} />
         <Route path="/login" element={<Samplelogin />} />
         <Route path="admin" element={<Login />} />
+        <Route path="/ReservationForm" element={<ReservationForm />} />
         <Route path="dashboard" element={<DashboardLayout />} >
           <Route index element={<DashboardContent />} />
           <Route path='sales' element={<SalesContent />} />

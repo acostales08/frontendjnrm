@@ -8,7 +8,7 @@ const Samplelogin = () => {
   return (
     <div className='h-screen w-full flex justify-center items-center bg-[#F9F5F6]'>
         <div className="h-[85%] w-[80%] flex rounded-[25px] overflow-hidden bg-white shadow-2xl">
-            <div className="flex justify-center items-center h-full w-[45%] bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})`}}>
+            <div className="hidden md:flex lg:flex justify-center items-center h-full w-[45%] bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})`}}>
               <img src="\logo2.png" alt="" className='w-[360px]' />
             </div>
             <div className="h-full w-[55%] flex justify-center items-center">

@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import ControlledCard from '../../Card/Card'
+import {SlArrowLeft} from 'react-icons/sl'
 
 const ProductList = () => {
 
@@ -142,7 +144,13 @@ const ProductList = () => {
   ]
   return (
     <>
-    <h1 className="text-center tracking-widest text-shadow  text-5xl font-bold my-10">Our Product's</h1>
+    <div className="px-10 my-10">
+      <Link to='/'>
+      <div className=" flex justify-start tracking-tighter items-center text-end text-[16px] hover:text-[#C88EA7] duration-150 "><SlArrowLeft size={20} className='pr-2'/> Back to Home</div>
+      </Link>
+      <h1 className="text-center text-4xl font-semibold text-shadow m-5 mt-[-40px]">Our Product's</h1>     
+    </div>
+
     <div className="h-auto w-full flex justify-center items-center px-4 lg:px-16">
       <div className="w-full h-full text-center gap-4 lg:gap-8  grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 pt-8">
             {Product.map(({img, description, productName,price,link })=>(

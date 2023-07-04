@@ -8,33 +8,39 @@ import axios from 'axios'
 
 const Samplelogin = () => {
 
-  const [username, setUsername] = useState("")
-const [password, setPassword] = useState("")
-const [error, setError] = useState(null)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null)
 
+  const haddleOnChangeToggle = () => {
+        setShowPassword(!showPassword)
+      }
+  const navigate = useNavigate()
 
-const navigate = useNavigate()
-const handleSubmit = async(e) => {
-  e.preventDefault()
-  try {
-    const response = await axios.post('http://127.0.0.1:8000/api/login', {
-      username,
-      password
-    })
+  const handleSubmit = async(e) => {
+    e.preventDefault()
 
-    if(response.data.status === 200){
-      navigate("/dashboard")
-    }else{
-      alert("error")
-    }
-
-    setUsername("")
-    setPassword("")
-  } catch (error) {
-      setError(error)    
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/login', {
+        username,
+        password
+      })
+      if (response.data.status === 200) {
+        // Login successful
+        // Store the token or handle the response accordingly
+;
+        // Navigate to the home screen or any other screen upon successful login
+        navigate('/dashboard');
+      } else {
+        // Login failed
+        alert('Error',  'Incorrect Username or Password!');
+      }
+    } catch (error) {
+      setError(error)
       console.log(error)
+    }
   }
-}
   return (
     <div className='h-screen w-full flex justify-center items-center bg-[#F9F5F6]'>
         <div className="h-[85%] w-[80%] flex rounded-[25px] overflow-hidden bg-white shadow-2xl">

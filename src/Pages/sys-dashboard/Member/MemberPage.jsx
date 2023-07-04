@@ -4,6 +4,7 @@ import {LuSearch} from 'react-icons/lu'
 import DataTable from 'react-data-table-component'
 import { ControlledContainer, ControlledCard, ControlledTextField } from '../../../Components'
 import ReusableModal from '../../../Components/Modal/modal'
+import { Button } from '@mui/material'
 
 
 const MemberContent = () => {
@@ -56,8 +57,8 @@ const MemberContent = () => {
     {name: 'fullname', selector: row => row.fullname, sortable: true},
     {name: 'email', selector: row => row.email, sortable: true},
     {name: 'username', selector: row => row.username, sortable: true},
-    {name: 'action', cell: row => <div className="flex gap-2"><button onClick={handleModalOpen} className='px-3 py-2 bg-[yellow] rounded-lg font-semibold hover:scale-110 duration-200'>edit</button>
-    <button onClick={handleModalOpen} className='px-3 py-2 bg-[red] text-white rounded-md font-semibold hover:scale-110 duration-200'>delete</button>
+    {name: 'action', cell: row => <div className="flex gap-2"><Button variant='contained' color='primary'>Edit</Button>
+    <Button variant='outlined' color='error'>Delete</Button>
     </div>}
     
     

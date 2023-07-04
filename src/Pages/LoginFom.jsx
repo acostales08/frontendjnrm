@@ -28,21 +28,19 @@ const LoginFom = () => {
         username,
         password
       })
-
-  
-      
       if (response.data.status === 200) {
         // Login successful
         // Store the token or handle the response accordingly
 ;
         // Navigate to the home screen or any other screen upon successful login
-        navigate('/');
+        navigate('/dashboard');
       } else {
         // Login failed
         alert('Error',  'Incorrect Username or Password!');
       }
     } catch (error) {
       setError(error)
+      console.log(error)
     }
   }
 

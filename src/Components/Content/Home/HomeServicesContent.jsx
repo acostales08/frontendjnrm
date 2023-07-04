@@ -1,8 +1,6 @@
 import React from 'react'
-import ServiseCard from '../../Card/ServiseCard'
 import ControlledCard from '../../Card/Card'
 import { Button } from '@mui/material'
-import { LuArrowRight } from 'react-icons/lu'
 
 
 const HomeServicesContent = () => {

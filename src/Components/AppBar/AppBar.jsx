@@ -14,25 +14,28 @@ export default function ButtonAppBar() {
 
   const {setOpen, open} = useContext(dashboardContext)
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{backgroundColor: '#F8E8EE', color: '#787878'}}>
-        <Toolbar>
-          <IconButton
-            onClick={() => setOpen(!open)}
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <FaBars  className='cursor-pointer'/>
-          </IconButton>
-          
-          <Button color="inherit" >
-            <Link to='/login'>Login</Link>
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <div className="">
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" style={{backgroundColor: '#F8E8EE', color: '#787878'}}>
+          <Toolbar>
+            <IconButton
+              onClick={() => setOpen(!open)}
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <FaBars  className='cursor-pointer'/>
+            </IconButton>
+            
+            <Button color="inherit" >
+              <Link to='/login'>Login</Link>
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </Box>      
+    </div>
+
   );
 }

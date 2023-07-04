@@ -1,10 +1,40 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import backgroundImage from '../assets/Homebg.png'
 import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material'
+import axios from 'axios'
+
 
 
 const Samplelogin = () => {
+
+  const [username, setUsername] = useState("")
+const [password, setPassword] = useState("")
+const [error, setError] = useState(null)
+
+
+const navigate = useNavigate()
+const handleSubmit = async(e) => {
+  e.preventDefault()
+  try {
+    const response = await axios.post('http://127.0.0.1:8000/api/login', {
+      username,
+      password
+    })
+
+    if(response.data.status === 200){
+      navigate("/dashboard")
+    }else{
+      alert("error")
+    }
+
+    setUsername("")
+    setPassword("")
+  } catch (error) {
+      setError(error)    
+      console.log(error)
+  }
+}
   return (
     <div className='h-screen w-full flex justify-center items-center bg-[#F9F5F6]'>
         <div className="h-[85%] w-[80%] flex rounded-[25px] overflow-hidden bg-white shadow-2xl">
@@ -14,9 +44,12 @@ const Samplelogin = () => {
             <div className="h-full w-[55%] flex justify-center items-center">
               <div className=" h-[380px] w-96">
                 <h2 className=" border-[#C88EA7] text-2xl font-bold px-2 border-l-4">Member <span className="font-normal">Access</span></h2>
+                <form action="" onSubmit={handleSubmit}>
                 <TextField
                 label='Username'
                 variant='standard'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 fullWidth
                 style={{margin: '15px 0'}}
                 />
@@ -24,6 +57,8 @@ const Samplelogin = () => {
                 type='password'
                 label='Password'
                 variant='standard'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 fullWidth
                 style={{margin: '15px 0'}}
                 />
@@ -41,13 +76,17 @@ const Samplelogin = () => {
                   }}
                 />
                 <Button
+                type='submit'
                 style={{backgroundColor: '#C88EA7', margin: '15px 0'}}
                 variant='contained'
                 color='secondary'
+
                 fullWidth
                 >
                   Submit
-                </Button>
+                </Button>                  
+                </form>
+
                 <div className="text-[#4d494f] flex justify-center items-center flex-col m-4">
                   <p className="">Don't have an account? <a href="" className="text-[#C88EA7]">Register here</a></p>
                   <p className="">OR</p>

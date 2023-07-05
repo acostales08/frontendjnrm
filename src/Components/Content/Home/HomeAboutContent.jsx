@@ -37,6 +37,13 @@ const HomeAboutContent = () => {
       productName: 'product 4',
       price: '578.00',
       link: 'https://shopee.ph/-BUNDLE-OF-2-Baby-Dove-Hair-to-Toe-Wash-Rich-Moisture-430ml-Refill-for-Dry-Skin-i.40867978.7657839993?sp_atk=b33b8d6d-c0fd-44c9-b2f4-22eef52008e1&xptdk=b33b8d6d-c0fd-44c9-b2f4-22eef52008e1'
+    },
+    {
+      img: '\product4.png',
+      description: 'product 14',
+      productName: 'product 4',
+      price: '578.00',
+      link: 'https://shopee.ph/-BUNDLE-OF-2-Baby-Dove-Hair-to-Toe-Wash-Rich-Moisture-430ml-Refill-for-Dry-Skin-i.40867978.7657839993?sp_atk=b33b8d6d-c0fd-44c9-b2f4-22eef52008e1&xptdk=b33b8d6d-c0fd-44c9-b2f4-22eef52008e1'
     }
     
   ]
@@ -58,7 +65,7 @@ const HomeAboutContent = () => {
               </h4>
             </div>
           <div className="h-auto w-full rounded-[25px] bg-[#fff3f6] shadow-lg p-2 md:p-5 lg:p-10">
-            <div className="w-full h-full text-center gap-2 lg:gap-8  grid grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 pt-8">
+            <div className="w-full h-full text-center gap-2 lg:gap-8  grid grid-cols-2 lg:grid-cols-4 lg:grid-rows-1 pt-8">
             {Product.slice(0, 4).map(({img, description, productName,price,link })=>(
                 <div className="h-full w-full flex flex-col lg:flex-row justify-center items-center">
                   <a href={link}>
@@ -68,25 +75,20 @@ const HomeAboutContent = () => {
                       
                     }}
                       children = {
-                        
-                        <div className='grid grid-cols4 grid-rows-1'>
-                                <div className=' h-full w-full overflow-hidden'>
-                                    <div className="h-[60%] w-[240px] md:w-[320px] lg:w-[350px] flex justify-center items-center">
-                                      <img className='h-[180px] w-[150px] lg:w-[200px] my-4' src={img} />                          
-                                    </div>
-                                    <div className="h-[40%] w-full py-0 lg:py-10">
-                                      <h4 className='text-[14px] lg:text-3xl text-shadow'>{productName}</h4>  
-                                      <p  className='text-[12px] lg:text-1xl text-shadow'>{description}</p>
-                                      <p className='text-[#C88EA7] text-1xl lg:text-2xl'><span>&#8369;</span>{price}</p>                          
-                                    </div>
-                                  </div>                
-                                            
+                      
+                    <div className=' h-full w-full overflow-hidden'>
+                        <div className="h-[60%] w-[240px] md:w-[320px] lg:w-[350px] flex justify-center items-center">
+                          <img className='h-[180px] w-[150px] lg:w-[200px] my-4' src={img} />                          
                         </div>
+                        <div className="h-[40%] w-full py-0 lg:py-10">
+                          <h4 className='text-[14px] lg:text-3xl text-shadow'>{productName}</h4>  
+                          <p  className='text-[12px] lg:text-1xl text-shadow'>{description}</p>
+                          <p className='text-[#C88EA7] text-1xl lg:text-2xl'><span>&#8369;</span>{price}</p>                          
+                        </div>
+                      </div>                
                       }
                     />                    
                   </a>
-
-
               </div>
               ))}  
             </div>

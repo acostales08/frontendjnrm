@@ -152,7 +152,7 @@ const ProductList = () => {
     </div>
 
     <div className="h-auto w-full flex justify-center items-center px-4 lg:px-16">
-      <div className="w-full h-full text-center gap-4 lg:gap-8  grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 pt-8">
+      <div className="w-full h-full text-center gap-4 lg:gap-4  grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 pt-8">
             {Product.map(({img, description, productName,price,link })=>(
                 <div className="h-full w-full flex flex-col lg:flex-row justify-center items-center">
                   <a href={link}>
@@ -162,20 +162,18 @@ const ProductList = () => {
                       
                     }}
                       children = {
-                        
-                        <div className='grid grid-cols4 grid-rows-1'>
-                                <div className='h-full w-full overflow-hidden'>
-                                    <div className="h-[60%] w-full px-10 lg:px-16">
-                                      <img className='h-auto w-auto mt-2 lg:mt-4' src={img} />                          
-                                    </div>
-                                    <div className="h-[40%] w-full py-0 lg:py-2 mb-5">
-                                      <h4 className='text-[14px] lg:text-3xl text-shadow'>{productName}</h4>  
-                                      <p  className='text-[12px] lg:text-1xl text-shadow'>{description}</p>
-                                      <p className='text-[#C88EA7] text-1xl lg:text-2xl mb-10'><span>&#8369;</span>{price}</p>                          
-                                    </div>
-                                  </div>                
-                                            
-                        </div>
+              
+                      <div className='h-full w-full overflow-hidden'>
+                          <div className="h-[60%] w-full px-8 lg:px-16">
+                            <img className='h-36 w-44 mt-2 lg:mt-4' src={img} />                          
+                          </div>
+                          <div className="h-[40%] w-full py-0 lg:py-2 mb-5">
+                            <h4 className='text-[14px] lg:text-3xl text-shadow'>{productName}</h4>  
+                            <p  className='text-[12px] lg:text-1xl text-shadow'>{description}</p>
+                            <p className='text-[#C88EA7] text-1xl lg:text-2xl mb-10'><span>&#8369;</span>{price}</p>                          
+                          </div>
+                        </div>                
+                                  
                       }
                     />                    
                   </a>

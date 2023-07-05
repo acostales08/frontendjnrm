@@ -9,11 +9,7 @@ const ReusableModal = ({ open, onClose, title, children }) => {
           {title}
         </Typography>
         {children}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 16 }}>
-          <Button variant="contained" color="error" onClick={onClose}>
-            Close
-          </Button>
-        </div>
+
       </div>
     </Modal>
   );

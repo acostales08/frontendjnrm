@@ -14,7 +14,6 @@ export default function ButtonAppBar() {
 
   const {setOpen, open} = useContext(dashboardContext)
   return (
-    <div className="">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" style={{backgroundColor: '#F8E8EE', color: '#787878'}}>
           <Toolbar>
@@ -35,7 +34,6 @@ export default function ButtonAppBar() {
           </Toolbar>
         </AppBar>
       </Box>      
-    </div>
-
+ 
   );
 }

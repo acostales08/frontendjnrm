@@ -10,15 +10,16 @@ const DasboardLayout = () => {
 
   return (
     <dashboardContext.Provider value={{open, setOpen}}>
-    <main className="flex">
-        <div className="hidden lg:flex">
-        <SideBar/>
-        </div>
-        <div className="flex-1">
-            <ButtonAppBar />
-              <Outlet/>
-        </div>
-    </main>
+      <main className="flex">
+          <div className="hidden lg:flex">
+          <SideBar/>
+          </div>
+          <div className="flex-1">
+              <ButtonAppBar />            
+
+                <Outlet/>
+          </div>
+      </main>
     </dashboardContext.Provider>
   )
 }

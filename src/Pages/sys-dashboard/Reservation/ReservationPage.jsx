@@ -4,7 +4,7 @@ import DataTable from 'react-data-table-component'
 
 const ReservationPage = () => {
     return (
-        <div className="h-[897px] w-auto p-8 bg-[#F9F5F6]">
+        <section className="h-[897px] w-auto p-8 bg-[#F9F5F6]">
           <ControlledCard>
             <DataTable
                   title="Reservation's List"
@@ -19,7 +19,7 @@ const ReservationPage = () => {
                   >
                 </DataTable>
           </ControlledCard>
-        </div>
+        </section>
       )
 }
 

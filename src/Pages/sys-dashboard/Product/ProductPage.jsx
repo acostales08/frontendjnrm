@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component'
 
 const ProductPage = () => {
     return (
-        <div className="h-[897px] w-auto p-8 bg-[#F9F5F6] overflow-scroll">
+        <section className="h-[897px] w-auto p-8 bg-[#F9F5F6] overflow-scroll">
             <ControlledCard>
               <DataTable
                 title="Product's List"
@@ -20,7 +20,7 @@ const ProductPage = () => {
                 >
               </DataTable>
             </ControlledCard>
-        </div>
+        </section>
       )
 }
 

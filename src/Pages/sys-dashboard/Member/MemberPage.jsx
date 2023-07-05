@@ -66,7 +66,7 @@ const MemberContent = () => {
   
  const pgSize = (data.length > 10) ? 5 : data.length;
   return (
-    <main name="member" className='h-[897px] p-8 bg-[#F9F5F6] overflow-scroll'>
+    <section name="member" className='h-[897px] p-8 bg-[#F9F5F6] overflow-scroll'>
       <ControlledCard>
           <DataTable
               title="Member's List"
@@ -123,7 +123,7 @@ const MemberContent = () => {
             </div>
           </div>
         </ReusableModal>
-    </main>
+    </section>
   )
 }
 

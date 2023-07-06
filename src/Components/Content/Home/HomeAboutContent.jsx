@@ -65,7 +65,7 @@ const HomeAboutContent = () => {
               </h4>
             </div>
           <div className="h-auto w-full rounded-[25px] bg-[#fff3f6] shadow-lg p-2 md:p-5 lg:p-10">
-            <div className="w-full h-full text-center gap-2 lg:gap-8  grid grid-cols-2 lg:grid-cols-4 lg:grid-rows-1 pt-8">
+            <div className="w-full h-full text-center gap-2 lg:gap-8  grid grid-cols-2 lg:grid-cols-4  lg:grid-rows-1 pt-8">
             {Product.slice(0, 4).map(({img, description, productName,price,link })=>(
                 <div className="h-full w-full flex flex-col lg:flex-row justify-center items-center">
                   <a href={link}>

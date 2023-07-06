@@ -7,6 +7,7 @@ export const dashboardContext = createContext({})
 
 const DasboardLayout = () => {
   const [open, setOpen] = useState(false)
+  
 
   return (
     <dashboardContext.Provider value={{open, setOpen}}>
@@ -16,7 +17,6 @@ const DasboardLayout = () => {
           </div>
           <div className="flex-1">
               <ButtonAppBar />            
-
                 <Outlet/>
           </div>
       </main>

@@ -2,23 +2,30 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import {LuSearch} from 'react-icons/lu'
 import DataTable from 'react-data-table-component'
-import { FiEdit, FiDelete } from 'react-icons/fi'
+import { FiEdit } from 'react-icons/fi'
+import {RiDeleteBin6Line} from 'react-icons/ri'
 import IconButton from '@mui/material/IconButton'
-import { ControlledContainer, ControlledCard, ControlledTextField } from '../../../Components'
+import { ControlledCard, ControlledTextField } from '../../../Components'
 import ReusableModal from '../../../Components/Modal/modal'
-import { Button, TextField } from '@mui/material'
+import { Button } from '@mui/material'
 
 
 const MemberContent = () => {
 
   const [search, setSearch] = useState("")
   const [fillteredMember, setFillteredMember] = useState([])
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [isOpenDelete, setIsOpenDelete] = useState(false);
+  const [member, setMember] = useState({
+    fullname: "",
+    email:"",
+    username: "",
+    password: ""
+  })
+  const [data, setData] = useState([]);
 
   const openAddModal = () => {
     setIsOpenAdd(true);
@@ -50,8 +57,6 @@ const MemberContent = () => {
   }, []);
 
 
-  
-
   const fetchData = async () => {
 
     try {
@@ -65,6 +70,27 @@ const MemberContent = () => {
       setLoading(false)
     
     }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      fullname: member.fullname,
+      email: member.email,
+      username: member.email,
+      password: member.password
+    }
+
+    axios.post('http://localhost:8000/api/member', data).then(res => {
+      alert(res.data.message);
+    });
+    closeAddModal()
+  };
+
+  const handleChange = (e) => {
+    e.persist();
+    setMember({...member, [e.target.name]: e.target.value})
   }
 
   useEffect(() => {
@@ -82,6 +108,8 @@ const MemberContent = () => {
   }
   };
 
+
+
   if (error) {
     return <p>{error}</p>;
   }
@@ -94,7 +122,7 @@ const MemberContent = () => {
     {name: 'email', selector: row => row.email, sortable: true},
     {name: 'username', selector: row => row.username, sortable: true},
     {name: 'action', cell: row => <div className="flex gap-2"><IconButton onClick={openEditModal}><FiEdit size={20} className='text-[#3c5dc9]'/></IconButton>
-   <IconButton onClick={openDeleteModal}><FiDelete size={20} className='text-[#971212]'/></IconButton>
+   <IconButton onClick={openDeleteModal}><RiDeleteBin6Line size={20} className='text-[#971212]'/></IconButton>
     </div>}
     
     
@@ -136,9 +164,88 @@ const MemberContent = () => {
                 </div>
 
               }
+              subHeaderAlign='left'
               >
             </DataTable>
         </ControlledCard>
+
+    {/* add modal */}
+        <ReusableModal open={isOpenAdd} onClose={closeAddModal} title="Add Modal">
+        <div className="flex py-8 flex-col justify-center items-center">
+          <div className="w-full px-5">
+            <div className="py-8">
+              <form action="" onSubmit={handleSubmit}>
+              <ControlledTextField 
+                    variant="subtitle1"
+                    label="Fullname"
+                    value={member.fullname}
+                    onChange={handleChange}
+                    style={{
+                      margin: '5px',
+                      width: '100%'
+                    }}
+                    variantTextfield="standard"
+                    isgutterbottom={false}
+                />              
+
+                <ControlledTextField 
+                    variant="subtitle1"
+                    label="Email"
+                    value={member.email}
+                    onChange={handleChange}
+                    style={{
+                        marginTop: '10px',
+                        marginBottom: '10px',
+                        width: '100%'
+                    }}
+                    variantTextfield="standard"
+                    isgutterbottom={false}
+                />              
+                <ControlledTextField 
+                  variant="subtitle1"
+                  label="Username"
+                  value={member.username}
+                  onChange={handleChange}
+                  style={{
+                      marginTop: '10px',
+                      marginBottom: '10px',
+                      width: '100%'
+                  }}
+                  variantTextfield="standard"
+                  isgutterbottom={false}
+                />
+                <ControlledTextField 
+                  variant="subtitle1"
+                  label="Password"
+                  value={member.password}
+                  onChange={handleChange}
+                  style={{
+                      marginTop: '10px',
+                      marginBottom: '10px',
+                      width: '100%'
+                  }}
+                  variantTextfield="standard"
+                  isgutterbottom={false}
+                  
+                />   
+              </form>   
+            </div>
+          </div>
+            <div className='flex justify-end w-full px-2  border-t-2'>
+              <div className="flex gap-3 my-4">
+                <Button type='submit' variant="contained" color="primary">
+                  Save
+                </Button>
+                <Button variant="text" color="info" onClick={closeAddModal}>
+                  Close
+                </Button>
+              </div>
+            </div>
+          </div>
+          
+        </ReusableModal>
+
+    {/* edit modal */}
         <ReusableModal open={isOpenEdit} onClose={closeEditModal} title="Edit Member">
           <div className="flex py-8 flex-col justify-center items-center">
             <div className="w-full px-6">
@@ -191,70 +298,8 @@ const MemberContent = () => {
               </div>
             </div>
         </ReusableModal>
-        <ReusableModal open={isOpenAdd} onClose={closeAddModal} title="Add Modal">
-        <div className="flex py-8 flex-col justify-center items-center">
-          <div className="w-full px-5">
-            <div className="py-8">
-                <ControlledTextField 
-                    variant="subtitle1"
-                    label="Fullname"
-                    style={{
-                      margin: '5px',
-                      width: '100%'
-                    }}
-                    variantTextfield="standard"
-                    isgutterbottom={false}
-                />              
 
-                <ControlledTextField 
-                    variant="subtitle1"
-                    label="Email"
-                    style={{
-                        marginTop: '10px',
-                        marginBottom: '10px',
-                        width: '100%'
-                    }}
-                    variantTextfield="standard"
-                    isgutterbottom={false}
-                />              
-                <ControlledTextField 
-                  variant="subtitle1"
-                  label="Username"
-                  style={{
-                      marginTop: '10px',
-                      marginBottom: '10px',
-                      width: '100%'
-                  }}
-                  variantTextfield="standard"
-                  isgutterbottom={false}
-                />
-                <ControlledTextField 
-                  variant="subtitle1"
-                  label="Password"
-                  style={{
-                      marginTop: '10px',
-                      marginBottom: '10px',
-                      width: '100%'
-                  }}
-                  variantTextfield="standard"
-                  isgutterbottom={false}
-                />                
-            </div>
-         
-          </div>
-
-            <div className='flex justify-end w-full px-2  border-t-2'>
-              <div className="flex gap-3 my-4">
-                <Button variant="contained" color="primary" onClick={closeAddModal}>
-                  Save
-                </Button>
-                <Button variant="text" color="info" onClick={closeAddModal}>
-                  Close
-                </Button>
-              </div>
-            </div>
-          </div>
-        </ReusableModal>
+    {/* delete modal */}
         <ReusableModal open={isOpenDelete} onClose={closeDeleteModal} title="Delete Modal">
         <h1 className='text-2xl text-center py-4 border-y-[1px]'>Are you sure?? you whant to Delete</h1>
         <div className='flex justify-end w-full px-2'>
@@ -268,6 +313,7 @@ const MemberContent = () => {
               </div>
             </div>
         </ReusableModal>
+        
     </section>
   )
 }

@@ -38,7 +38,7 @@ const SideBar = () => {
         </div> 
         <div className=' my-4 w-full text-center '>
           <span className={`${open && 'hidden'}`}>
-          Powered by: JNRM corp.
+          Powered by: JNRM Corp.
           </span>
           </div>
         </div>

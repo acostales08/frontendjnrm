@@ -6,7 +6,7 @@ import { ControlledCard } from '../../../Components'
 
 const SalesContent = () => {
     return (
-        <section className="h-[897px] w-auto p-2 top-0 flex">
+        <section className="h-[897px] w-auto p-2 top-0 flex bg-[#F9F5F6]">
           <div className=" h-full w-[60%] flex flex-col">
             <div className="w-full h-full bg-white rounded-lg grid grid-cols-2 lg:grid-cols-5 grid-rows-3 p-5 gap-3 shadow-inner">
             <ControlledCard
@@ -66,7 +66,7 @@ const SalesContent = () => {
               <ControlledCard/> 
  
             </div>
-            <div className="w-full h-[20%] flex p-2">
+            <div className="w-full h-[20%] flex p-2 bg-[#F9F5F6]">
               <div className="w-full flex px-10 text-1xl gap-4">
                 <div className="gap-0 grid">
                   <p className=" flex items-center">Sub :</p>

@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component'
 
 const ProductPage = () => {
     return (
-        <section className="h-[897px] w-auto p-8 bg-[#F9F5F6] overflow-scroll">
+        <section className="h-[897px] w-auto p-8 bg-[#f8f8f8] overflow-scroll">
             <ControlledCard>
               <DataTable
                 title="Product's List"

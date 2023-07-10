@@ -1,11 +1,16 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-export default function BasicButtons({variant, spacing, direction,text, style, className}) {
+ const ControlledButton = ({variant, size, type, text, color, onClick}) => {
   return (
-    <Stack spacing={spacing} direction={direction}>
-      <Button type='submit' className={className} variant={variant} style={style}>{text}</Button>
-    </Stack>
+    <Box sx={{ '& button': { m: 1 } }}>
+      <div>
+        <Button type={type} variant={variant} size={size} color={color} onClick={onClick}>
+          {text}
+        </Button>
+      </div>
+    </Box>
   );
 }
+export default ControlledButton

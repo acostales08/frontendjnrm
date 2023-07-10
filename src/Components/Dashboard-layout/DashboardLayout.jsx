@@ -11,7 +11,7 @@ const DasboardLayout = () => {
 
   return (
     <dashboardContext.Provider value={{open, setOpen}}>
-      <main className="flex">
+      <main className="flex bg-[#F9F5F6]">
           <div className="hidden lg:flex">
           <SideBar/>
           </div>

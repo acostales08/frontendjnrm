@@ -1,320 +1,211 @@
+import React, {useState, useEffect} from "react"
+import { RiEditBoxFill, RiDeleteBin2Fill } from 'react-icons/ri';
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-import {LuSearch} from 'react-icons/lu'
-import DataTable from 'react-data-table-component'
-import { FiEdit } from 'react-icons/fi'
-import {RiDeleteBin6Line} from 'react-icons/ri'
-import IconButton from '@mui/material/IconButton'
-import { ControlledCard, ControlledTextField } from '../../../Components'
-import ReusableModal from '../../../Components/Modal/modal'
-import { Button } from '@mui/material'
+import { IconButton } from '@mui/material';
+import {ControlledDataTable, ControlledButton, ControlledModal, ControlledTypography, ControlledTextField} from "../../../Components"
 
 
 const MemberContent = () => {
-
-  const [search, setSearch] = useState("")
-  const [fillteredMember, setFillteredMember] = useState([])
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [isOpenAdd, setIsOpenAdd] = useState(false);
-  const [isOpenEdit, setIsOpenEdit] = useState(false);
-  const [isOpenDelete, setIsOpenDelete] = useState(false);
-  const [member, setMember] = useState({
-    fullname: "",
-    email:"",
-    username: "",
-    password: ""
-  })
   const [data, setData] = useState([]);
+  const [isOpen, setIsOpen] =useState(false);
+  const [isEdit, setIsEdit] =useState(false);
+  const [newMember, setNewMember] = useState({
+    fullname: '',
+    email: '',
+    username: '',
+    password: '',
+  });
 
-  const openAddModal = () => {
-    setIsOpenAdd(true);
-  };
-
-  const openEditModal = () => {
-    setIsOpenEdit(true);
-  };
-
-  const openDeleteModal = () => {
-    setIsOpenDelete(true);
-  };
-
+  const openAddmodal = () => {
+    setIsOpen(true)
+  }
   const closeAddModal = () => {
-    setIsOpenAdd(false);
-  };
-
+    setIsOpen(false)
+  }
+  const openEditModal = () => {
+    setIsEdit(true)
+  }
   const closeEditModal = () => {
-    setIsOpenEdit(false);
-  };
-
-  const closeDeleteModal = () => {
-    setIsOpenDelete(false);
-  };
-
-
+    setIsEdit(false)
+  }
   useEffect(() => {
     fetchData()
-  }, []);
-
+  }, [])
 
   const fetchData = async () => {
-
     try {
-
-    const response = await axios.get('http://localhost:8000/api/member');
-    setData(response.data.member);
-    setFillteredMember(response.data.member)
-    setLoading(false);
-
-    }catch (error) {
-      setLoading(false)
-    
+      const response = await axios.get('http://127.0.0.1:8000/api/member')
+      setData(response.data.member)
+    } catch (error) {
+      
     }
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const data = {
-      fullname: member.fullname,
-      email: member.email,
-      username: member.email,
-      password: member.password
-    }
-
-    axios.post('http://localhost:8000/api/member', data).then(res => {
-      alert(res.data.message);
-    });
-    closeAddModal()
   };
 
-  const handleChange = (e) => {
-    e.persist();
-    setMember({...member, [e.target.name]: e.target.value})
+  const createMember = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/member', newMember)
+      fetchData()
+      closeAddModal()
+    } catch (error) {
+      
+    }
   }
-
-  useEffect(() => {
-    const result = data.filter((member) => {
-      return member.fullname.toLowerCase().match(search.toLowerCase());
-    })
-    setFillteredMember(result)
-  }, [search]);
-
-  const rowDisable =(row) => {
-    if (row.status === 'active') {
-    return false;
-  }else{
-    return true;
-  }
-  };
-
-
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-
 
   const columns = [
-    {name: 'id', selector: row => row.id, sortable: true},
-    {name: 'fullname', selector: row => row.fullname, sortable: true},
-    {name: 'email', selector: row => row.email, sortable: true},
-    {name: 'username', selector: row => row.username, sortable: true},
-    {name: 'action', cell: row => <div className="flex gap-2"><IconButton onClick={openEditModal}><FiEdit size={20} className='text-[#3c5dc9]'/></IconButton>
-   <IconButton onClick={openDeleteModal}><RiDeleteBin6Line size={20} className='text-[#971212]'/></IconButton>
-    </div>}
-    
-    
-  ]
-  
+    { name: 'id', selector: (row) => row.id, sortable: true },
+    { name: 'fullname', selector: (row) => row.fullname, sortable: true },
+    { name: 'email', selector: (row) => row.email, sortable: true },
+    { name: 'username', selector: (row) => row.username, sortable: true },
+    {
+      name: 'action',
+      cell: (row) => (
+        <div className="flex gap-2">
+          <IconButton color="success" onClick={openEditModal}>
+            <RiEditBoxFill size={25} />
+          </IconButton>
+          <IconButton color="error">
+            <RiDeleteBin2Fill size={25} />
+          </IconButton>
+        </div>
+      ),
+    },
+  ];
 
-  return (
-    <section name="member" className='h-[897px] p-8 bg-[#F9F5F6] overflow-scroll'>
+  return(
+    <>
+      <div className="px-6 py-4">
+        <ControlledButton 
+          onClick={openAddmodal}
+          size='small' 
+          color='primary' 
+          text='Add Member' 
+          variant='contained'
+          />      
+      </div>
+      <div className="px-8">
+        <ControlledDataTable
+        columns={columns}
+        data={data}
+        />    
+      </div>    
 
-      <ControlledCard>
-          <DataTable
-              title="Member's List"
-              columns={columns}
-              data={fillteredMember}
-              selectableRows
-              pagination
-              fixedHeader
-              progressPending={loading}
-              progressComponent={<h2 className='text-gray-900'>loading please wait ...</h2>}
-              expandableRowDisabled={rowDisable}
-              actions={
-                <div className="m-10">
-                  <Button onClick={openAddModal} variant='contained'>Add</Button>
-                </div>
-              }
-              subHeader
-              subHeaderComponent={
-                <div className="border rounded-lg flex justify-center items-center h-full text-gray-900">
-                  <div className="border-r">
-                  <LuSearch size={20} className='m-2 cursor-pointer'/>
-                  </div>
-                  <input
-                   type="text" 
-                   placeholder='Search' 
-                   className=' p-1'
-                   value={search}
-                   onChange={(e) => setSearch(e.target.value)}
-                    />
-                </div>
 
-              }
-              subHeaderAlign='left'
-              >
-            </DataTable>
-        </ControlledCard>
-
-    {/* add modal */}
-        <ReusableModal open={isOpenAdd} onClose={closeAddModal} title="Add Modal">
-        <div className="flex py-8 flex-col justify-center items-center">
-          <div className="w-full px-5">
-            <div className="py-8">
-              <form action="" onSubmit={handleSubmit}>
-              <ControlledTextField 
-                    variant="subtitle1"
-                    label="Fullname"
-                    value={member.fullname}
-                    onChange={handleChange}
-                    style={{
-                      margin: '5px',
-                      width: '100%'
-                    }}
-                    variantTextfield="standard"
-                    isgutterbottom={false}
-                />              
-
-                <ControlledTextField 
-                    variant="subtitle1"
-                    label="Email"
-                    value={member.email}
-                    onChange={handleChange}
-                    style={{
-                        marginTop: '10px',
-                        marginBottom: '10px',
-                        width: '100%'
-                    }}
-                    variantTextfield="standard"
-                    isgutterbottom={false}
-                />              
-                <ControlledTextField 
-                  variant="subtitle1"
-                  label="Username"
-                  value={member.username}
-                  onChange={handleChange}
-                  style={{
-                      marginTop: '10px',
-                      marginBottom: '10px',
-                      width: '100%'
-                  }}
-                  variantTextfield="standard"
-                  isgutterbottom={false}
-                />
-                <ControlledTextField 
-                  variant="subtitle1"
-                  label="Password"
-                  value={member.password}
-                  onChange={handleChange}
-                  style={{
-                      marginTop: '10px',
-                      marginBottom: '10px',
-                      width: '100%'
-                  }}
-                  variantTextfield="standard"
-                  isgutterbottom={false}
-                  
-                />   
-              </form>   
-            </div>
+      {/* create member Modal */}
+      <ControlledModal open={isOpen} onClose={closeAddModal}>
+        <ControlledTypography
+        text='Add Member'
+        />
+        <div className="flex flex-col justify-center p-5">
+          <ControlledTextField
+            type='text'
+            variant='outlined'
+            label="Full Name"
+            value={newMember.fullname}
+            onChange={(e) => setNewMember({...newMember, fullname: e.target.value})}
+            style={{
+              margin: '5px',
+              width: '100%',
+            }}
+          />  
+          <ControlledTextField
+            type='email'
+            variant='outlined'
+            label="Email"
+            value={newMember.email}
+            onChange={(e) => setNewMember({...newMember, email: e.target.value})}
+            style={{
+              margin: '5px',
+              width: '100%',
+            }}
+          /> 
+          <ControlledTextField
+            type='text'
+            variant='outlined'
+            label="Username"
+            value={newMember.username}
+            onChange={(e) => setNewMember({...newMember, username: e.target.value})}
+            style={{
+              margin: '5px',
+              width: '100%',
+            }}
+          /> 
+          <ControlledTextField
+            type='password'
+            variant='outlined'
+            label="Password"
+            value={newMember.password}
+            onChange={(e) => setNewMember({...newMember, password: e.target.value})}
+            style={{
+              margin: '5px',
+              width: '100%',
+            }}
+          />  
+          <div className="flex">
+            <ControlledButton color='primary' text='Save' variant='contained' onClick={createMember}/>
+            <ControlledButton color='success' text='Cancel' variant='outlined' onClick={closeAddModal}/>             
           </div>
-            <div className='flex justify-end w-full px-2  border-t-2'>
-              <div className="flex gap-3 my-4">
-                <Button type='submit' variant="contained" color="primary">
-                  Save
-                </Button>
-                <Button variant="text" color="info" onClick={closeAddModal}>
-                  Close
-                </Button>
-              </div>
-            </div>
-          </div>
-          
-        </ReusableModal>
+     
+        </div>
+      </ControlledModal>
 
-    {/* edit modal */}
-        <ReusableModal open={isOpenEdit} onClose={closeEditModal} title="Edit Member">
-          <div className="flex py-8 flex-col justify-center items-center">
-            <div className="w-full px-6">
-              <ControlledTextField 
-                  variant="subtitle1"
-                  label="Fullname"
-                  style={{
-                    margin: '5px',
-                    width: '100%'
-                  }}
-                  variantTextfield="standard"
-                  isgutterbottom={false}
-              />              
-            </div>
-            <div className="w-full px-6">
-              <ControlledTextField 
-                  variant="subtitle1"
-                  label="Email"
-                  style={{
-                      marginTop: '10px',
-                      marginBottom: '10px',
-                      width: '100%'
-                  }}
-                  variantTextfield="standard"
-                  isgutterbottom={false}
-              />              
-            </div>
-            <div className="w-full px-6">
-              <ControlledTextField 
-                variant="subtitle1"
-                label="Username"
-                style={{
-                    marginTop: '10px',
-                    marginBottom: '10px',
-                    width: '100%'
-                }}
-                variantTextfield="standard"
-                isgutterbottom={false}
-            />
-            </div>
+      {/* edit member Modal */}
+      <ControlledModal open={isEdit} onClose={closeEditModal}>
+        <ControlledTypography
+        text='Edit Member'
+        />
+        <div className="flex flex-col justify-center p-5">
+          <ControlledTextField
+            type='text'
+            variant='outlined'
+            label="Full Name"
+            value={newMember.fullname}
+            onChange={(e) => setNewMember({...newMember, fullname: e.target.value})}
+            style={{
+              margin: '5px',
+              width: '100%',
+            }}
+          />  
+          <ControlledTextField
+            type='email'
+            variant='outlined'
+            label="Email"
+            value={newMember.email}
+            onChange={(e) => setNewMember({...newMember, email: e.target.value})}
+            style={{
+              margin: '5px',
+              width: '100%',
+            }}
+          /> 
+          <ControlledTextField
+            type='text'
+            variant='outlined'
+            label="Username"
+            value={newMember.username}
+            onChange={(e) => setNewMember({...newMember, username: e.target.value})}
+            style={{
+              margin: '5px',
+              width: '100%',
+            }}
+          /> 
+          <ControlledTextField
+            type='password'
+            variant='outlined'
+            label="Password"
+            value={newMember.password}
+            onChange={(e) => setNewMember({...newMember, password: e.target.value})}
+            style={{
+              margin: '5px',
+              width: '100%',
+            }}
+          />  
+          <div className="flex">
+            <ControlledButton color='primary' text='Update' variant='contained' onClick={createMember}/>
+            <ControlledButton color='success' text='Cancel' variant='outlined' onClick={closeAddModal}/>             
           </div>
-          <div className='flex justify-end w-full px-2'>
-              <div className="flex gap-3 my-4">
-                <Button variant="contained" color="primary" onClick={closeAddModal}>
-                  Save
-                </Button>
-                <Button variant="text" color="info" onClick={closeEditModal}>
-                  Close
-                </Button>
-              </div>
-            </div>
-        </ReusableModal>
-
-    {/* delete modal */}
-        <ReusableModal open={isOpenDelete} onClose={closeDeleteModal} title="Delete Modal">
-        <h1 className='text-2xl text-center py-4 border-y-[1px]'>Are you sure?? you whant to Delete</h1>
-        <div className='flex justify-end w-full px-2'>
-              <div className="flex gap-3 my-4">
-                <Button variant="contained" color="error" onClick={closeAddModal}>
-                  Delete
-                </Button>
-                <Button variant="text" color="info" onClick={closeDeleteModal}>
-                  Close
-                </Button>
-              </div>
-            </div>
-        </ReusableModal>
-        
-    </section>
+     
+        </div>
+      </ControlledModal>
+    </>
   )
 }
 

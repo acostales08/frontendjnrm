@@ -2,19 +2,37 @@ import React, {useState, useEffect} from "react"
 import { RiEditBoxFill, RiDeleteBin2Fill } from 'react-icons/ri';
 import axios from 'axios'
 import { IconButton } from '@mui/material';
-import {ControlledDataTable, ControlledButton, ControlledModal, ControlledTypography, ControlledTextField} from "../../../Components"
+import {ControlledDataTable, ControlledButton, ControlledModal, ControlledTypography, ControlledTextField, ControlledAlert} from "../../../Components"
 
 
 const MemberContent = () => {
   const [data, setData] = useState([]);
+  const [open, setOpen] = useState(false)
   const [isOpen, setIsOpen] =useState(false);
   const [isEdit, setIsEdit] =useState(false);
+  const [isDelete, setIsDelete] = useState(false)
+  const [message, setMessage] = useState("")
   const [newMember, setNewMember] = useState({
     fullname: '',
     email: '',
     username: '',
     password: '',
   });
+  const [editedMember, setEditedMember] = useState({
+    id: '',
+    fullname: '',
+    email: '',
+    username: '',
+    password: '',
+  });
+
+  const openAlert = () => {
+    setOpen(true)
+  }
+
+  const closeAlert = () => {
+    setOpen(false)
+  }
 
   const openAddmodal = () => {
     setIsOpen(true)
@@ -28,6 +46,13 @@ const MemberContent = () => {
   const closeEditModal = () => {
     setIsEdit(false)
   }
+  const openDeletetModal = () => {
+    setIsDelete(true)
+  }
+  const closeDeleteModal = () => {
+    setIsDelete(false)
+  }
+
   useEffect(() => {
     fetchData()
   }, [])
@@ -44,12 +69,49 @@ const MemberContent = () => {
   const createMember = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/member', newMember)
+      setMessage(response.data.message)
       fetchData()
       closeAddModal()
     } catch (error) {
       
     }
-  }
+  };
+
+  const editMember = async (member) => {
+    openEditModal()
+    setEditedMember(data);
+  };
+
+  const updateMember = async () => {
+    openEditModal()
+    try {
+      const response = await axios.put(`http://127.0.0.1:8000/api/member/${editedMember.id}`, editedMember); 
+      console.log(response.data);
+      fetchData();
+      setEditedMember({
+        id: '',
+        fullname: '',
+        email: '',
+        username: '',
+        password: '',
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteMember = async (id) => {
+    try {
+      const response = await axios.delete(`http://127.0.0.1:8000/api/member/${id}/delete`); // Replace '/api/members/:id' with your actual API endpoint
+      console.log(response.data);
+      fetchData();
+      closeDeleteModal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
 
   const columns = [
     { name: 'id', selector: (row) => row.id, sortable: true },
@@ -60,10 +122,10 @@ const MemberContent = () => {
       name: 'action',
       cell: (row) => (
         <div className="flex gap-2">
-          <IconButton color="success" onClick={openEditModal}>
+          <IconButton color="success" onClick={() => editMember(data)}>
             <RiEditBoxFill size={25} />
           </IconButton>
-          <IconButton color="error">
+          <IconButton color="error" onClick={openDeletetModal}>
             <RiDeleteBin2Fill size={25} />
           </IconButton>
         </div>
@@ -142,11 +204,13 @@ const MemberContent = () => {
           />  
           <div className="flex">
             <ControlledButton color='primary' text='Save' variant='contained' onClick={createMember}/>
-            <ControlledButton color='success' text='Cancel' variant='outlined' onClick={closeAddModal}/>             
+            <ControlledButton color='info' text='Cancel' variant='outlined' onClick={closeAddModal}/>             
           </div>
      
         </div>
       </ControlledModal>
+
+
 
       {/* edit member Modal */}
       <ControlledModal open={isEdit} onClose={closeEditModal}>
@@ -158,8 +222,8 @@ const MemberContent = () => {
             type='text'
             variant='outlined'
             label="Full Name"
-            value={newMember.fullname}
-            onChange={(e) => setNewMember({...newMember, fullname: e.target.value})}
+            value={editedMember.fullname}
+            onChange={(e) => setEditedMember({...editedMember, fullname: e.target.value})}
             style={{
               margin: '5px',
               width: '100%',
@@ -169,8 +233,8 @@ const MemberContent = () => {
             type='email'
             variant='outlined'
             label="Email"
-            value={newMember.email}
-            onChange={(e) => setNewMember({...newMember, email: e.target.value})}
+            value={editedMember.email}
+            onChange={(e) => setEditedMember({...editedMember, email: e.target.value})}
             style={{
               margin: '5px',
               width: '100%',
@@ -180,8 +244,8 @@ const MemberContent = () => {
             type='text'
             variant='outlined'
             label="Username"
-            value={newMember.username}
-            onChange={(e) => setNewMember({...newMember, username: e.target.value})}
+            value={editedMember.username}
+            onChange={(e) => setEditedMember({...editedMember, username: e.target.value})}
             style={{
               margin: '5px',
               width: '100%',
@@ -191,8 +255,8 @@ const MemberContent = () => {
             type='password'
             variant='outlined'
             label="Password"
-            value={newMember.password}
-            onChange={(e) => setNewMember({...newMember, password: e.target.value})}
+            value={editedMember.password}
+            onChange={(e) => setEditedMember({...editedMember, password: e.target.value})}
             style={{
               margin: '5px',
               width: '100%',
@@ -200,9 +264,25 @@ const MemberContent = () => {
           />  
           <div className="flex">
             <ControlledButton color='primary' text='Update' variant='contained' onClick={createMember}/>
-            <ControlledButton color='success' text='Cancel' variant='outlined' onClick={closeAddModal}/>             
-          </div>
-     
+            <ControlledButton color='info' text='Cancel' variant='outlined' onClick={closeEditModal}/>             
+          </div>          
+        </div>        
+
+      </ControlledModal>
+
+      {/* delete member  */}
+      <ControlledModal open={isDelete} onClose={closeDeleteModal}>
+        <ControlledTypography
+        text='Delete Member'
+        />
+        <div className=" h-32 flex justify-center items-center">
+            <h2 className="text-[20px] text-center">
+              Are you sure to delete from the list?
+            </h2>
+        </div>
+        <div className="flex">
+          <ControlledButton color='error' text='Delete' variant='contained' onClick={() => deleteMember(data.id)}/>
+          <ControlledButton color='info' text='Cancel' variant='outlined' onClick={closeDeleteModal}/>          
         </div>
       </ControlledModal>
     </>

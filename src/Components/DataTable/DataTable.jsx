@@ -4,11 +4,11 @@ import ControlledCard from '../Card/Card'
 
 const ControlledDataTable = (props) => {
 
-    const {columns, data, loading  } = props
+    const {columns, data, loading,title } = props
   return (
     <ControlledCard>
         <DataTable
-            title="Member's List"
+            title={title}
             columns={columns}
             data={data}
             selectableRows

@@ -18,53 +18,6 @@ const SalesContent = () => {
                       </div>
                     }
                   /> 
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>   
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/> 
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>   
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/>
-              <ControlledCard/> 
- 
             </div>
             <div className="w-full h-[20%] flex p-2 bg-[#F9F5F6]">
               <div className="w-full flex px-10 text-1xl gap-4">

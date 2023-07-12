@@ -33,7 +33,7 @@ const Footer = () => {
 
         </div>
         <div className="h-[44px] w-full flex justify-center items-center border-t-[1px] border-[#C88EA7] mt-2">
-          <h6 className="text-[#C88EA7] text-1xl">Copyright © 2023 The Royal Charm. All Rights Reserved</h6>
+          <h6 className="text-[#C88EA7] text-[16px]">Copyright © 2023 The Royal Charm. All Rights Reserved</h6>
         </div> 
     </div>
   )

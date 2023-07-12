@@ -9,9 +9,9 @@ export const Links = [
     },
     {
       id: '2',
-        link: 'Sales',
-        path: '/dashboard/sales',
-        img: <LuBarChart4 size={25} className='m-1'/>
+      link: 'Sales',
+      path: '/dashboard/sales',
+      img: <LuBarChart4 size={25} className='m-1'/>
     },
     {
       id: '3',

@@ -47,28 +47,28 @@ export const Links = [
 
   export const navLinks = [
     {
-        id:1,
+        id:'1',
         path: 'home',
         link: 'Home'
     },
     {
-        id: 2,
+        id: '2',
         path: 'promo',
         link: 'Promo'
     },
     {
-        id: 3,
+        id: '3',
 
         path: 'service',
         link: 'Service'
     },
     {
-        id: 4,
+        id: '4',
         path: 'about',
         link: 'Product'
     },
     {
-        id: 5,
+        id: '5',
         path: 'contact',
         link: 'Contact Us'
     },

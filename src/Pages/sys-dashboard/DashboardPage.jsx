@@ -5,18 +5,32 @@ import { ControlledContainer, ControlledCard } from '../../Components'
 
 const DashboardContent = () => {
   return (
-    <section className="bg-[#F9F5F6] h-[93vh] w-full">
-      <div className="h-72 w-full  p-4">
+    <section className=" h-auto w-full">
+      <div className=" h-52 w-full p-4">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 h-full w-full">
-        <ControlledCard/>
-        <ControlledCard/>
-        <ControlledCard/>
-        <ControlledCard/>
+        <ControlledCard children ={
+          <>
+          </>
+        }/>
+        <ControlledCard children ={
+          <>
+          </>
+        }/>
+        <ControlledCard children ={
+          <>
+          </>
+        }/>
+        <ControlledCard children ={
+          <>
+          </>
+        }/>
         </div>
       </div>
-        <div className="grid h-[60vh] w-full p-4">
-        <ControlledCard
-        />
+        <div className="grid h-[55vh] w-full p-4">
+        <ControlledCard children ={
+          <>
+          </>
+        }/>
         </div>
     </section>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ControlledContainer, ControlledCard } from '../../Components'
+import { ControlledCard } from '../../Components'
 
 
 

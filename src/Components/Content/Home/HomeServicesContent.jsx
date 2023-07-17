@@ -43,7 +43,7 @@ const HomeServicesContent = () => {
                 <>
                 <div className='h-[280px] lg:h-full w-full overflow-hidden'>
                   <div className="h-[50%] w-full">
-                    <img className='h-[15vh] lg:h-[30vh] w-full' src={img} />                          
+                    <img className='h-[15vh] lg:h-[30vh] w-full' src={img} alt='image'/>                          
                   </div>
                   <div className="gap-2 h-[50%] w-full flex flex-col justify-center items-center">
                     <div className=" h-[40px] lg:h-[80px] w-full flex justify-center items-center">

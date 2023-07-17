@@ -10,12 +10,7 @@ const Samplelogin = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(null)
 
-  const haddleOnChangeToggle = () => {
-        setShowPassword(!showPassword)
-      }
   const navigate = useNavigate()
 
   const handleSubmit = async(e) => {
@@ -37,7 +32,6 @@ const Samplelogin = () => {
         alert('Error',  'Incorrect Username or Password!');
       }
     } catch (error) {
-      setError(error)
       console.log(error)
     }
   }

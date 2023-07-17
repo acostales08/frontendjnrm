@@ -1,5 +1,4 @@
 import React from 'react'
-import { ControlledCard } from '../../../Components'
 
 const PromoPage = () => {
     return (

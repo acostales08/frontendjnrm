@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Typography } from '@mui/material';
+import { Modal, Typography } from '@mui/material';
 
 const ControlledModal = ({ open, onClose, title, children }) => {
 

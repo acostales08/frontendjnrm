@@ -13,7 +13,6 @@ const LoginFom = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(null)
 
   const haddleOnChangeToggle = () => {
         setShowPassword(!showPassword)
@@ -39,7 +38,6 @@ const LoginFom = () => {
         alert('Error',  'Incorrect Username or Password!');
       }
     } catch (error) {
-      setError(error)
       console.log(error)
     }
   }

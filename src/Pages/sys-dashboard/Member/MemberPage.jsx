@@ -8,14 +8,12 @@ import {
   ControlledModal,
   ControlledTypography,
   ControlledTextField,
-  ControlledAlert,
 } from "../../../Components";
 
 const MemberContent = () => {
 
   const [members, setMembers] = useState([])
   const [selectedMem, setSelectedMem] = useState(null)
-  const [message, setMessage] = useState('')
   const [modalState, setModalState] = useState({
     AddModal: false,
     EditModal: false,
@@ -51,18 +49,17 @@ const MemberContent = () => {
 
   const fetchdata = async () => {
     try {
-       axios.get('http://localhost:8000/api/member').then(response => {
-        setMembers(response.data.member)      
+      const response = await axios.get('http://localhost:8000/api/member')
+      setMembers(response.data.member)
     } catch (error) {
       
     }
-
-
   }
 
   const createMember = async () => {
     try {
       const response = await axios.post('http://localhost:8000/api/member', newMember)
+      alert(response.data.message)
       fetchdata();
       closeModal('AddModal')
     } catch (error) {
@@ -96,7 +93,7 @@ const MemberContent = () => {
           <IconButton color="success">
             <RiEditBoxFill
               size={25}
-             onClick={()=> openModal('EditModal')}
+             onClick={()=> openModal('EditModal', row.id)}
             />
           </IconButton>
           <IconButton color="error">
@@ -182,52 +179,55 @@ const MemberContent = () => {
       </ControlledModal>
 
       {/* edit member Modal */}
-
-        <ControlledModal open={modalState.EditModal} onClose={() => closeModal('EditModal')}>
-          <ControlledTypography text="Edit Member" />
-          <div className="flex flex-col justify-center p-5">
-            <form>
-              <ControlledTextField
-                type="text"
-                variant="outlined"
-                label="Full Name"
-                style={{ margin: "5px", width: "100%" }}
-              />
-              <ControlledTextField
-                type="email"
-                variant="outlined"
-                label="Email"
-                style={{ margin: "5px", width: "100%" }}
-              />
-              <ControlledTextField
-                type="text"
-                variant="outlined"
-                label="Username"
-                style={{ margin: "5px", width: "100%" }}
-              />
-              <ControlledTextField
-                type="password"
-                variant="outlined"
-                label="Password"
-                style={{ margin: "5px", width: "100%" }}
-              />
-              <div className="flex">
-                <ControlledButton
-                  color="primary"
-                  text="Update"
-                  variant="contained"
-                 
-                />
-                <ControlledButton
-                  color="info"
-                  text="Cancel"
+    {selectedMem && (
+          <ControlledModal open={modalState.EditModal} onClose={() => closeModal('EditModal')}>
+            <ControlledTypography text="Edit Member" />
+            <div className="flex flex-col justify-center p-5">
+              <form>
+                <ControlledTextField
+                  type="text"
                   variant="outlined"
-                  onClick={() => closeModal('EditModal')}
+                  label="Full Name"
+                  value={selectedMem.fullname}
+                  style={{ margin: "5px", width: "100%" }}
                 />
-              </div>
-            </form>
-          </div>
-        </ControlledModal>
+                <ControlledTextField
+                  type="email"
+                  variant="outlined"
+                  label="Email"
+                  style={{ margin: "5px", width: "100%" }}
+                />
+                <ControlledTextField
+                  type="text"
+                  variant="outlined"
+                  label="Username"
+                  style={{ margin: "5px", width: "100%" }}
+                />
+                <ControlledTextField
+                  type="password"
+                  variant="outlined"
+                  label="Password"
+                  style={{ margin: "5px", width: "100%" }}
+                />
+                <div className="flex">
+                  <ControlledButton
+                    color="primary"
+                    text="Update"
+                    variant="contained"
+                  
+                  />
+                  <ControlledButton
+                    color="info"
+                    text="Cancel"
+                    variant="outlined"
+                    onClick={() => closeModal('EditModal')}
+                  />
+                </div>
+              </form>
+            </div>
+          </ControlledModal>      
+    )}
+
 
 
       {/* delete member */}

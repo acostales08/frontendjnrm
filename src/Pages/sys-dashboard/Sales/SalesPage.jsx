@@ -1,7 +1,6 @@
 import React from 'react'
-import { Button } from '@mui/material'
+import { Button, IconButton } from '@mui/material'
 import { RiDeleteBin6Line } from 'react-icons/ri'
-import {BsPlusLg, BsDash} from 'react-icons/bs'
 import { ControlledCard } from '../../../Components'
 
 const SalesContent = () => {
@@ -11,7 +10,7 @@ const SalesContent = () => {
             <div className="w-full h-full bg-white rounded-lg grid grid-cols-2 lg:grid-cols-5 grid-rows-3 p-5 gap-3 shadow-inner">
             <ControlledCard
                     children = {
-                      <div className='flex flex-col justify-center items-center'>
+                      <div className='h-full flex flex-col justify-center items-center cursor-pointer'>
                           <img src="\product1.png" alt="" className='h-28 w-28'/>
                           <p className="m-2">Product name</p>
                           <p className="flex justify-center items-center"><span>&#8369;</span>10.00</p>
@@ -82,30 +81,25 @@ const SalesContent = () => {
               >Print</Button>    
             </div>
           </div>
-          <div className=" h-full w-[40%] p-2">
-            <div className="h-full w-full rounded-lg grid grid-rows-5 gap-2">
+          <div className=" h-full w-[40%] p-1">
+            <div className="h-[60%] w-full rounded-lg grid grid-rows-5 gap-2">
               <ControlledCard 
               children={
-                <div className='h-full flex items-center p-2'>
-                  <div className="">
-                    <img src="\product1.png" alt=""  className=' h-32 w-36'/>
-                  </div>
-                  <div className=" text-center h-full w-52 flex flex-col">
-                    <p className=" h-20 flex justify-center items-center">product name</p>
-                    <p className=" h-16 flex justify-center items-center"><span>&#8369;</span>10.00</p>
-                  </div>
-                  <div className=" h-full w-60 flex">
-                    <div className=" flex justify-center items-center w-full ">
-                      <div className=" flex justify-center items-center rounded-full shadow-lg h-10 w-10 cursor-pointer"><BsDash/></div>
-                      <div className=" flex justify-center items-center mx-1 h-14 w-14 shadow-inner rounded-md">1</div>
-                      <div className=" flex justify-center items-center rounded-full shadow-lg h-10 w-10 cursor-pointer"><BsPlusLg/></div>
-                      </div>
-                    <div className=" flex justify-end items-center text-[#4d494f] cursor-pointer">
-                    <RiDeleteBin6Line size={30} className=' m-4'/>
+                <div className='flex h-full'>
+                    <div className='p-4 h-full w-[20%]'>
+                      <img src="/product1.png" alt="Product image" className='' />
                     </div>
-                  </div>
+                    <div className='flex justify-between items-center w-full h-full gap-5 text-2xl'>
+                      <p className="m-6">product name</p>
+                      <p className="m-6"><span>&#8369;</span>10.00</p>
+                    </div>
+                    <div className="w-[20%] flex justify-center items-center">
+                      <IconButton>
+                        <RiDeleteBin6Line size={30}/>                        
+                      </IconButton>
+                    </div>          
                 </div>
-              }
+              }   
               />
             </div>
           </div>

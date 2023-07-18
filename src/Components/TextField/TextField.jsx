@@ -3,7 +3,7 @@ import { Box, TextField } from '@mui/material'
 
 
 const ControlledTextField  = (props) => {
-    const { onChange, label, style, variant, disable, name } = props
+    const { onChange, label, style, variant, disable, name, value } = props
 
     return (
         <Box
@@ -21,6 +21,7 @@ const ControlledTextField  = (props) => {
             name={name}
             label={label}
             disabled={disable}
+            value={value}
             fullWidth
             ></TextField>
         </Box>

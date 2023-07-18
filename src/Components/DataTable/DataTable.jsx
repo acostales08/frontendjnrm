@@ -6,19 +6,24 @@ const ControlledDataTable = (props) => {
 
     const {columns, data, loading,title } = props
   return (
-    <ControlledCard>
-        <DataTable
-            title={title}
-            columns={columns}
-            data={data}
-            selectableRows
-            pagination
-            fixedHeader
-            progressPending={loading}
-            progressComponent={<h2 className='text-gray-900'>loading please wait ...</h2>}
-            >
-        </DataTable>
-    </ControlledCard>
+    <ControlledCard
+      children={
+        <div className='p-10'>
+          <DataTable
+              title={title}
+              columns={columns}
+              data={data}
+              // selectableRows
+              pagination
+              fixedHeader
+              progressPending={loading}
+              progressComponent={<h2 className='text-gray-900'>loading please wait ...</h2>}
+              >
+          </DataTable>           
+        </div>
+       
+      }
+    />
   )
 }
 

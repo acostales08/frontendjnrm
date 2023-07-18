@@ -1,6 +1,5 @@
 import React from 'react'
 import { Home, Samplelogin, Login, ReservationForm } from './Pages'
-// import { Sample } from './Pages/Sample'
 import { DashboardContent, MemberContent, SalesContent, PromoPage, ProductPage, ReservationPage} from './Pages/sys-dashboard'
 import {ProductList} from './Components/Content'
 import DashboardLayout from './Components/Dashboard-layout/DashboardLayout'
@@ -8,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 const App = () => {
   return (
+
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />

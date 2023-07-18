@@ -11,22 +11,20 @@ import {
 } from "../../../Components";
 
 const MemberContent = () => {
-
-  const [members, setMembers] = useState([])
-  const [selectedMem, setSelectedMem] = useState(null)
+  const [members, setMembers] = useState([]);
+  const [selectedMem, setSelectedMem] = useState(null);
   const [modalState, setModalState] = useState({
     AddModal: false,
     EditModal: false,
-    Delete: false
+    DeleteModal: false, // Fixed typo in modal state
   });
 
   const [newMember, setNewMember] = useState({
-    fullname: '',
-    email: '',
-    username: '',
-    password: ''
-  })
-
+    fullname: "",
+    email: "",
+    username: "",
+    password: "",
+  });
 
   const openModal = (modalType, memberId = null) => {
     setModalState({ ...modalState, [modalType]: true });
@@ -38,48 +36,62 @@ const MemberContent = () => {
     }
   };
 
-
   const closeModal = (modalType) => {
-    setModalState({...modalState, [modalType]: false});
-  }
+    setModalState({ ...modalState, [modalType]: false });
+  };
 
-  useEffect(()=>{
-    fetchdata()
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  const fetchdata = async () => {
+  const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/member')
-      setMembers(response.data.member)
+      const response = await axios.get("http://localhost:8000/api/member");
+      setMembers(response.data.member);
     } catch (error) {
-      
+      console.error("Error fetching data:", error);
     }
-  }
+  };
 
   const createMember = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/api/member', newMember)
-      alert(response.data.message)
-      fetchdata();
-      closeModal('AddModal')
+      const response = await axios.post(
+        "http://localhost:8000/api/member",
+        newMember
+      );
+      if (response.status === 200) {
+        alert(response.data.message);
+        fetchData();
+        closeModal("AddModal");
+      } else {
+        alert(response.data.message);
+      }
     } catch (error) {
-      
+      console.error("Error creating member:", error);
     }
-  }
-
-  const deleteMember = (memberId) => {
-    axios
-      .delete(`http://localhost:8000/api/member/${memberId}/delete`)
-      .then((response) => {
-        console.log("Member deleted successfully:", response.data);
-        closeModal("DeleteModal");
-        fetchdata();
-      })
-      .catch((error) => {
-        console.error("Error deleting member:", error);
-      });
   };
 
+  const updateMember = async (member) => {
+    try {
+      const response = await axios.put(`http://localhost:8000/api/member/${member.id}/edit`, member);
+      alert(response.data.message);
+      closeModal("EditModal")
+      fetchData();
+    } catch (error) {
+      console.error("Error updating member:", error);
+    }
+  };
+
+  const deleteMember = async (memberId) => {
+    try {
+      const response = await axios.delete(`http://localhost:8000/api/member/${memberId}/delete`);
+      alert(response.data.message);
+      closeModal("DeleteModal");
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting member:", error);
+    }
+  };
 
   const columns = [
     { name: "id", selector: (row) => row.id, sortable: true },
@@ -93,13 +105,13 @@ const MemberContent = () => {
           <IconButton color="success">
             <RiEditBoxFill
               size={25}
-             onClick={()=> openModal('EditModal', row.id)}
+              onClick={() => openModal("EditModal", row.id)}
             />
           </IconButton>
           <IconButton color="error">
             <RiDeleteBin2Fill
               size={25}
-              onClick={()=> openModal('DeleteModal', row.id)}
+              onClick={() => openModal("DeleteModal", row.id)}
             />
           </IconButton>
         </div>
@@ -115,15 +127,18 @@ const MemberContent = () => {
           color="primary"
           text="Add Member"
           variant="contained"
-          onClick={() => openModal('AddModal')}
+          onClick={() => openModal("AddModal")}
         />
       </div>
       <div className="px-8">
-        <ControlledDataTable columns={columns} data={members}/>
+        <ControlledDataTable columns={columns} data={members} />
       </div>
 
       {/* create member Modal */}
-      <ControlledModal open={modalState.AddModal} onClose={() => closeModal('AddModal')}>
+      <ControlledModal
+        open={modalState.AddModal}
+        onClose={() => closeModal("AddModal")}
+      >
         <ControlledTypography text="Add Member" />
         <div className="flex flex-col justify-center p-5">
           <form onSubmit={createMember}>
@@ -132,7 +147,9 @@ const MemberContent = () => {
               variant="outlined"
               label="Full Name"
               value={newMember.fullname}
-              onChange={(e) => setNewMember({...newMember, fullname: e.target.value})}
+              onChange={(e) =>
+                setNewMember({ ...newMember, fullname: e.target.value })
+              }
               style={{ margin: "5px", width: "100%" }}
             />
             <ControlledTextField
@@ -140,7 +157,9 @@ const MemberContent = () => {
               variant="outlined"
               label="Email"
               value={newMember.email}
-              onChange={(e) => setNewMember({...newMember, email: e.target.value})}
+              onChange={(e) =>
+                setNewMember({ ...newMember, email: e.target.value })
+              }
               style={{ margin: "5px", width: "100%" }}
             />
             <ControlledTextField
@@ -148,7 +167,9 @@ const MemberContent = () => {
               variant="outlined"
               label="Username"
               value={newMember.username}
-              onChange={(e) => setNewMember({...newMember, username: e.target.value})}
+              onChange={(e) =>
+                setNewMember({ ...newMember, username: e.target.value })
+              }
               style={{ margin: "5px", width: "100%" }}
             />
             <ControlledTextField
@@ -156,7 +177,9 @@ const MemberContent = () => {
               variant="outlined"
               label="Password"
               value={newMember.password}
-              onChange={(e) => setNewMember({...newMember, password: e.target.value})}
+              onChange={(e) =>
+                setNewMember({ ...newMember, password: e.target.value })
+              }
               style={{ margin: "5px", width: "100%" }}
             />
             <div className="flex">
@@ -171,7 +194,7 @@ const MemberContent = () => {
                 color="info"
                 text="Cancel"
                 variant="outlined"
-                onClick={() => closeModal('AddModal')}
+                onClick={() => closeModal("AddModal")}
               />
             </div>
           </form>
@@ -179,60 +202,82 @@ const MemberContent = () => {
       </ControlledModal>
 
       {/* edit member Modal */}
-    {selectedMem && (
-          <ControlledModal open={modalState.EditModal} onClose={() => closeModal('EditModal')}>
-            <ControlledTypography text="Edit Member" />
-            <div className="flex flex-col justify-center p-5">
-              <form>
-                <ControlledTextField
-                  type="text"
-                  variant="outlined"
-                  label="Full Name"
-                  value={selectedMem.fullname}
-                  style={{ margin: "5px", width: "100%" }}
+      {selectedMem && (
+        <ControlledModal
+          open={modalState.EditModal}
+          onClose={() => closeModal("EditModal")}
+        >
+          <ControlledTypography text="Edit Member" />
+          <div className="flex flex-col justify-center p-5">
+            <form>
+              <ControlledTextField
+                type="text"
+                variant="outlined"
+                label="Full Name"
+                value={selectedMem.fullname}
+                onChange={(e) =>
+                  setSelectedMem({ ...selectedMem, fullname: e.target.value })
+                }
+                style={{ margin: "5px", width: "100%" }}
+              />
+              <ControlledTextField
+                type="email"
+                variant="outlined"
+                label="Email"
+                value={selectedMem.email}
+                onChange={(e) =>
+                  setSelectedMem({ ...selectedMem, email: e.target.value })
+                }
+                style={{ margin: "5px", width: "100%" }}
+              />
+              <ControlledTextField
+                type="text"
+                variant="outlined"
+                label="Username"
+                value={selectedMem.username}
+                onChange={(e) =>
+                  setSelectedMem({ ...selectedMem, username: e.target.value })
+                }
+                style={{ margin: "5px", width: "100%" }}
+              />
+              <ControlledTextField
+                type="password"
+                variant="outlined"
+                label="Password"
+                value={selectedMem.password}
+                onChange={(e) =>
+                  setSelectedMem({ ...selectedMem, password: e.target.value })
+                }
+                style={{ margin: "5px", width: "100%" }}
+              />
+              <div className="flex">
+                <ControlledButton
+                  color="primary"
+                  text="Update"
+                  variant="contained"
+                  onClick={() => {
+                    updateMember(selectedMem);
+                    closeModal("EditModal");
+                  }}
                 />
-                <ControlledTextField
-                  type="email"
+                <ControlledButton
+                  color="info"
+                  text="Cancel"
                   variant="outlined"
-                  label="Email"
-                  style={{ margin: "5px", width: "100%" }}
+                  onClick={() => closeModal("EditModal")}
                 />
-                <ControlledTextField
-                  type="text"
-                  variant="outlined"
-                  label="Username"
-                  style={{ margin: "5px", width: "100%" }}
-                />
-                <ControlledTextField
-                  type="password"
-                  variant="outlined"
-                  label="Password"
-                  style={{ margin: "5px", width: "100%" }}
-                />
-                <div className="flex">
-                  <ControlledButton
-                    color="primary"
-                    text="Update"
-                    variant="contained"
-                  
-                  />
-                  <ControlledButton
-                    color="info"
-                    text="Cancel"
-                    variant="outlined"
-                    onClick={() => closeModal('EditModal')}
-                  />
-                </div>
-              </form>
-            </div>
-          </ControlledModal>      
-    )}
-
-
+              </div>
+            </form>
+          </div>
+        </ControlledModal>
+      )}
 
       {/* delete member */}
       {selectedMem && (
-        <ControlledModal open={modalState.DeleteModal} onClose={() => closeModal('DeleteModal')}>
+        <ControlledModal
+          open={modalState.DeleteModal}
+          onClose={() => closeModal("DeleteModal")}
+        >
           <ControlledTypography text="Delete Member" />
           <div className="h-32 flex justify-center items-center">
             <h2 className="text-[20px] text-center">
@@ -251,7 +296,7 @@ const MemberContent = () => {
               color="info"
               text="Cancel"
               variant="outlined"
-              onClick={() => closeModal('DeleteModal')}
+              onClick={() => closeModal("DeleteModal")}
             />
           </div>
         </ControlledModal>

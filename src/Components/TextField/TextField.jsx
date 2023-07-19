@@ -3,7 +3,7 @@ import { Box, TextField } from '@mui/material'
 
 
 const ControlledTextField  = (props) => {
-    const { onChange, label, style, variant, disable, name, value } = props
+    const { onChange, label, style, variant, disable, name, value, type } = props
 
     return (
         <Box
@@ -15,6 +15,7 @@ const ControlledTextField  = (props) => {
       autoComplete="off"
         >
             <TextField
+            type={type}
             style={style}
             onChange={onChange}
             variant={variant}

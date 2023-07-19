@@ -16,8 +16,6 @@ const ControlledDataTable = (props) => {
               // selectableRows
               pagination
               fixedHeader
-              progressPending={loading}
-              progressComponent={<h2 className='text-gray-900'>loading please wait ...</h2>}
               >
           </DataTable>           
         </div>

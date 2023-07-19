@@ -1,15 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import { RiEditBoxFill, RiDeleteBin2Fill } from "react-icons/ri";
-import { IconButton } from "@mui/material";
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import { RiEditBoxFill, RiDeleteBin2Fill } from 'react-icons/ri';
+import { IconButton } from '@mui/material';
+import axios from 'axios';
 import {
   ControlledDataTable,
   ControlledButton,
   ControlledModal,
   ControlledTypography,
   ControlledTextField,
-} from "../../../Components";
-
+} from '../../../Components';
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -21,19 +20,17 @@ const ProductPage = () => {
   });
 
   const [newProduct, setNewProduct] = useState({
-    fullname: "",
-    email: "",
-    username: "",
-    image: null,
+    productname: '', // Fixed the field name to match the FormData keys
+    description: '',
+    price: '',
+    image: '',
   });
 
-  
-
-  const openModal = (modalType, productId = null ) => {
+  const openModal = (modalType, productId = null) => {
     setModalState({ ...modalState, [modalType]: true });
     if (productId) {
       const product = products.find((p) => p.id === productId);
-      console.log(productId)
+      console.log(productId);
       setSelectedProd(product);
     } else {
       setSelectedProd(null);
@@ -45,72 +42,93 @@ const ProductPage = () => {
   };
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/product')
-      setProducts(response.data.product)
+      const response = await axios.get('http://localhost:8000/api/product');
+      setProducts(response.data.product);
     } catch (error) {
-      
+      console.error('Error fetching data:', error);
     }
   };
 
-  const createProduct = async () => {
-    try {
-      const response = await axios.post('http://localhost:8000/api/product', newProduct)
-      if(response.data === 200){
-        alert(response.data.message)
-        fetchData()
-        closeModal('AddModal')        
-      }else{
-        alert(response.data.message)
-      }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewProduct({ ...newProduct, [name]: value });
+  };
 
+  const handleImageChange = (e) => {
+    setNewProduct({ ...newProduct, image: e.target.files[0] });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('productname', newProduct.productname);
+    formData.append('description', newProduct.description);
+    formData.append('price', newProduct.price);
+    formData.append('image', newProduct.image);
+
+    try {
+      await axios.post('http://localhost:8000/api/product', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      // Reset the form data and trigger a success callback
+      setNewProduct({
+        productname: '',
+        description: '',
+        price: '',
+        image: '',
+      });
     } catch (error) {
-      
+      console.error('Error creating product:', error);
     }
   };
 
   const deleteProduct = async (productId) => {
     try {
-      const response = await axios.delete(`http://localhost:8000/api/product/${productId}/delete`)
-      alert(response.data.message)
-      closeModal("DeleteModal")
-      fetchData()
+      const response = await axios.delete(`http://localhost:8000/api/product/${productId}/delete`);
+      alert(response.data.message);
+      closeModal('DeleteModal');
+      fetchData();
     } catch (error) {
-      
+      console.error('Error deleting product:', error);
     }
-  }
+  };
 
-    const columns = [
-      { name: "id", selector: (row) => row.id, sortable: true },
-      { name: "image", selector: (row) => row.image, sortable: true },
-      { name: "Product-Name", selector: (row) => row.productname, sortable: true },
-      { name: "Product-Description", selector: (row) => row.description, sortable: true },
-      { name: "Product-Price", selector: (row) => row.price, sortable: true },
-      { name: "Quantity", selector: (row) => row.quantity, sortable: true },
-      {
-        name: "action",
-        cell: (row) => (
-          <div className="flex gap-2">
-            <IconButton color="success">
-              <RiEditBoxFill
-                size={25}
-                // onClick={() => openModal("EditModal", row.id)}
-              />
-            </IconButton>
-            <IconButton color="error">
-              <RiDeleteBin2Fill
-                size={25}
-                onClick={() => openModal("DeleteModal", row.id)}
-              />
-            </IconButton>
-          </div>
-        ),
-      },
-    ];
+  const columns = [
+    { name: 'id', selector: (row) => row.id, sortable: true },
+    { name: 'image', selector: (row) => <img src={`http://127.0.0.1:8000/storage/${row.image}`} alt="" height={50} width={50} />, sortable: true },
+    { name: 'Product-Name', selector: (row) => row.productname, sortable: true },
+    { name: 'Product-Description', selector: (row) => row.description, sortable: true },
+    { name: 'Product-Price', selector: (row) => row.price, sortable: true },
+    { name: 'Quantity', selector: (row) => row.quantity, sortable: true },
+    {
+      name: 'action',
+      cell: (row) => (
+        <div className="flex gap-2">
+          <IconButton color="success">
+            <RiEditBoxFill
+              size={25}
+              onClick={() => openModal('EditModal', row.id)}
+            />
+          </IconButton>
+          <IconButton color="error">
+            <RiDeleteBin2Fill
+              size={25}
+              onClick={() => openModal('DeleteModal', row.id)}
+            />
+          </IconButton>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -120,124 +138,114 @@ const ProductPage = () => {
           color="primary"
           text="Add Product"
           variant="contained"
-          onClick={() => openModal("AddModal")}
+          onClick={() => openModal('AddModal')}
         />
       </div>
       <div className="px-8">
-
-        <ControlledDataTable 
-        columns={columns} 
-          data={products} 
+        <ControlledDataTable
+          columns={columns}
+          data={products}
         />
-
       </div>
 
       {/* creating new product modal */}
       <ControlledModal
         open={modalState.AddModal}
-        onClose={() => closeModal("AddModal")}
+        onClose={() => closeModal('AddModal')}
       >
         <ControlledTypography text="Add Member" />
         <div className="flex flex-col justify-center p-5">
-          <form onSubmit={createProduct}>
+          <form onSubmit={handleSubmit}>
             <ControlledTextField
               type="text"
               variant="outlined"
               label="Product Name"
+              name="productname"
               value={newProduct.productname}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, productname: e.target.value })
-              }
-              style={{ margin: "5px", width: "100%" }}
+              onChange={handleChange}
+              style={{ margin: '5px', width: '100%' }}
             />
             <ControlledTextField
               type="text"
               variant="outlined"
               label="Description"
+              name="description"
               value={newProduct.description}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, description: e.target.value })
-              }
-              style={{ margin: "5px", width: "100%" }}
+              onChange={handleChange}
+              style={{ margin: '5px', width: '100%' }}
             />
             <ControlledTextField
               type="number"
               variant="outlined"
               label="Price"
+              name="price"
               value={newProduct.price}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, price: e.target.value })
-              }
-              style={{ margin: "5px", width: "100%" }}
+              onChange={handleChange}
+              style={{ margin: '5px', width: '100%' }}
             />
             <ControlledTextField
               type="number"
               variant="outlined"
               label="Quantity"
+              name="quantity" // Added the correct field name for quantity if it exists in the data
               value={newProduct.quantity}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, quantity: e.target.value })
-              }
-              style={{ margin: "5px", width: "100%" }}
+              onChange={handleChange}
+              style={{ margin: '5px', width: '100%' }}
             />
             <ControlledTextField
               type="file"
               variant="outlined"
-              value={newProduct.image}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, image: e.target.value })
-              }
-              style={{ margin: "5px", width: "100%" }}
+              name="image"
+              onChange={handleImageChange}
+              style={{ margin: '5px', width: '100%' }}
             />
             <div className="flex">
               <ControlledButton
-                type="button"
+                type="submit"
                 color="primary"
                 text="Save"
                 variant="contained"
-                onClick={createProduct}
               />
               <ControlledButton
                 color="info"
                 text="Cancel"
                 variant="outlined"
-                onClick={() => closeModal("AddModal")}
+                onClick={() => closeModal('AddModal')}
               />
             </div>
           </form>
         </div>
       </ControlledModal>
+
       {/* Deleting Product */}
       {selectedProd && (
-       <ControlledModal open={modalState.DeleteModal} onClose={() => closeModal('DeleteModal')}>
-        <ControlledTypography
-        text="Delete"
-        />
-        <div className="h-32 py-4 flex justify-center items-center">
-          <h2 className="text-3xl border border-black font-semibold p-4">Are you sure? you want to delete this?</h2>
-        </div>
-        <div className="flex">
-          <ControlledButton
-          variant='contained'
-          type='submit'
-          text="Delete"
-          color='error'
-          onClick={deleteProduct}
-          />
-          <ControlledButton
-          variant='outlined'
-          type='submit'
-          text="Cancel"
-          color='info'
-          onClick={() => closeModal('DeleteModal')}
-          />          
-        </div>
-
-      </ControlledModal>
+        <ControlledModal open={modalState.DeleteModal} onClose={() => closeModal('DeleteModal')}>
+          <ControlledTypography text="Delete" />
+          <div className="h-32 py-4 flex justify-center items-center">
+            <h2 className="text-3xl border border-black font-semibold p-4">
+              Are you sure? you want to delete this?
+            </h2>
+          </div>
+          <div className="flex">
+            <ControlledButton
+              variant="contained"
+              type="submit"
+              text="Delete"
+              color="error"
+              onClick={() => deleteProduct(selectedProd.id)}
+            />
+            <ControlledButton
+              variant="outlined"
+              type="submit"
+              text="Cancel"
+              color="info"
+              onClick={() => closeModal('DeleteModal')}
+            />
+          </div>
+        </ControlledModal>
       )}
-
     </>
-  )
-}
+  );
+};
 
-export default ProductPage
+export default ProductPage;

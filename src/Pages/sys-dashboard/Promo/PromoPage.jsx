@@ -1,135 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [productData, setProductData] = useState({
+import React, { useState, useEffect } from 'react';
+
+const EditItemModal = ({ showModal, closeModal, item, onUpdate }) => {
+  const [itemData, setItemData] = useState({
     productname: '',
     description: '',
     price: '',
-    image: null,
+    image: '',
   });
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get('/api/products');
-      setProducts(response.data.product);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProductData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleImageChange = (e) => {
-    setProductData((prevData) => ({
-      ...prevData,
-      image: e.target.files[0],
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append('productname', productData.productname);
-      formData.append('description', productData.description);
-      formData.append('price', productData.price);
-      formData.append('image', productData.image);
-
-      await axios.post('/api/products', formData);
-
-      // Clear form data
-      setProductData({
-        productname: '',
-        description: '',
-        price: '',
-        image: null,
+    if (item) {
+      setItemData({
+        productname: item.productname,
+        description: item.description,
+        price: item.price,
+        image: '',
       });
-
-      // Fetch updated products list
-      fetchProducts();
-    } catch (error) {
-      console.error(error);
     }
+  }, [item]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setItemData({ ...itemData, [name]: value });
   };
 
-  const handleDelete = async (productId) => {
-    try {
-      await axios.delete(`/api/products/${productId}`);
-      fetchProducts();
-    } catch (error) {
-      console.error(error);
-    }
+  const handleUpdate = () => {
+    onUpdate(itemData);
   };
 
   return (
     <div>
-      <h1>Product List</h1>
-
-      <form onSubmit={handleSubmit}>
-        <label>
-          Product Name:
-          <input
-            type="text"
-            name="productname"
-            value={productData.productname}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Description:
-          <input
-            type="text"
-            name="description"
-            value={productData.description}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Price:
-          <input
-            type="number"
-            name="price"
-            value={productData.price}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Image:
-          <input type="file" name="image" onChange={handleImageChange} />
-        </label>
-        <br />
-        <button type="submit">Add Product</button>
-      </form>
-
-      <h2>Products:</h2>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <h3>{product.productname}</h3>
-            <p>{product.description}</p>
-            <p>Price: {product.price}</p>
-            <img src={`uploads/product/${product.image}`} alt="Product" />
-            <button onClick={() => handleDelete(product.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <h2>Edit Item</h2>
+      <input
+        type="text"
+        name="productname"
+        value={itemData.productname}
+        onChange={handleChange}
+        placeholder="Product Name"
+      />
+      <input
+        type="text"
+        name="description"
+        value={itemData.description}
+        onChange={handleChange}
+        placeholder="Description"
+      />
+      <input
+        type="number"
+        name="price"
+        value={itemData.price}
+        onChange={handleChange}
+        placeholder="Price"
+      />
+      <input
+        type="file"
+        name="image"
+        onChange={handleChange}
+        placeholder="Image"
+      />
+      <button onClick={handleUpdate}>Update</button>
+      <button onClick={closeModal}>Cancel</button>
     </div>
   );
 };
 
-export default ProductList;
+export default EditItemModal;

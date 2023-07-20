@@ -1,4 +1,5 @@
 import { LuLayoutDashboard, LuUsers, LuTicket, LuBox, LuCalendarRange, LuSettings, LuBarChart4 } from 'react-icons/lu'
+import { MdOutlineInventory2 } from 'react-icons/md'
 
 export const Links = [
     {
@@ -15,30 +16,36 @@ export const Links = [
     },
     {
       id: '3',
+      link: 'Inventory',
+      path: '/dashboard/s',
+      img: <MdOutlineInventory2 size={25} className='m-1' border border-black/>
+    },
+    {
+      id: '4',
       link: 'Member',
       path: '/dashboard/member',
       img: <LuUsers size={25} className='m-1' border border-black/>
     },
     {
-      id: '4',
+      id: '5',
       link: 'Promo',
       path: '/dashboard/promo',
       img: <LuTicket size={25} className='m-1' border border-black />
     },
     {
-      id: '5',
+      id: '6',
       link: 'Product',
       path: '/dashboard/product',
       img: <LuBox size={25} className='m-1' border border-black/>
     },
     {
-      id: '6',
+      id: '7',
       link: 'Reservations',
       path: '/dashboard/reservation',
       img: <LuCalendarRange size={25} className='m-1' border border-black/>
     },
     {
-      id: '7',
+      id: '8',
       link: 'Setting',
       path: '/dashboard/',
       img: <LuSettings size={25} className='m-1' border border-black/>

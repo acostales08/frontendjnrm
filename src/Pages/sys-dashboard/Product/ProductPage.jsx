@@ -23,6 +23,7 @@ const ProductPage = () => {
     productname: '', // Fixed the field name to match the FormData keys
     description: '',
     price: '',
+    quantity: '',
     image: '',
   });
 
@@ -70,20 +71,25 @@ const ProductPage = () => {
     formData.append('productname', newProduct.productname);
     formData.append('description', newProduct.description);
     formData.append('price', newProduct.price);
+    formData.append('quantity', newProduct.quantity);
     formData.append('image', newProduct.image);
 
     try {
-      await axios.post('http://localhost:8000/api/product', formData, {
+      const response = await axios.post('http://localhost:8000/api/product', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
+      alert(response.data.message)
+      fetchData()
+      closeModal("AddModal")
       // Reset the form data and trigger a success callback
       setNewProduct({
         productname: '',
         description: '',
         price: '',
+        quantity: '',
         image: '',
       });
     } catch (error) {
@@ -222,7 +228,7 @@ const ProductPage = () => {
         <ControlledModal open={modalState.DeleteModal} onClose={() => closeModal('DeleteModal')}>
           <ControlledTypography text="Delete" />
           <div className="h-32 py-4 flex justify-center items-center">
-            <h2 className="text-3xl border border-black font-semibold p-4">
+            <h2 className="text-3xl font-semibold p-4">
               Are you sure? you want to delete this?
             </h2>
           </div>

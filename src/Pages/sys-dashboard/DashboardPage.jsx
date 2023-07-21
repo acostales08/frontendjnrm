@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, useState, useEffect } from 'react'
+import axios from 'axios';
 import { ControlledCard } from '../../Components'
 import { FaUsers } from 'react-icons/fa'
 import { MdProductionQuantityLimits } from 'react-icons/md'
@@ -6,6 +7,7 @@ import { FcSalesPerformance } from 'react-icons/fc'
 import { RiCustomerService2Line } from 'react-icons/ri'
 import { VscGraph } from 'react-icons/vsc'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 
 const DashboardContent = () => {
@@ -83,6 +85,22 @@ const DashboardContent = () => {
       amt: 2100,
     },
   ];
+
+  const [totalMembers, setTotalMembers] = useState(null);
+
+  useEffect(() => {
+    // Fetch the total member count from the API
+    axios.get('http://127.0.0.1:8000/api/totalmember') // Replace '/api/total-member' with your actual API endpoint
+      .then(response => {
+        if (response.data.status === 200) {
+          setTotalMembers(response.data.message); // Update the state with the total member count
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        setTotalMembers(null); // Handle errors if needed
+      });
+  }, []);
   
   return (
     <section className=" h-auto w-full">
@@ -99,7 +117,7 @@ const DashboardContent = () => {
             </div>
             <div className="h-full w-full">
               <div className="h-[60%] flex justify-start items-end">
-                <h1 className="text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]">40</h1>
+                <h1 className="text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]">{totalMembers !== null ? totalMembers : 'Loading...'}</h1>
               </div>
               <div className="h-[40%] flex justify-start items-start">
                 <h2 className="text-1xl text-[white] font-semibold">Total Members</h2>

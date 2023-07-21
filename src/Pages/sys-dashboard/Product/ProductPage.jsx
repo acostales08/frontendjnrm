@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RiEditBoxFill, RiDeleteBin2Fill } from 'react-icons/ri';
+import { TiPlus } from 'react-icons/ti'
 import { IconButton } from '@mui/material';
 import axios from 'axios';
 import {
@@ -16,11 +17,11 @@ const ProductPage = () => {
   const [modalState, setModalState] = useState({
     AddModal: false,
     EditModal: false,
-    DeleteModal: false, // Fixed typo in modal state
+    DeleteModal: false, 
   });
 
   const [newProduct, setNewProduct] = useState({
-    productname: '', // Fixed the field name to match the FormData keys
+    productname: '', 
     description: '',
     price: '',
     quantity: '',
@@ -108,13 +109,46 @@ const ProductPage = () => {
     }
   };
 
+  const NumberedCell = ({ rowIndex }) => <div>{rowIndex}</div>;
+
   const columns = [
-    { name: 'id', selector: (row) => row.id, sortable: true },
-    { name: 'image', selector: (row) => <img src={`http://127.0.0.1:8000/storage/${row.image}`} alt="" height={50} width={50} />, sortable: true },
-    { name: 'Product-Name', selector: (row) => row.productname, sortable: true },
-    { name: 'Product-Description', selector: (row) => row.description, sortable: true },
-    { name: 'Product-Price', selector: (row) => row.price, sortable: true },
-    { name: 'Quantity', selector: (row) => row.quantity, sortable: true },
+    {
+      name: 'No.',
+      selector: (row, index) => <NumberedCell rowIndex={index + 1} />,
+      sortable: true,
+    },
+    {
+      name: 'image',
+      selector: (row) => (
+        <img
+          src={`http://127.0.0.1:8000/storage/${row.image}`}
+          alt=""
+          height={50}
+          width={50}
+        />
+      ),
+      sortable: true,
+    },
+    {
+      name: 'Product-Name',
+      selector: (row) => row.productname,
+      sortable: true,
+    },
+    {
+      name: 'Product-Description',
+      selector: (row) => row.description,
+      sortable: true,
+    },
+    {
+      name: 'Product-Price',
+      selector: (row) => row.price,
+      sortable: true,
+    },
+    {
+      name: 'Quantity',
+      selector: (row) => row.quantity,
+      sortable: true,
+    },
     {
       name: 'action',
       cell: (row) => (
@@ -144,6 +178,7 @@ const ProductPage = () => {
           color="primary"
           text="Add Product"
           variant="contained"
+          icon={<TiPlus size={20}/>}
           onClick={() => openModal('AddModal')}
         />
       </div>

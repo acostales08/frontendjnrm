@@ -31,7 +31,7 @@ const DashboardContent = () => {
     {
       name: 'Page D',
       uv: 2780,
-      pv: 3908,
+      pv: 6555,
       amt: 2000,
     },
     {
@@ -60,26 +60,26 @@ const DashboardContent = () => {
     },
     {
       name: 'Page G',
-      uv: 3490,
-      pv: 4300,
+      uv: 8989,
+      pv: 667,
       amt: 2100,
     },
     {
       name: 'Page G',
-      uv: 3490,
-      pv: 4300,
+      uv: 5467,
+      pv: 4567,
       amt: 2100,
     },
     {
       name: 'Page G',
-      uv: 3490,
-      pv: 4300,
+      uv: 3456,
+      pv: 7867,
       amt: 2100,
     },
     {
       name: 'Page G',
-      uv: 3490,
-      pv: 4300,
+      uv: 8764,
+      pv: 8976,
       amt: 2100,
     },
   ];
@@ -118,7 +118,7 @@ const DashboardContent = () => {
             </div>
             <div className="h-full w-full">
             <div className="h-[60%] flex justify-start items-end">
-              <h1 className='text-[50px] font-bold font-sans text-[white]'>50</h1>
+              <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>50</h1>
             </div>
             <div className="h-[40%] flex justify-start items-start">
             <h2 className="text-1xl text-[white] font-semibold">Total Product</h2>
@@ -137,7 +137,7 @@ const DashboardContent = () => {
           </div>
           <div className="h-full w-full">
           <div className="h-[60%] flex justify-start items-end">
-            <h1 className='text-[50px] font-bold font-sans text-[white]'>20</h1>
+            <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>20</h1>
           </div>
           <div className="h-[40%] flex justify-start items-start">
           <h2 className="text-1xl text-[white] font-semibold">Total Sales</h2>

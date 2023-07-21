@@ -17,7 +17,7 @@ export const Links = [
     {
       id: '3',
       link: 'Inventory',
-      path: '/dashboard/s',
+      path: '/dashboard/inventory',
       img: <MdOutlineInventory2 size={25} className='m-1' border border-black/>
     },
     {

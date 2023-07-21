@@ -1,6 +1,6 @@
 import React from 'react'
 import { Home, Samplelogin, Login, ReservationForm } from './Pages'
-import { DashboardContent, MemberContent, SalesContent, PromoPage, ProductPage, ReservationPage} from './Pages/sys-dashboard'
+import { DashboardContent, MemberContent, SalesContent, PromoPage, ProductPage, ReservationPage, InventoryContent} from './Pages/sys-dashboard'
 import {ProductList} from './Components/Content'
 import DashboardLayout from './Components/Dashboard-layout/DashboardLayout'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -18,6 +18,7 @@ const App = () => {
         <Route path="dashboard" element={<DashboardLayout />} >
           <Route index element={<DashboardContent />} />
           <Route path='sales' element={<SalesContent />} />
+          <Route path='inventory' element={<InventoryContent />} />
           <Route path='member' element={<MemberContent />} />
           <Route path='promo' element={<PromoPage />} />
           <Route path='product' element={<ProductPage />} />

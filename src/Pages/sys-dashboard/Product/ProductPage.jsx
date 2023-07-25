@@ -171,7 +171,7 @@ const ProductPage = () => {
   ];
 
   return (
-    <>
+    <div className='h-[93vh] overflow-scroll'>
       <div className="px-6 py-4">
         <ControlledButton
           size="medium"
@@ -182,10 +182,11 @@ const ProductPage = () => {
           onClick={() => openModal('AddModal')}
         />
       </div>
-      <div className="px-8">
+      <div className="px-8 ">
         <ControlledDataTable
           columns={columns}
           data={products}
+          pagination
         />
       </div>
 
@@ -285,7 +286,7 @@ const ProductPage = () => {
           </div>
         </ControlledModal>
       )}
-    </>
+    </div>
   );
 };
 

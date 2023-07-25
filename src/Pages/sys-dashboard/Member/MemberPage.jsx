@@ -173,7 +173,7 @@ const MemberContent = () => {
         />
       </div>
       <div className="px-8">
-        <ControlledDataTable columns={columns} data={members} />
+        <ControlledDataTable columns={columns} data={members} pagination/> 
       </div>
 
       {/* create member Modal */}

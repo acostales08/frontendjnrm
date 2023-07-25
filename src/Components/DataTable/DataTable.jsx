@@ -4,7 +4,7 @@ import ControlledCard from '../Card/Card'
 
 const ControlledDataTable = (props) => {
 
-    const {columns, data, loading,title } = props
+    const {columns, data, loading,title, pagination } = props
   return (
     <ControlledCard
       children={
@@ -14,7 +14,7 @@ const ControlledDataTable = (props) => {
               columns={columns}
               data={data}
               // selectableRows
-              pagination
+              pagination={pagination}
               fixedHeader
               >
           </DataTable>           

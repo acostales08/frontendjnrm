@@ -15,7 +15,7 @@ const DasboardLayout = () => {
           <div className="hidden lg:flex">
           <SideBar/>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 overflow-hidden ">
               <ButtonAppBar />            
                 <Outlet/>
           </div>

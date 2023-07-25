@@ -17,8 +17,10 @@
     "react-scroll": "^1.8.9",
     "react-swipeable-views": "^0.14.0",
     "react-swipeable-views-utils": "^0.14.0",
+    "react-to-print": "^2.14.13",
     "recharts": "^2.7.2",
     "styled-components": "^6.0.4",
+    "sweetalert2": "^11.7.20",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

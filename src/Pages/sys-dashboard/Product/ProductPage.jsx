@@ -3,6 +3,7 @@ import { RiEditBoxFill, RiDeleteBin2Fill } from 'react-icons/ri';
 import { TiPlus } from 'react-icons/ti'
 import { IconButton } from '@mui/material';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import {
   ControlledDataTable,
   ControlledButton,
@@ -65,7 +66,7 @@ const ProductPage = () => {
     setNewProduct({ ...newProduct, image: e.target.files[0] });
   };
 
-  const handleSubmit = async (e) => {
+  const CreateProduct = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -81,18 +82,17 @@ const ProductPage = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-
-      alert(response.data.message)
-      fetchData()
       closeModal("AddModal")
-      // Reset the form data and trigger a success callback
-      setNewProduct({
-        productname: '',
-        description: '',
-        price: '',
-        quantity: '',
-        image: '',
-      });
+      Swal.fire({
+        title: 'Success!',
+        text: response.data.message,
+        icon: 'success',
+        confirmButtonText: 'Got it!'
+      }).then(() => {
+        fetchData();
+        setNewProduct({})
+    });
+
     } catch (error) {
       console.error('Error creating product:', error);
     }
@@ -144,11 +144,11 @@ const ProductPage = () => {
       selector: (row) => row.price,
       sortable: true,
     },
-    {
-      name: 'Quantity',
-      selector: (row) => row.quantity,
-      sortable: true,
-    },
+    // {
+    //   name: 'Quantity',
+    //   selector: (row) => row.quantity,
+    //   sortable: true,
+    // },
     {
       name: 'action',
       cell: (row) => (
@@ -196,7 +196,7 @@ const ProductPage = () => {
       >
         <ControlledTypography text="Add Member" />
         <div className="flex flex-col justify-center p-5">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={CreateProduct}>
             <ControlledTextField
               type="text"
               variant="outlined"

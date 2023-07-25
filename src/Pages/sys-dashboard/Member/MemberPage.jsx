@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { RiEditBoxFill, RiDeleteBin2Fill } from "react-icons/ri";
 import { TiPlus } from 'react-icons/ti'
 import axios from "axios";
+import Swal from 'sweetalert2';
 import { IconButton } from "@mui/material";
 import {
   ControlledDataTable,
@@ -17,7 +18,7 @@ const MemberContent = () => {
   const [modalState, setModalState] = useState({
     AddModal: false,
     EditModal: false,
-    DeleteModal: false, // Fixed typo in modal state
+    DeleteModal: false, 
   });
 
   const [newMember, setNewMember] = useState({
@@ -61,9 +62,16 @@ const MemberContent = () => {
         newMember
       );
       if (response.status === 200) {
-        alert(response.data.message);
-        fetchData();
         closeModal("AddModal");
+        Swal.fire({
+          title: 'Success!',
+          text: response.data.message,
+          icon: 'success',
+          confirmButtonText: 'Got it!'
+        }).then(() => {
+          fetchData();
+        setNewMember({})
+      });
       } else {
         alert(response.data.message);
       }
@@ -75,9 +83,16 @@ const MemberContent = () => {
   const updateMember = async (member) => {
     try {
       const response = await axios.put(`http://localhost:8000/api/member/${member.id}/edit`, member);
-      alert(response.data.message);
       closeModal("EditModal")
-      fetchData();
+      Swal.fire({
+        title: 'Success!',
+        text: response.data.message,
+        icon: 'success',
+        confirmButtonText: 'Got it!'
+      }).then(() => {
+
+        fetchData();
+      });
     } catch (error) {
       console.error("Error updating member:", error);
     }
@@ -86,8 +101,16 @@ const MemberContent = () => {
   const deleteMember = async (memberId) => {
     try {
       const response = await axios.delete(`http://localhost:8000/api/member/${memberId}/delete`);
-      alert(response.data.message);
       closeModal("DeleteModal");
+      Swal.fire({
+        title: 'Success!',
+        text: response.data.message,
+        icon: 'success',
+        confirmButtonText: 'Got it!'
+      }).then(() => {
+        fetchData();
+      setNewMember({})
+    });
       fetchData();
     } catch (error) {
       console.error("Error deleting member:", error);

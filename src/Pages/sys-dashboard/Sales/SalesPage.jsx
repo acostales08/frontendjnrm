@@ -12,12 +12,12 @@ const SalesContent = () => {
   const [productData, setProductData] = useState([])
   const [cart, setCart] = useState([])
   const [totalAmount, setTotalAmount] = useState(0)
+  const [discount, setDiscount] = useState(0)
 
   const fetchData = async () => {
     try {
       const response = await axios.get('http://localhost:8000/api/product');
       setProductData(response.data.product)
-      console.log(response.data.product)
     } catch (error) {
       
     }
@@ -106,10 +106,10 @@ const SalesContent = () => {
                 </div>
                 <div className=" w-[230px] grid">
                   <div className=" p-1 flex items-center">
-                    <p className=" w-full rounded-lg bg-white p-1 shadow-inner">10.00</p>
+                    <p className=" w-full rounded-lg bg-white p-1 shadow-inner"><span>&#8369;</span>{totalAmount}</p>
                   </div>
                   <div className=" p-1 flex items-center">
-                    <p className=" w-full rounded-lg bg-white p-1 shadow-inner">0.7</p>
+                    <input type="number" className="text-black" placeholder='Enter Discount here' onChange={(e) => setDiscount(e.target.value)} />
                   </div>
                   <div className=" p-1 flex items-center">
                     <p className=" w-full rounded-lg bg-white p-1 shadow-inner">10.00</p>
@@ -166,7 +166,8 @@ const SalesContent = () => {
                                 <p className="m-6"><span>&#8369;</span>{cartProduct.price}</p>
                                 <div className="">
                                 <p className="m-6"><span className='mx-3'>quantity</span>{cartProduct.quantity}</p>
-                                <p className="m-6"><span className='mx-3'>total</span><span>&#8369;</span>{cartProduct.totalAmount}</p>                                  
+                                <p className="m-6"><span className='mx-3'>total</span><span>&#8369;</span>{cartProduct.totalAmount}</p>           
+                                {console.log(discount)}                       
                                 </div>
 
                               </div>

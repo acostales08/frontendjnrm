@@ -27,6 +27,7 @@ const ProductPage = () => {
     price: '',
     quantity: '',
     image: '',
+    link: ''
   });
 
   const openModal = (modalType, productId = null) => {
@@ -75,6 +76,7 @@ const ProductPage = () => {
     formData.append('price', newProduct.price);
     formData.append('quantity', newProduct.quantity);
     formData.append('image', newProduct.image);
+    formData.append('link', newProduct.link);
 
     try {
       const response = await axios.post('http://localhost:8000/api/product', formData, {
@@ -101,9 +103,16 @@ const ProductPage = () => {
   const deleteProduct = async (productId) => {
     try {
       const response = await axios.delete(`http://localhost:8000/api/product/${productId}/delete`);
-      alert(response.data.message);
       closeModal('DeleteModal');
+      Swal.fire({
+        title: 'Success!',
+        text: response.data.message,
+        icon: 'success',
+        confirmButtonText: 'Got it!'
+      }).then(() => {
+        fetchData();
       fetchData();
+      })
     } catch (error) {
       console.error('Error deleting product:', error);
     }
@@ -144,11 +153,6 @@ const ProductPage = () => {
       selector: (row) => row.price,
       sortable: true,
     },
-    // {
-    //   name: 'Quantity',
-    //   selector: (row) => row.quantity,
-    //   sortable: true,
-    // },
     {
       name: 'action',
       cell: (row) => (
@@ -174,7 +178,7 @@ const ProductPage = () => {
     <div className='h-[93vh] overflow-scroll'>
       <div className="px-6 py-4">
         <ControlledButton
-          size="medium"
+          size="small"
           color="primary"
           text="Add Product"
           variant="contained"
@@ -235,6 +239,15 @@ const ProductPage = () => {
               style={{ margin: '5px', width: '100%' }}
             />
             <ControlledTextField
+              type="text"
+              variant="outlined"
+              label="Product link"
+              name="link"
+              value={newProduct.link}
+              onChange={handleChange}
+              style={{ margin: '5px', width: '100%' }}
+            />
+            <ControlledTextField
               type="file"
               variant="outlined"
               name="image"
@@ -258,6 +271,105 @@ const ProductPage = () => {
           </form>
         </div>
       </ControlledModal>
+
+      {/* update product modal */}
+      {selectedProd && (
+              <ControlledModal
+              open={modalState.EditModal}
+              onClose={() => closeModal('EditModal')}
+            >
+              <ControlledTypography text="Add Member" />
+              <div className="flex justify-center items-center">
+                <div className="w-36 h-36">
+                    <img src={`http://127.0.0.1:8000/storage/${selectedProd.image}`} alt="" />
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-center p-5">
+                <form onSubmit={CreateProduct}>
+                  <ControlledTextField
+                    type="text"
+                    variant="outlined"
+                    label="Product Name"
+                    name="productname"
+                    value={selectedProd.productname}
+                    onChange={(e) =>
+                    setSelectedProd({ ...selectedProd, productname: e.target.value })
+                    }
+                    style={{ margin: '5px', width: '100%' }}
+                  />
+                  <ControlledTextField
+                    type="text"
+                    variant="outlined"
+                    label="Description"
+                    name="description"
+                    value={selectedProd.description}
+                    onChange={(e) =>
+                    setSelectedProd({ ...selectedProd, description: e.target.value })
+                    }
+                    style={{ margin: '5px', width: '100%' }}
+                  />
+                  <ControlledTextField
+                    type="number"
+                    variant="outlined"
+                    label="Price"
+                    name="price"
+                    value={selectedProd.price}
+                    onChange={(e) =>
+                    setSelectedProd({ ...selectedProd, price: e.target.value })
+                    }
+                    style={{ margin: '5px', width: '100%' }}
+                  />
+                  {/* <ControlledTextField
+                    type="number"
+                    variant="outlined"
+                    label="Quantity"
+                    name="quantity" // Added the correct field name for quantity if it exists in the data
+                    value={selectedProd.quantity}
+                    onChange={(e) =>
+                    setSelectedProd({ ...selectedProd, quantity: e.target.value })
+                    }
+                    style={{ margin: '5px', width: '100%' }}
+                  /> */}
+                  <ControlledTextField
+                    type="text"
+                    variant="outlined"
+                    label="Product link"
+                    name="link"
+                    value={selectedProd.link}
+                    onChange={(e) =>
+                    setSelectedProd({ ...selectedProd, link: e.target.value })
+                    }
+                    style={{ margin: '5px', width: '100%' }}
+                  />
+                  <ControlledTextField
+                    type="file"
+                    variant="outlined"
+                    name="image"
+                    // value={selectedProd.image}
+                    onChange={(e) =>
+                      setSelectedProd({ ...selectedProd, image: e.target.value })
+                      }
+                    style={{ margin: '5px', width: '100%' }}
+                  />
+                  <div className="flex">
+                    <ControlledButton
+                      type="submit"
+                      color="primary"
+                      text="Save"
+                      variant="contained"
+                    />
+                    <ControlledButton
+                      color="info"
+                      text="Cancel"
+                      variant="outlined"
+                      onClick={() => closeModal('AddModal')}
+                    />
+                  </div>
+                </form>
+              </div>
+            </ControlledModal>
+      )}
 
       {/* Deleting Product */}
       {selectedProd && (

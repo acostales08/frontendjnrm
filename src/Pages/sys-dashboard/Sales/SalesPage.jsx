@@ -24,7 +24,17 @@ const SalesContent = () => {
   }
 
   const addProductToCart = async (product) => {
-    let findProductInCart = cart.find((item) => item.id === product.id);
+    try {
+      const response = await axios.post('http://localhost:8000/api/order', {
+        id: product.id,
+        quantity: 1, // I-adjust depende sa desired quantity ng user
+      });
+  
+      if (response.status === 200) {
+        console.log(response.data.message); // Success message from Laravel
+  
+        // Add the new cart item to the cart state
+        let findProductInCart = cart.find((item) => item.id === product.id);
   
     if (findProductInCart) {
       let newCart = cart.map((cartItem) => {
@@ -48,7 +58,16 @@ const SalesContent = () => {
       };
       setCart([...cart, addingProduct]);
     }
+      } else {
+        console.error('Something went wrong!');
+        // Handle error cases
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error cases
+    }
   };
+  
 
   const componentRef = useRef();
 
@@ -60,9 +79,27 @@ const SalesContent = () => {
     handleReactToPrint()
   }
 
-  const removeProduct = async(product) => {
-      const newCart = cart.filter(cartItem =>  cartItem.id !== product.id )
-      setCart(newCart)
+  const removeProduct = async() => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/cancelorder', { cartItem: cart });
+  
+      // Kapag nag-response ng 200 OK, ibalik ang mga produkto sa kanilang orihinal na quantity sa cart
+      const updatedCart = cart.map((cartItem) => {
+        const originalQuantity = productData.find((product) => product.id === cartItem.product.id).quantity;
+        return {
+          ...cartItem,
+          quantity: originalQuantity,
+        };
+      });
+  
+      setCart(updatedCart);
+  
+      // I-display ang success message sa user
+      console.log('Order removed successfully');
+    } catch (error) {
+      // I-handle ang mga error mula sa backend
+      console.error('Remove order failed:');
+    }
   }
 
   useEffect(() => {
@@ -154,34 +191,51 @@ const SalesContent = () => {
                   <ComponentToPrint cart={cart} totalAmount={totalAmount} ref={componentRef}/>
             </div>
             <div className="h-auto w-full rounded-lg grid grid-rows-10 gap-2">
-            { cart ? cart.map(( cartProduct, index) => 
-              <ControlledCard key={index}
-                children={
-                          <div className='flex h-full'>
-                              <div className='p-4 h-full w-[20%]'>
-                                <img src={`http://127.0.0.1:8000/storage/${cartProduct.image}`} alt="Product image" className='' />
-                              </div>
-                              <div className='flex justify-between items-center w-full h-full gap-5 text-2xl'>
-                                <p className="m-6">{cartProduct.productname}</p>
-                                <p className="m-6"><span>&#8369;</span>{cartProduct.price}</p>
-                                <div className="">
-                                <p className="m-6"><span className='mx-3'>quantity</span>{cartProduct.quantity}</p>
-                                <p className="m-6"><span className='mx-3'>total</span><span>&#8369;</span>{cartProduct.totalAmount}</p>           
-                                {console.log(discount)}                       
-                                </div>
-
-                              </div>
-                              <div className="w-[20%] flex justify-center items-center">
-                                <IconButton onClick={()=> removeProduct(cartProduct)}>
-                                  <RiDeleteBin6Line size={30}/>                        
-                                </IconButton>
-                              </div>          
-                          </div>
-                        }   
-              />                
-              ): 'No Items In Cart'}
-
+  {cart.length > 0 ? (
+    cart.map((cartItem, index) => (
+      <ControlledCard key={index}>
+        <div className="flex h-full">
+          <div className="p-4 h-full w-[20%]">
+            <img src={`http://127.0.0.1:8000/storage/${cartItem.image}`} alt="Product image" className="" />
+          </div>
+          <div className="flex justify-between items-center w-full h-full gap-5 text-2xl">
+            <p className="m-6">{cartItem.name}</p>
+            <p className="m-6">
+              <span>&#8369;</span>
+              {cartItem.price}
+            </p>
+            <div className="">
+              <p className="m-6">
+                <span className="mx-3">quantity</span>
+                {cartItem.quantity}
+              </p>
+              <p className="m-6">
+                <span className="mx-3">total</span>
+                <span>&#8369;</span>
+                {cartItem.totalAmount}
+              </p>
+              {/* Display discount if applicable */}
+              {cartItem.discount && (
+                <p className="m-6">
+                  <span className="mx-3">discount</span>
+                  <span>&#8369;</span>
+                  {cartItem.discount}
+                </p>
+              )}
             </div>
+          </div>
+          <div className="w-[20%] flex justify-center items-center">
+            <IconButton onClick={() => removeProduct(cartItem)}>
+              <RiDeleteBin6Line size={30} />
+            </IconButton>
+          </div>
+        </div>
+      </ControlledCard>
+    ))
+  ) : (
+    'No Items In Cart'
+  )}
+</div>
           </div>
         </section>        
       )

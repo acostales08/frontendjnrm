@@ -79,28 +79,36 @@ const SalesContent = () => {
     handleReactToPrint()
   }
 
-  const removeProduct = async() => {
+  const removeProduct = async(product) => {
     try {
+      // Call the API to cancel the order
       const response = await axios.post('http://localhost:8000/api/cancelorder', { cartItem: cart });
+
+      // If the response is successful (status code 200 OK), remove the item from cart state
+      if (response.status === 200) {
+        const newCart = cart.filter(cartItem =>  cartItem.id !== product.id )
+      setCart(newCart)
+
+        // Update the productData state to reflect the correct quantity
+        const updatedCart = cart.map((cartItem) => {
+          const originalQuantity = productData.find((product) => product.id === cartItem.product.id).quantity;
+          return {
+            ...cartItem,
+            quantity: originalQuantity,
+          };
+        });
   
-      // Kapag nag-response ng 200 OK, ibalik ang mga produkto sa kanilang orihinal na quantity sa cart
-      const updatedCart = cart.map((cartItem) => {
-        const originalQuantity = productData.find((product) => product.id === cartItem.product.id).quantity;
-        return {
-          ...cartItem,
-          quantity: originalQuantity,
-        };
-      });
-  
-      setCart(updatedCart);
-  
-      // I-display ang success message sa user
-      console.log('Order removed successfully');
+        setCart(updatedCart);
+
+        console.log('Order removed successfully');
+      } else {
+        console.error('Remove order failed:', response.data.error);
+      }
     } catch (error) {
-      // I-handle ang mga error mula sa backend
-      console.error('Remove order failed:');
+      console.error('Error removing order:', error);
     }
-  }
+  };
+
 
   useEffect(() => {
     fetchData()

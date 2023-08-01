@@ -17,7 +17,7 @@ const Samplelogin = () => {
     e.preventDefault()
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login', {
+      const response = await axios.post('http://127.0.0.1:8000/api/login/member', {
         username,
         password
       })
@@ -26,7 +26,7 @@ const Samplelogin = () => {
         // Store the token or handle the response accordingly
 ;
         // Navigate to the home screen or any other screen upon successful login
-        navigate('/dashboard');
+        navigate('/');
       } else {
         // Login failed
         alert('Error',  'Incorrect Username or Password!');

@@ -12,7 +12,9 @@ const SalesContent = () => {
   const [productData, setProductData] = useState([])
   const [cart, setCart] = useState([])
   const [totalAmount, setTotalAmount] = useState(0)
-  const [discount, setDiscount] = useState(0)
+  const [discount, setDiscount] = useState(0);
+  const [discountPercentage, setDiscountPercentage] = useState(0);
+  const [discountAmount, setDiscountAmount] = useState(0);
 
   const fetchData = async () => {
     try {
@@ -121,7 +123,15 @@ const SalesContent = () => {
       });
       setTotalAmount(newTotalAmount)
   }, [cart])
-
+  
+  const handleDiscountChange = (e) => {
+    const enteredDiscount = parseFloat(e.target.value);
+    setDiscount(enteredDiscount);
+  
+    // Calculate discount percentage and amount based on the entered discount
+    const newDiscountPercentage = totalAmount * (enteredDiscount / 100);
+    setDiscountPercentage(newDiscountPercentage);
+  };
     return (
         <section className="h-[897px] w-auto p-2 top-0 flex bg-[#F9F5F6]">
           <div className=" h-full w-[50%] flex flex-col">
@@ -146,7 +156,7 @@ const SalesContent = () => {
               <div className="w-full flex px-10 text-1xl gap-4">
                 <div className="gap-0 grid">
                   <p className=" flex items-center">Sub :</p>
-                  <p className=" flex items-center">Discount :</p>
+                  <p className=" flex items-center">Discount %:</p>
                   <p className=" flex items-center">Tax :</p>
                 </div>
                 <div className=" w-[230px] grid">
@@ -154,16 +164,26 @@ const SalesContent = () => {
                     <p className=" w-full rounded-lg bg-white p-1 shadow-inner"><span>&#8369;</span>{totalAmount}</p>
                   </div>
                   <div className=" p-1 flex items-center">
-                    <input type="number" className="text-black" placeholder='Enter Discount here' onChange={(e) => setDiscount(e.target.value)} />
+                  <input
+                type="number"
+                className="text-black"
+                placeholder="Enter Discount here"
+                value={discount}
+                onChange={handleDiscountChange}
+              />
                   </div>
                   <div className=" p-1 flex items-center">
-                    <p className=" w-full rounded-lg bg-white p-1 shadow-inner">10.00</p>
+                    <p className=" w-full rounded-lg bg-white p-1 shadow-inner"> <span>&#8369;</span>
+            {totalAmount * 0.12}</p>
                   </div> 
                 </div>
               </div>
               <div className="gap-2 w-9/12 text-2xl  flex flex-col justify-center items-center">
-                <h1 className=""> Total Amount </h1>
-                <p className="p-4 rounded-md shadow-inner bg-white w-36 "><span>&#8369;</span>{totalAmount}</p>
+              <h1 className=""> Total Amount </h1>
+          <p className="p-4 rounded-md shadow-inner bg-white w-36 ">
+            <span>&#8369;</span>
+            {totalAmount - discountPercentage}
+          </p>
               </div>                
             </div>
             <div className="h-10 flex justify-center gap-5">

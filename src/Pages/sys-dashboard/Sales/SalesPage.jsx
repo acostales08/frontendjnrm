@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { Button, IconButton } from '@mui/material'
 import { RiDeleteBin6Line } from 'react-icons/ri'
-import { ControlledCard } from '../../../Components'
+import { ControlledButton, ControlledCard } from '../../../Components'
 import axios from 'axios'
 import { ComponentToPrint } from '../../../Components/Print/Print'
 import { useReactToPrint } from 'react-to-print';
@@ -14,29 +14,21 @@ const SalesContent = () => {
   const [totalAmount, setTotalAmount] = useState(0)
   const [discount, setDiscount] = useState(0);
   const [discountPercentage, setDiscountPercentage] = useState(0);
-  const [discountAmount, setDiscountAmount] = useState(0);
+  // const [cartToDb, setCartToDb] = useState([])
 
   const fetchData = async () => {
     try {
       const response = await axios.get('http://localhost:8000/api/product');
       setProductData(response.data.product)
+
     } catch (error) {
       
     }
   }
 
+ 
   const addProductToCart = async (product) => {
-    try {
-      const response = await axios.post('http://localhost:8000/api/order', {
-        id: product.id,
-        quantity: 1, // I-adjust depende sa desired quantity ng user
-      });
-  
-      if (response.status === 200) {
-        console.log(response.data.message); // Success message from Laravel
-  
-        // Add the new cart item to the cart state
-        let findProductInCart = cart.find((item) => item.id === product.id);
+    let findProductInCart = cart.find((item) => item.id === product.id); 
   
     if (findProductInCart) {
       let newCart = cart.map((cartItem) => {
@@ -60,15 +52,8 @@ const SalesContent = () => {
       };
       setCart([...cart, addingProduct]);
     }
-      } else {
-        console.error('Something went wrong!');
-        // Handle error cases
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle error cases
-    }
   };
+
   
 
   const componentRef = useRef();
@@ -81,34 +66,12 @@ const SalesContent = () => {
     handleReactToPrint()
   }
 
-  const removeProduct = async(product) => {
-    try {
-      // Call the API to cancel the order
-      const response = await axios.post('http://localhost:8000/api/cancelorder', { cartItem: cart });
 
-      // If the response is successful (status code 200 OK), remove the item from cart state
-      if (response.status === 200) {
-        const newCart = cart.filter(cartItem =>  cartItem.id !== product.id )
+const removeProduct = async(product) => {
+      const newCart = cart.filter(cartItem =>  cartItem.id !== product.id )
       setCart(newCart)
-
-        // Update the productData state to reflect the correct quantity
-        const updatedCart = cart.map((cartItem) => {
-          const originalQuantity = productData.find((product) => product.id === cartItem.product.id).quantity;
-          return {
-            ...cartItem,
-            quantity: originalQuantity,
-          };
-        });
-  
-        setCart(updatedCart);
-
-        console.log('Order removed successfully');
-      } else {
-        console.error('Remove order failed:', response.data.error);
-      }
-    } catch (error) {
-      console.error('Error removing order:', error);
-    }
+      setDiscount('0');
+      setDiscountPercentage('0');
   };
 
 
@@ -117,21 +80,29 @@ const SalesContent = () => {
   }, [])
 
   useEffect(() => {
-      let newTotalAmount = 0;
-      cart.forEach(icart => {
-        newTotalAmount = newTotalAmount + parseInt(icart.totalAmount)
-      });
-      setTotalAmount(newTotalAmount)
-  }, [cart])
+    let newTotalAmount = 0;
+    cart.forEach(icart => {
+      newTotalAmount = newTotalAmount + parseInt(icart.totalAmount)
+    });
+    setTotalAmount(newTotalAmount)
+}, [cart])
   
   const handleDiscountChange = (e) => {
     const enteredDiscount = parseFloat(e.target.value);
-    setDiscount(enteredDiscount);
+    if (!isNaN(enteredDiscount)) {
+      setDiscount(enteredDiscount);
   
-    // Calculate discount percentage and amount based on the entered discount
-    const newDiscountPercentage = totalAmount * (enteredDiscount / 100);
-    setDiscountPercentage(newDiscountPercentage);
+      // Calculate discount percentage and amount based on the entered discount
+      const newDiscountPercentage = totalAmount * (enteredDiscount / 100);
+      setDiscountPercentage(newDiscountPercentage);
+    } else {
+      setDiscount('');
+      setDiscountPercentage('');
+    }
+
   };
+
+
     return (
         <section className="h-[897px] w-auto p-2 top-0 flex bg-[#F9F5F6]">
           <div className=" h-full w-[50%] flex flex-col">
@@ -165,12 +136,12 @@ const SalesContent = () => {
                   </div>
                   <div className=" p-1 flex items-center">
                   <input
-                type="number"
-                className="text-black"
-                placeholder="Enter Discount here"
-                value={discount}
-                onChange={handleDiscountChange}
-              />
+                  type="number"
+                  className="text-black"
+                  placeholder="Enter Discount here"
+                  value={discount}
+                  onChange={handleDiscountChange}
+                />
                   </div>
                   <div className=" p-1 flex items-center">
                     <p className=" w-full rounded-lg bg-white p-1 shadow-inner"> <span>&#8369;</span>
@@ -180,38 +151,36 @@ const SalesContent = () => {
               </div>
               <div className="gap-2 w-9/12 text-2xl  flex flex-col justify-center items-center">
               <h1 className=""> Total Amount </h1>
-          <p className="p-4 rounded-md shadow-inner bg-white w-36 ">
+          <p className="p-4 rounded-md shadow-inner bg-white w-36 overflow-hidden">
             <span>&#8369;</span>
-            {totalAmount - discountPercentage}
+            {totalAmount - discountPercentage }
           </p>
               </div>                
             </div>
             <div className="h-10 flex justify-center gap-5">
-              <Button
-
-              variant='contained'
-              >Save</Button>
-              <Button 
-
-              color='warning'
-              variant='outlined'
-              >Cancel</Button>                    
-              <Button 
-
-              variant='contained'
+              <ControlledButton
+              variant="contained"
+              text='Save'
+              size='large'
+              />
+              <ControlledButton
+              variant="outlined"
+              text='Cancel'
+              size='large'
+              />                   
+              <ControlledButton
+              variant="contained"
+              text='Gcash'
+              size='large'
               color='success'
-              >
-                GCash</Button>    
-              <Button
- 
-              variant='contained'
+              />   
+              <ControlledButton
+              variant="contained"
+              text='Print'
+              size='large'
               color='success'
-              >
-                Discount</Button>    
-              <Button onClick={handlePrint}
-              variant='contained'
-              color='success'
-              >Print</Button>    
+              onClick={handlePrint}
+              />        
             </div>
           </div>
           <div className=" h-full w-[50%] p-1 overflow-scroll">
@@ -219,54 +188,37 @@ const SalesContent = () => {
                   <ComponentToPrint cart={cart} totalAmount={totalAmount} ref={componentRef}/>
             </div>
             <div className="h-auto w-full rounded-lg grid grid-rows-10 gap-2">
-  {cart.length > 0 ? (
-    cart.map((cartItem, index) => (
-      <ControlledCard key={index}>
-        <div className="flex h-full">
-          <div className="p-4 h-full w-[20%]">
-            <img src={`http://127.0.0.1:8000/storage/${cartItem.image}`} alt="Product image" className="" />
-          </div>
-          <div className="flex justify-between items-center w-full h-full gap-5 text-2xl">
-            <p className="m-6">{cartItem.name}</p>
-            <p className="m-6">
-              <span>&#8369;</span>
-              {cartItem.price}
-            </p>
-            <div className="">
-              <p className="m-6">
-                <span className="mx-3">quantity</span>
-                {cartItem.quantity}
-              </p>
-              <p className="m-6">
-                <span className="mx-3">total</span>
-                <span>&#8369;</span>
-                {cartItem.totalAmount}
-              </p>
-              {/* Display discount if applicable */}
-              {cartItem.discount && (
-                <p className="m-6">
-                  <span className="mx-3">discount</span>
-                  <span>&#8369;</span>
-                  {cartItem.discount}
-                </p>
-              )}
+                {cart.map((cartItem, index) => (
+                <ControlledCard key={index}>
+                  <div className="flex justify-around p-2">
+                    <div className="w-16 h-16">
+                      <img src={`http://127.0.0.1:8000/storage/${cartItem.image}`} alt="product image" />
+                    </div>
+                    <div className="flex items-center gap-10">
+                      <p className="text-2xl font-semibold ">{cartItem.productname}</p>
+                      </div>
+                      <div className="grid grid-cols-2 grid-rows-3">
+                        <p className="">Price: </p>
+                        <p className="font-semibold">{cartItem.price}</p>
+                        <p className="">Quantity: </p>    
+                        <p className="font-semibold"> {cartItem.quantity}</p>
+                        <p className="">Total:  </p>
+                        <p className="font-semibold"><span>&#8369; </span>{cartItem.totalAmount}</p>      
+                                           
+                      </div>
+                    <div className=" flex justify-center items-center">
+                        <IconButton onClick={() => removeProduct(cartItem)}>
+                          <RiDeleteBin6Line size={30} />
+                        </IconButton>
+                      </div>
+                  </div>
+                </ControlledCard>
+              ))}
             </div>
-          </div>
-          <div className="w-[20%] flex justify-center items-center">
-            <IconButton onClick={() => removeProduct(cartItem)}>
-              <RiDeleteBin6Line size={30} />
-            </IconButton>
-          </div>
-        </div>
-      </ControlledCard>
-    ))
-  ) : (
-    'No Items In Cart'
-  )}
-</div>
           </div>
         </section>        
       )
 }
 
 export default SalesContent
+

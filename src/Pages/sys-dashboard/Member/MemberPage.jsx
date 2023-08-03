@@ -57,10 +57,7 @@ const MemberContent = () => {
 
   const createMember = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/member",
-        newMember
-      );
+      const response = await axios.post("http://localhost:8000/api/member", newMember);
       if (response.status === 200) {
         closeModal("AddModal");
         Swal.fire({

@@ -36,6 +36,20 @@ const InventoryContent = () => {
         sortable: true 
         },
         {
+          name: "Status",
+          cell: (row) => (
+            <>
+            <div className="bg-red-600 rounded-full">
+              <p className="text-white my-1 mx-4 ">Out of Stock</p>  
+            </div>  
+            {/* <div className="bg-yellow-300 rounded-full">
+              <p className="text-black my-1 mx-4 ">Critical stack</p>  
+            </div>   */}
+            </>
+  
+          ),
+          },
+        {
         name: "Stock action",
         cell: (row) => (
           <>
@@ -67,6 +81,11 @@ const InventoryContent = () => {
             productname: 'sample1',
             quantity: '23'
         },
+        {
+          id: '2',
+          productname: 'sample2',
+          quantity: '23'
+      },
     ];
   return (
     <>

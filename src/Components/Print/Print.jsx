@@ -43,10 +43,8 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
 
     return (
       <div ref={ref} className='p-5'>
-        <div className="p-5">
-            <h3 className="">Total Amount: {totalAmount}</h3>
-        </div>
-        <ControlledDataTable columns={columns} data={cart}/>
+       <ControlledDataTable columns={columns} data={cart}/>
       </div>
     );
+    
   });

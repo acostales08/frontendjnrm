@@ -11,6 +11,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 
 
 const DashboardContent = () => {
+
   const data = [
     {
       name: 'January',
@@ -87,13 +88,18 @@ const DashboardContent = () => {
   ];
 
   const [totalMembers, setTotalMembers] = useState(null);
+  const [totalProduct, setTotalProduct] = useState(null);
+  const [totalSales, setTotalSales] = useState(null);
+  const [criticalStock, setCriticalStock] = useState(null);
+
 
   useEffect(() => {
     // Fetch the total member count from the API
     axios.get('http://127.0.0.1:8000/api/totalmember') // Replace '/api/total-member' with your actual API endpoint
       .then(response => {
         if (response.data.status === 200) {
-          setTotalMembers(response.data.message); // Update the state with the total member count
+          setTotalMembers(response.data.message);
+          console.log(totalMembers) // Update the state with the total member count
         }
       })
       .catch(error => {
@@ -101,7 +107,55 @@ const DashboardContent = () => {
         setTotalMembers(null); // Handle errors if needed
       });
   }, []);
+
+
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/totalproduct') 
+      .then(response => {
+        if (response.data.status === 200) {
+          setTotalProduct(response.data.message); 
+          console.log(totalProduct)
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        setTotalProduct(null);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/totalsales') 
+      .then(response => {
+        if (response.data.status === 200) {
+          setTotalSales(response.data.message); 
+          console.log(totalSales)
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        setTotalSales(null);
+      });
+  }, []);
+
   
+  
+ 
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/criticalstock') 
+      .then(response => {
+        if (response.data.status === 200) {
+          setCriticalStock(response.data.message); 
+          console.log(criticalStock)
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        setCriticalStock(null);
+      });
+  }, []);
+
   return (
     <section className=" h-auto w-full">
       <div className=" h-96 md:h-52 lg:h-52 w-full p-4">
@@ -136,7 +190,7 @@ const DashboardContent = () => {
             </div>
             <div className="h-full w-full">
             <div className="h-[60%] flex justify-start items-end">
-              <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>50</h1>
+              <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>{totalProduct !== null ? totalProduct : 'Loading...'}</h1>
             </div>
             <div className="h-[40%] flex justify-start items-start">
             <h2 className="text-1xl text-[white] font-semibold">Total Product</h2>
@@ -155,8 +209,8 @@ const DashboardContent = () => {
           </div>
           <div className="h-full w-full">
           <div className="h-[60%] flex justify-start items-end">
-            <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>20</h1>
-          </div>
+            <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>{totalSales !== null ? totalSales : 'Loading...'}</h1>
+          </div>{console.log(totalSales)}
           <div className="h-[40%] flex justify-start items-start">
           <h2 className="text-1xl text-[white] font-semibold">Total Sales</h2>
           </div>
@@ -174,10 +228,10 @@ const DashboardContent = () => {
          </div>
          <div className="h-full w-full">
          <div className="h-[60%] flex justify-start items-end">
-           <h1 className='text-[50px] font-bold font-sans text-[white]'>30</h1>
+           <h1 className='text-[50px] font-bold font-sans text-[white]'>{criticalStock !== null ? criticalStock : 'Loading...'}</h1>
          </div>
          <div className="h-[40%] flex justify-start items-start">
-         <h2 className="text-1 xl text-[white] font-semibold">Total Service</h2>
+         <h2 className="text-1 xl text-[white] font-semibold">Critical Stock</h2>
          </div>
          </div>
          </div>

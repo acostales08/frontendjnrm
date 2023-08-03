@@ -1,9 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BsPlusCircleFill } from 'react-icons/bs'
 import { FaMinusCircle } from 'react-icons/fa'
+import axios from 'axios';
 import { ControlledButton, ControlledDataTable, ControlledModal, ControlledTypography, ControlledTextField } from '../../../Components'
 
 const InventoryContent = () => {
+
+  const [products, setProducts] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/product');
+      setProducts(response.data.product);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
 
     const [modal, setModal] = useState({
       AddModal: false,
@@ -71,7 +88,7 @@ const InventoryContent = () => {
   return (
     <>
       <div className="p-8">
-        <ControlledDataTable columns={columns} data={data} />
+        <ControlledDataTable columns={columns} data={products} />
       </div>
 
     {/* increase product quantity */}

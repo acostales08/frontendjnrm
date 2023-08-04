@@ -1,52 +1,29 @@
-import React from 'react' 
+import React, { useState, useEffect } from 'react' 
 import { Link } from 'react-router-dom'
 import { LuArrowRight } from 'react-icons/lu'
 import ControlledCard from '../../Card/Card'
 import backgroundImage from '../../../assets/bg.jpeg'
-
+import axios from 'axios'
 
 
 
 const HomeAboutContent = () => {
 
-  const Product = [
-    {
-      img: 'product1.png',
-      productName: 'product 1',
-      description: 'product 1',
-      price: '54.00',
-      link: 'https://shopee.ph/Palmolive-Naturals-White-Beauty-Bar-Soap-with-100-Natural-Papaya-Extract-80g-Pack-of-3-i.45237836.726251114?sp_atk=e0151b7a-257c-412d-bfc3-92bcb178e791&xptdk=e0151b7a-257c-412d-bfc3-92bcb178e791'
-    },
-    {
-      img: 'product2.png',
-      description: 'product 12',
-      productName: 'product 2',
-      price: '68.00',
-      link: 'https://shopee.ph/Palmolive-Naturals-Intensive-Moisture-Shampoo-with-Coconut-Cream-for-Dry-Coarse-Hair-600mhttps://shopee.ph/Breeze-Laundry-Liquid-Detergent-Power-Machine-3L-Bottle-i.40495882.2227713819?sp_atk=b9db5cb2-0d0c-4537-8aab-ff499b496845&xptdk=b9db5cb2-0d0c-4537-8aab-ff499b496845l-Pump-i.45237836.5019871290?sp_atk=5790db3e-b127-43aa-a9d1-3bf52c14842a&xptdk=5790db3e-b127-43aa-a9d1-3bf52c14842a'
-    },
-    {
-      img: 'product3.png',
-      description: 'product 3',
-      productName: 'product 3',
-      price: '67.00',
-      link: 'https://shopee.ph/-BUNDLE-OF-3-Cream-Silk-Triple-Keratin-Rescue-Ultimate-Straight-Conditioner-340ml-i.40867978.5440704693?sp_atk=fafd2bb8-5140-47aa-a686-10063561ba76&xptdk=fafd2bb8-5140-47aa-a686-10063561ba76'
-    },
-    {
-      img: 'product4.png',
-      description: 'product 14',
-      productName: 'product 4',
-      price: '578.00',
-      link: 'https://shopee.ph/-BUNDLE-OF-2-Baby-Dove-Hair-to-Toe-Wash-Rich-Moisture-430ml-Refill-for-Dry-Skin-i.40867978.7657839993?sp_atk=b33b8d6d-c0fd-44c9-b2f4-22eef52008e1&xptdk=b33b8d6d-c0fd-44c9-b2f4-22eef52008e1'
-    },
-    {
-      img: 'product4.png',
-      description: 'product 14',
-      productName: 'product 4',
-      price: '578.00',
-      link: 'https://shopee.ph/-BUNDLE-OF-2-Baby-Dove-Hair-to-Toe-Wash-Rich-Moisture-430ml-Refill-for-Dry-Skin-i.40867978.7657839993?sp_atk=b33b8d6d-c0fd-44c9-b2f4-22eef52008e1&xptdk=b33b8d6d-c0fd-44c9-b2f4-22eef52008e1'
+  const [productData, setProductData] = useState([])
+
+  useEffect(()=> {
+    fetchData()
+  }, [])
+  const fetchData = async() => {
+    try {
+      const response =  await axios.get('http://127.0.0.1:8000/api/product')
+      setProductData(response.data.product)
+    } catch (error) {
+      
     }
-    
-  ]
+  }
+
+
 
   return (
     <div name="about" className=' lg:h-screen w-full bg-fixed' style={{ backgroundImage: `url(${backgroundImage})`}}>
@@ -65,8 +42,9 @@ const HomeAboutContent = () => {
               </h4>
             </div>
           <div className="h-auto w-full rounded-[25px] bg-[#fff3f6] shadow-lg p-2 md:p-5 lg:p-10">
-            <div className="w-full h-full text-center gap-2 lg:gap-8  grid grid-cols-2 lg:grid-cols-4  lg:grid-rows-1 pt-8">
-            {Product.slice(0, 4).map(({img, description, productName,price,link })=>(
+            
+            <div className="w-full h-full text-center gap-2 lg:gap-8  grid grid-cols-2 lg:grid-cols-4  lg:grid-rows-1 pt-8  border border-black">
+            {productData.slice(0, 4).map(({image, description, productName,price,link })=>(
                 <div className="h-full w-full flex flex-col lg:flex-row justify-center items-center">
                   <a href={link}>
                     <ControlledCard
@@ -78,7 +56,7 @@ const HomeAboutContent = () => {
                       
                     <div className=' h-full w-full overflow-hidden'>
                         <div className="h-[60%] w-[240px] md:w-[320px] lg:w-[350px] flex justify-center items-center">
-                          <img className='h-[180px] w-[150px] lg:w-[200px] my-4' src={img} alt='img'/>                          
+                          <img className='h-[180px] w-[150px] lg:w-[200px] my-4' src={`http://127.0.0.1:8000/storage/${image}`} alt='img'/>                          
                         </div>
                         <div className="h-[40%] w-full py-0 lg:py-10">
                           <h4 className='text-[14px] lg:text-3xl text-shadow'>{productName}</h4>  

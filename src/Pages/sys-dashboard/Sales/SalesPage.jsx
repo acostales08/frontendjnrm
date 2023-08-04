@@ -5,6 +5,7 @@ import { ControlledButton, ControlledCard } from '../../../Components'
 import axios from 'axios'
 import { ComponentToPrint } from '../../../Components/Print/Print'
 import { useReactToPrint } from 'react-to-print';
+import Swal from 'sweetalert2';
 
 
 const SalesContent = () => {
@@ -44,6 +45,44 @@ const SalesContent = () => {
       });
   
       setCart(newCart);
+    }else if(product.quantity == 0){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 700,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'info',
+        title: 'Out of Stock'
+      })
+    } else if(product.quantity <= 20){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'warning',
+        title: 'This product is allready less than 20'
+      })
+      let addingProduct = {
+        ...product,
+        quantity: 1,
+        totalAmount: product.price,
+      };
+      setCart([...cart, addingProduct]);
     } else {
       let addingProduct = {
         ...product,
@@ -51,11 +90,97 @@ const SalesContent = () => {
         totalAmount: product.price,
       };
       setCart([...cart, addingProduct]);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 700,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'success',
+        title: 'Added successfully'
+      })
     }
   };
 
+  const sendCartToApi = async (cart) => {
+    try {
+      if (cart.length === 0) {
+        console.log("Cart is empty.");
+        return;
+      }
   
+      const cartData = cart.map((item) => ({
+        pid: item.id,
+        image: item.image,
+        name: item.productname,
+        description: item.description,
+        price: item.price,
+        quantity: item.quantity,
+      }));
+  
+      console.log("Sending cart data:", cartData);
+  
+      const apiUrl = "http://localhost:8000/api/order"; // Replace with your actual API endpoint
+  
+      // Make the API request
+      const response = await axios.post(apiUrl, cartData);
+  
+      console.log("Cart sent successfully!", response.data);
+    } catch (error) {
+      console.error("Error sending cart:", error);
+    }
+  };
 
+  // const sendCartToApi = async (cart) => {
+  //   try {
+  //     if (cart.length === 0) {
+  //       console.log("Cart is empty.");
+  //       return;
+  //     }
+
+  //     const cartData = cart.map((item) => ({
+
+  //       pid: item.id,
+  //       image: item.image,
+  //       name: item.productname,
+  //       description: item.description,
+  //       price: item.price,
+  //       quantity: item.quantity,
+  //     }));
+  // console.log(cartData)
+  //     // Make the API request
+  //     const response = await axios.post('http://localhost:8000/api/order', cartData);
+      
+
+  //     console.log('Cart sent successfully!', response.data);
+  //   } catch (error) {
+  //     console.error('Error sending cart:', error);
+  //   }
+  // };
+
+  // const sendCartToApi = async () => {
+  //   try {
+  //     const cartData = cart.map((item) => ({
+  //       pid: item.id,
+  //       name: item.productname,
+  //       image: item.image,
+  //       description: item.description,
+  //       price: item.price,
+  //       quantity: item.quantity,
+
+  //     }));
+  //     const response = await axios.post('http://localhost:8000/api/order', cartData)
+  //     console.log('Cart sent successfully!', response.data);
+  //   } catch (error) {
+      
+  //   }
+  // }
   const componentRef = useRef();
 
   const handleReactToPrint =  useReactToPrint({
@@ -64,6 +189,7 @@ const SalesContent = () => {
 
   const handlePrint = () => {
     handleReactToPrint()
+    console.log(cart)
   }
 
 
@@ -72,6 +198,21 @@ const removeProduct = async(product) => {
       setCart(newCart)
       setDiscount('0');
       setDiscountPercentage('0');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 700,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'error',
+        title: 'Removed Successfully'
+      })
   };
 
 
@@ -161,6 +302,7 @@ const removeProduct = async(product) => {
               <ControlledButton
               variant="contained"
               text='Save'
+              onClick={() => sendCartToApi(cart)}
               size='large'
               />
               <ControlledButton

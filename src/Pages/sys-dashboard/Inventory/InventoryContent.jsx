@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BsPlusCircleFill } from 'react-icons/bs'
 import { FaMinusCircle } from 'react-icons/fa'
+import axios from 'axios'
 import { ControlledButton, ControlledDataTable, ControlledModal, ControlledTypography, ControlledTextField } from '../../../Components'
 
 const InventoryContent = () => {
@@ -9,6 +10,22 @@ const InventoryContent = () => {
       AddModal: false,
       MinusModal: false
     })
+    const [products, setProducts] = useState([]);
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/product');
+        setProducts(response.data.product);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    useEffect(() => {
+      fetchData();
+    }, []);
+
+ console.log(products.quantity)
 
     const openModal = (modalType) => {
       setModal({...modal, [modalType]: true})
@@ -39,12 +56,10 @@ const InventoryContent = () => {
           name: "Status",
           cell: (row) => (
             <>
-            <div className="bg-red-600 rounded-full">
-              <p className="text-white my-1 mx-4 ">Out of Stock</p>  
-            </div>  
-            {/* <div className="bg-yellow-300 rounded-full">
-              <p className="text-black my-1 mx-4 ">Critical stack</p>  
-            </div>   */}
+            
+              <div className="bg-red-600 rounded-full">
+                <p className="text-[10px] text-white mx-2 ">Out of Stock</p>  
+              </div>  
             </>
   
           ),
@@ -90,7 +105,7 @@ const InventoryContent = () => {
   return (
     <>
       <div className="p-8">
-        <ControlledDataTable columns={columns} data={data} />
+        <ControlledDataTable columns={columns} data={products} />
       </div>
 
     {/* increase product quantity */}

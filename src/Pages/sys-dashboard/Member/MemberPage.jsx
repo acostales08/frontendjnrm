@@ -60,11 +60,20 @@ const MemberContent = () => {
       const response = await axios.post("http://localhost:8000/api/member", newMember);
       if (response.status === 200) {
         closeModal("AddModal");
-        Swal.fire({
-          title: 'Success!',
-          text: response.data.message,
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 700,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        Toast.fire({
           icon: 'success',
-          confirmButtonText: 'Got it!'
+          title: 'Added successfully'
         }).then(() => {
           fetchData();
         setNewMember({})
@@ -81,11 +90,20 @@ const MemberContent = () => {
     try {
       const response = await axios.put(`http://localhost:8000/api/member/${member.id}/edit`, member);
       closeModal("EditModal")
-      Swal.fire({
-        title: 'Success!',
-        text: response.data.message,
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
         icon: 'success',
-        confirmButtonText: 'Got it!'
+        title: 'Updated '
       }).then(() => {
 
         fetchData();
@@ -99,11 +117,20 @@ const MemberContent = () => {
     try {
       const response = await axios.delete(`http://localhost:8000/api/member/${memberId}/delete`);
       closeModal("DeleteModal");
-      Swal.fire({
-        title: 'Success!',
-        text: response.data.message,
-        icon: 'success',
-        confirmButtonText: 'Got it!'
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'error',
+        title: 'Deleted'
       }).then(() => {
         fetchData();
       setNewMember({})

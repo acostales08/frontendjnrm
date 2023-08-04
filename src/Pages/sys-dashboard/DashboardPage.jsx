@@ -113,7 +113,7 @@ const DashboardContent = () => {
           <div className='flex h-full w-full bg-red-600 bg-opacity-75 '>
             <div className="h-full w-full flex justify-center items-center">
                 {/* icons */}
-                <FaUsers size={130} className='text-[#4c4d7a] opacity-[0.7] hover:scale-125 duration-500'/>
+                <FaUsers size={130} className='text-[#af5858] opacity-[0.7] hover:scale-125 duration-500'/>
             </div>
             <div className="h-full w-full">
               <div className="h-[60%] flex justify-start items-end">
@@ -131,7 +131,7 @@ const DashboardContent = () => {
             <div className=" h-full w-full flex justify-center items-center">
               <div className="h-32 w-32  ">
                    {/* icons */}
-                   <MdProductionQuantityLimits size={130} className=' text-[#4c4d7a] opacity-[0.5] hover:scale-125 duration-500'/>
+                   <MdProductionQuantityLimits size={130} className=' text-[#3f85be] opacity-[0.5] hover:scale-125 duration-500'/>
               </div>
             </div>
             <div className="h-full w-full">
@@ -150,7 +150,7 @@ const DashboardContent = () => {
           <div className=" h-full w-full flex justify-center items-center">
             <div className="h-32 w-32 ">
                {/* icons */}
-               <VscGraph size={130} className=' text-[#32553b] opacity-[0.5] hover:scale-125 duration-500'/>
+               <VscGraph size={130} className=' text-[#66806d] opacity-[0.5] hover:scale-125 duration-500'/>
             </div>
           </div>
           <div className="h-full w-full">
@@ -169,7 +169,7 @@ const DashboardContent = () => {
          <div className=" h-full w-full flex justify-center items-center">
            <div className="h-32 w-32 ">
               {/* icons */}
-              <RiCustomerService2Line size={130} className=' text-[#6c724a] opacity-[0.5] hover:scale-125 duration-500'/>
+              <RiCustomerService2Line size={130} className=' text-[#b5be88] opacity-[0.5] hover:scale-125 duration-500'/>
            </div>
          </div>
          <div className="h-full w-full">

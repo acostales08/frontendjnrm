@@ -1,10 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { BsPlusCircleFill } from 'react-icons/bs'
 import { FaMinusCircle } from 'react-icons/fa'
+<<<<<<< HEAD
 import axios from 'axios'
+=======
+import axios from 'axios';
+>>>>>>> 5677f4550e6849bb247905dcc645d1f350b12781
 import { ControlledButton, ControlledDataTable, ControlledModal, ControlledTypography, ControlledTextField } from '../../../Components'
 
 const InventoryContent = () => {
+
+  const [products, setProducts] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/product');
+      setProducts(response.data.product);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
 
     const [modal, setModal] = useState({
       AddModal: false,

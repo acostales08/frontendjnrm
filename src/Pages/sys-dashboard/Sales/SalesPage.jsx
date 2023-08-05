@@ -115,27 +115,36 @@ const SalesContent = () => {
         return;
       }
   
-      const cartData = cart.map((item) => ({
-        pid: item.id,
-        image: item.image,
-        name: item.productname,
-        description: item.description,
-        price: item.price,
-        quantity: item.quantity,
-      }));
+      for (const item of cart) {
+        const { id, image, productname, description, price, quantity } = item;
   
-      console.log("Sending cart data:", cartData);
+        const apiUrl = "http://localhost:8000/api/order"; // Replace with your actual API endpoint for payment
   
-      const apiUrl = "http://localhost:8000/api/order"; // Replace with your actual API endpoint
+        // Make the API request
+        const response = await axios.post(apiUrl, {
+          id,
+          image,
+          name: productname,
+          description,
+          price,
+          quantity,
+          total: price * quantity,
+        });
   
-      // Make the API request
-      const response = await axios.post(apiUrl, cartData);
+        console.log("Product ID:", id, "Payment status:", response.data.message);
+      }
   
-      console.log("Cart sent successfully!", response.data);
+      console.log("Payment Successfully!");
+      setCart([]);
+    setTotalAmount(0);
+    setDiscount(0);
+    setDiscountPercentage(0);
     } catch (error) {
       console.error("Error sending cart:", error);
     }
   };
+  
+  
 
   // const sendCartToApi = async (cart) => {
   //   try {

@@ -33,12 +33,33 @@ const SalesContent = () => {
   
     if (findProductInCart) {
       let newCart = cart.map((cartItem) => {
-        if (cartItem.id === product.id) {
-          return {
-            ...cartItem,
-            quantity: cartItem.quantity + 1,
-            totalAmount: cartItem.price * (cartItem.quantity + 1),
-          };
+        if (cartItem.id === product.id) { 
+          if(cartItem.minusQuantity === 0){
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 700,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'info',
+              title: 'Out of Stock '
+            })
+            return cartItem;
+          }else{
+            return {
+              ...cartItem,
+              minusQuantity: product.quantity - cartItem.quantity -1,
+              quantity: cartItem.quantity + 1,
+              totalAmount: cartItem.price * (cartItem.quantity + 1),
+            };            
+          }
+
         } else {
           return cartItem;
         }
@@ -75,7 +96,7 @@ const SalesContent = () => {
       })
       Toast.fire({
         icon: 'warning',
-        title: 'This product is allready less than 20'
+        title: 'This product is allready'
       })
       let addingProduct = {
         ...product,
@@ -117,11 +138,10 @@ const SalesContent = () => {
   
       for (const item of cart) {
         const { id, image, productname, description, price, quantity } = item;
-  
-        const apiUrl = "http://localhost:8000/api/order"; // Replace with your actual API endpoint for payment
+
   
         // Make the API request
-        const response = await axios.post(apiUrl, {
+        const response = await axios.post('http://localhost:8000/api/order', {
           id,
           image,
           name: productname,
@@ -134,8 +154,7 @@ const SalesContent = () => {
         console.log("Product ID:", id, "Payment status:", response.data.message);
       }
   
-      console.log("Payment Successfully!");
-      setCart([]);
+    setCart([]);
     setTotalAmount(0);
     setDiscount(0);
     setDiscountPercentage(0);

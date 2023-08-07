@@ -3,11 +3,10 @@ import { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { dashboardContext } from '../Dashboard-layout/DashboardLayout';
+import ControlledTypography from '../Typography/Typography';
 
 export default function ButtonAppBar() {
 
@@ -15,7 +14,7 @@ export default function ButtonAppBar() {
   return (
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" style={{backgroundColor: '#F8E8EE', color: '#787878'}}>
-          <Toolbar>
+          <Toolbar style={{display: 'flex', justifyContent:'space-between'}}>
             <IconButton
               onClick={() => setOpen(!open)}
               size="large"
@@ -26,10 +25,9 @@ export default function ButtonAppBar() {
             >
               <FaBars size={20}  className='cursor-pointer'/>
             </IconButton>
-            
-            <Button color="inherit" >
-              <Link to='/login'>Login</Link>
-            </Button>
+            <ControlledTypography
+            text='Welcome Administrator'
+            />
           </Toolbar>
         </AppBar>
       </Box>      

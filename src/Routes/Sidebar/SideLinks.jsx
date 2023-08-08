@@ -1,5 +1,6 @@
 import { LuLayoutDashboard, LuUsers, LuTicket, LuBox, LuCalendarRange, LuSettings, LuBarChart4 } from 'react-icons/lu'
-import { MdOutlineInventory2 } from 'react-icons/md'
+import { TbReportAnalytics } from 'react-icons/tb'
+import { MdOutlineInventory2, MdDesignServices } from 'react-icons/md'
 
 export const Links = [
     {
@@ -46,8 +47,20 @@ export const Links = [
     },
     {
       id: '8',
+      link: 'Services',
+      path: '',
+      img: <MdDesignServices size={25} className='m-1' border border-black/>
+    },
+    {
+      id: '9',
+      link: 'Report',
+      path: '',
+      img: <TbReportAnalytics size={25} className='m-1' border border-black/>
+    },
+    {
+      id: '10',
       link: 'Setting',
-      path: '/dashboard/',
+      path: '',
       img: <LuSettings size={25} className='m-1' border border-black/>
     }
   ]

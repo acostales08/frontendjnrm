@@ -21,7 +21,8 @@
     "recharts": "^2.7.2",
     "styled-components": "^6.0.4",
     "sweetalert2": "^11.7.20",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zod": "^3.21.4"
   },
   "scripts": {
     "start": "react-scripts start",

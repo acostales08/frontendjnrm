@@ -85,11 +85,20 @@ const ProductPage = () => {
         },
       });
       closeModal("AddModal")
-      Swal.fire({
-        title: 'Success!',
-        text: response.data.message,
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 700,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
         icon: 'success',
-        confirmButtonText: 'Got it!'
+        title: (response.data.message)
       }).then(() => {
         fetchData();
         setNewProduct({})
@@ -100,15 +109,37 @@ const ProductPage = () => {
     }
   };
 
+  const updateProduct = async(product) => {
+    try {
+      const response = await axios.put(`http://localhost:8000/api/product/${product.id}/edit`, product)
+      if(response.status === 200){
+
+      }else{
+
+      }
+    } catch (error) {
+      
+    }
+  }
+
   const deleteProduct = async (productId) => {
     try {
       const response = await axios.delete(`http://localhost:8000/api/product/${productId}/delete`);
       closeModal('DeleteModal');
-      Swal.fire({
-        title: 'Success!',
-        text: response.data.message,
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 700,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
         icon: 'success',
-        confirmButtonText: 'Got it!'
+        title: (response.data.message)
       }).then(() => {
         fetchData();
       fetchData();
@@ -320,17 +351,6 @@ const ProductPage = () => {
                     }
                     style={{ margin: '5px', width: '100%' }}
                   />
-                  {/* <ControlledTextField
-                    type="number"
-                    variant="outlined"
-                    label="Quantity"
-                    name="quantity" // Added the correct field name for quantity if it exists in the data
-                    value={selectedProd.quantity}
-                    onChange={(e) =>
-                    setSelectedProd({ ...selectedProd, quantity: e.target.value })
-                    }
-                    style={{ margin: '5px', width: '100%' }}
-                  /> */}
                   <ControlledTextField
                     type="text"
                     variant="outlined"
@@ -370,6 +390,7 @@ const ProductPage = () => {
               </div>
             </ControlledModal>
       )}
+      
 
       {/* Deleting Product */}
       {selectedProd && (

@@ -73,7 +73,7 @@ const MemberContent = () => {
         })
         Toast.fire({
           icon: 'success',
-          title: 'Added successfully'
+          title: (response.data.message)
         }).then(() => {
           fetchData();
         setNewMember({})
@@ -89,25 +89,28 @@ const MemberContent = () => {
   const updateMember = async (member) => {
     try {
       const response = await axios.put(`http://localhost:8000/api/member/${member.id}/edit`, member);
-      closeModal("EditModal")
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      Toast.fire({
-        icon: 'success',
-        title: 'Updated '
-      }).then(() => {
+      if(response.status === 200){
+        closeModal("EditModal")
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        Toast.fire({
+          icon: 'success',
+          title: (response.data.message)
+        }).then(() => {
+  
+          fetchData();
+        });  
+      }
 
-        fetchData();
-      });
     } catch (error) {
       console.error("Error updating member:", error);
     }

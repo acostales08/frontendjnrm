@@ -43,7 +43,11 @@ const SalesContent = () => {
     if (findProductInCart) {
       let newCart = cart.map((cartItem) => {
         if (cartItem.id === product.id) { 
-          if(cartItem.minusQuantity === 0){
+          if (!cartItem.minusQuantity) {
+            cartItem.minusQuantity = product.quantity - cartItem.quantity;
+          }
+          
+          if (cartItem.minusQuantity < 1) {
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
@@ -51,16 +55,17 @@ const SalesContent = () => {
               timer: 700,
               timerProgressBar: true,
               didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
               }
-            })
+            });
             Toast.fire({
               icon: 'info',
-              title: 'Out of Stock '
-            })
+              title: 'Out of Stock'
+            });
+          
             return cartItem;
-          }else{
+          } else {
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
@@ -68,21 +73,21 @@ const SalesContent = () => {
               timer: 700,
               timerProgressBar: true,
               didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
               }
-            })
+            });
             Toast.fire({
               icon: 'success',
               title: 'Added successfully'
-            })
+            });
+          
             return {
               ...cartItem,
-              minusQuantity: product.quantity - cartItem.quantity -1,
+              minusQuantity: product.quantity - (cartItem.quantity + 1),
               quantity: cartItem.quantity + 1,
-              totalAmount: cartItem.price * (cartItem.quantity + 1),
-              
-            };            
+              totalAmount: cartItem.price * (cartItem.quantity + 1)
+            };
           }
 
         } else {
@@ -91,7 +96,7 @@ const SalesContent = () => {
       });
   
       setCart(newCart);
-    }else if(product.quantity == 0){
+    }else if(product.quantity === 0){
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',

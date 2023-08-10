@@ -48,13 +48,13 @@ export const Links = [
     {
       id: '8',
       link: 'Services',
-      path: '',
+      path: '/dashboard/Service',
       img: <MdDesignServices size={25} className='m-1' border border-black/>
     },
     {
       id: '9',
       link: 'Report',
-      path: '',
+      path: '/dashboard/Report',
       img: <TbReportAnalytics size={25} className='m-1' border border-black/>
     },
     {

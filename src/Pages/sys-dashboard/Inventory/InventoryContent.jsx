@@ -75,14 +75,24 @@ const decreaseProductQuantity = async (productId, quantity) => {
           name: "Status",
           cell: (row) => (
             <>
-            
-              <div className="bg-red-600 rounded-full">
-                <p className="text-[10px] text-white mx-2 ">Out of Stock</p>  
-              </div>  
+              {row.quantity == 0 && (
+                <div className="bg-red-600 rounded-full">
+                  <p className="text-[10px] text-white mx-2">Out of Stock</p>
+                </div>
+              )}
+              {row.quantity > 0 && row.quantity <= 20 && (
+                <div className="bg-yellow-600 rounded-full">
+                  <p className="text-[10px] text-white mx-2">Critical Stock</p>
+                </div>
+              )}
+              {row.quantity > 20 && (
+                <div className="bg-green-600 rounded-full">
+                  <p className="text-[10px] text-white mx-2">In Stock</p>
+                </div>
+              )}
             </>
-  
           ),
-          },
+        },
         {
         name: "Stock action",
         cell: (row) => (

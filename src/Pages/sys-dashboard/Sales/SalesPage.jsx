@@ -96,7 +96,7 @@ const SalesContent = () => {
       });
   
       setCart(newCart);
-    }else if(product.quantity === 0){
+    }else if(product.quantity <= 0){
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -168,10 +168,10 @@ const SalesContent = () => {
   
       for (const item of cart) {
         const { id, image, productname, description, price, quantity } = item;
-
+  
   
         // Make the API request
-        const response = await axios.post('http://localhost:8000/api/order', {
+        const response = await axios.post("http://localhost:8000/api/order", {
           id,
           image,
           name: productname,
@@ -184,7 +184,8 @@ const SalesContent = () => {
         console.log("Product ID:", id, "Payment status:", response.data.message);
       }
   
-    setCart([]);
+      console.log("Payment Successfully!");
+      setCart([]);
     setTotalAmount(0);
     setDiscount(0);
     setDiscountPercentage(0);
@@ -192,7 +193,6 @@ const SalesContent = () => {
       console.error("Error sending cart:", error);
     }
   };
-  
   
   const componentRef = useRef();
 

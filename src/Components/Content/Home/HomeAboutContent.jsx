@@ -53,17 +53,28 @@ const HomeAboutContent = () => {
                       
                     }}
                       children = {
-                      
-                    <div className=' h-full w-full overflow-hidden'>
-                        <div className="h-[60%] w-[240px] md:w-[320px] lg:w-[350px] flex justify-center items-center">
-                          <img className='h-[180px] w-[150px] lg:w-[200px] my-4' src={`http://127.0.0.1:8000/storage/${image}`} alt='img'/>                          
+                      <>
+                      <div className="h-full w-full overflow-hidden gap-10">
+                        <div className="h-40 w-46 md:h-52 md:w-60 lg:h-72 lg:w-96">
+                          <img className=' h-32 w-44 md:h-44 md:w-60 lg:h-72 lg:w-96' src={`http://127.0.0.1:8000/storage/${image}`} alt='img'/>                          
                         </div>
                         <div className="h-[40%] w-full py-0 lg:py-10">
                           <h4 className='text-[14px] lg:text-3xl text-shadow'>{productName}</h4>  
                           <p  className='text-[12px] lg:text-1xl text-shadow'>{description}</p>
                           <p className='text-[#C88EA7] text-1xl lg:text-2xl'><span>&#8369;</span>{price}</p>                          
                         </div>
-                      </div>                
+                      </div>
+                      </>
+                    // <div className=' h-full w-full overflow-hidden sm:m-4'>
+                    //     <div className="h-[60%] w-[240px] md:w-[320px] lg:w-[350px] flex justify-center items-center">
+                    //       <img className='h-[180px] w-[150px] lg:w-[200px] my-4' src={`http://127.0.0.1:8000/storage/${image}`} alt='img'/>                          
+                    //     </div>
+                    //     <div className="h-[40%] w-full py-0 lg:py-10">
+                    //       <h4 className='text-[14px] lg:text-3xl text-shadow'>{productName}</h4>  
+                    //       <p  className='text-[12px] lg:text-1xl text-shadow'>{description}</p>
+                    //       <p className='text-[#C88EA7] text-1xl lg:text-2xl'><span>&#8369;</span>{price}</p>                          
+                    //     </div>
+                    //   </div>                
                       }
                     />                    
                   </a>

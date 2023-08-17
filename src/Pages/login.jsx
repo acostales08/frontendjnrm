@@ -10,31 +10,31 @@ const Samplelogin = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [redirect, setRedirect] = useState(false)
 
   const navigate = useNavigate()
 
   const handleSubmit = async(e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login/member', {
-        username,
-        password
-      })
-      if (response.data.status === 200) {
-        // Login successful
-        // Store the token or handle the response accordingly
-;
-        // Navigate to the home screen or any other screen upon successful login
+        const response = await axios.post('http://localhost:8000/api/login', {
+          username,
+          password
+        })
+        setRedirect(true);
+
         navigate('/');
-      } else {
-        // Login failed
-        alert('Error',  'Incorrect Username or Password!');
-      }
     } catch (error) {
-      console.log(error)
+        console.error("Error:", error);
     }
-  }
+};
+
+if (redirect) {
+    // No need for Redirect component, since we're using navigate
+    return null;
+}
+
   return (
     <div className='h-screen w-full flex justify-center items-center bg-[#F9F5F6]'>
         <div className=" h-[60%] lg:h-[85%] w-[95%] lg:w-[80%] flex rounded-[25px] overflow-hidden bg-white shadow-2xl">
@@ -61,20 +61,7 @@ const Samplelogin = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 fullWidth
                 style={{margin: '15px 0'}}
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      // checked={rememberMe}
-                      // onChange={handleCheckboxChange}
-                      color="primary"
-                    />
-                  }
-                  label="Remember Me"
-                  style={{
-                    color: '#4d494f',
-                  }}
-                />
+                />  
                 <Button
                 type='submit'
                 style={{backgroundColor: '#C88EA7', margin: '15px 0'}}
@@ -88,8 +75,6 @@ const Samplelogin = () => {
                 </form>
 
                 <div className="text-[#4d494f] flex justify-center items-center flex-col m-1 lg:m-4">
-                  <p className="">Don't have an account? <a href="" className="text-[#C88EA7]">Register here</a></p>
-                  <p className="">OR</p>
                   <p className="">Back to <Link to="/"><span href="" className="text-[#C88EA7]">Homepage</span></Link>  </p>
                 </div>
               </div>

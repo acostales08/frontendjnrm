@@ -92,7 +92,6 @@ const DashboardContent = () => {
   const [totalSales, setTotalSales] = useState(null);
   const [criticalStock, setCriticalStock] = useState(null);
 
-
   useEffect(() => {
     // Fetch the total member count from the API
     axios.get('http://127.0.0.1:8000/api/totalmember') // Replace '/api/total-member' with your actual API endpoint
@@ -107,7 +106,6 @@ const DashboardContent = () => {
         setTotalMembers(null); // Handle errors if needed
       });
   }, []);
-
 
 
   useEffect(() => {
@@ -138,9 +136,6 @@ const DashboardContent = () => {
       });
   }, []);
 
-  
-  
- 
 
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/api/criticalstock') 
@@ -163,22 +158,22 @@ const DashboardContent = () => {
           {/* card  */}
         <ControlledCard 
         // card content
-        children ={
-          <div className='flex h-full w-full bg-red-600 bg-opacity-75 '>
-            <div className="h-full w-full flex justify-center items-center">
-                {/* icons */}
-                <FaUsers size={130} className='text-[#af5858] opacity-[0.7] hover:scale-125 duration-500'/>
-            </div>
-            <div className="h-full w-full">
-              <div className="h-[60%] flex justify-start items-end">
-                <h1 className="text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]">{totalMembers !== null ? totalMembers : 'Loading...'}</h1>
+          children ={
+            <div className='flex h-full w-full bg-red-600 bg-opacity-75 '>
+              <div className="h-full w-full flex justify-center items-center">
+                  {/* icons */}
+                  <FaUsers size={130} className='text-[#af5858] opacity-[0.7] hover:scale-125 duration-500'/>
               </div>
-              <div className="h-[40%] flex justify-start items-start">
-                <h2 className="text-1xl text-[white] font-semibold">Total Members</h2>
+              <div className="h-full w-full">
+                <div className="h-[60%] flex justify-start items-end">
+                  <h1 className="text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]">{totalMembers !== null ? totalMembers : 'Loading...'}</h1>
+                </div>
+                <div className="h-[40%] flex justify-start items-start">
+                  <h2 className="text-1xl text-[white] font-semibold">Total Members</h2>
+                </div>
               </div>
             </div>
-          </div>
-        }/>
+          }/>
 
         <ControlledCard children ={
           <div className='flex h-full w-full bg-[#068FFF] bg-opacity-75 '>
@@ -189,59 +184,58 @@ const DashboardContent = () => {
               </div>
             </div>
             <div className="h-full w-full">
-            <div className="h-[60%] flex justify-start items-end">
-              <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>{totalProduct !== null ? totalProduct : 'Loading...'}</h1>
+              <div className="h-[60%] flex justify-start items-end">
+                <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>{totalProduct !== null ? totalProduct : 'Loading...'}</h1>
+              </div>
+              <div className="h-[40%] flex justify-start items-start">
+                <h2 className="text-1xl text-[white] font-semibold">Total Product</h2>
+              </div>
             </div>
-            <div className="h-[40%] flex justify-start items-start">
-            <h2 className="text-1xl text-[white] font-semibold">Total Product</h2>
-            </div>
-            </div>
-            </div>
+          </div>
           
         }/>
         <ControlledCard children ={
           <div className='flex h-full w-full bg-[#5D9C59] bg-opacity-75 '>
-          <div className=" h-full w-full flex justify-center items-center">
-            <div className="h-32 w-32 ">
-               {/* icons */}
-               <VscGraph size={130} className=' text-[#66806d] opacity-[0.5] hover:scale-125 duration-500'/>
+            <div className=" h-full w-full flex justify-center items-center">
+              <div className="h-32 w-32 ">
+                {/* icons */}
+                <VscGraph size={130} className=' text-[#66806d] opacity-[0.5] hover:scale-125 duration-500'/>
+              </div>
             </div>
-          </div>
-          <div className="h-full w-full">
-          <div className="h-[60%] flex justify-start items-end">
-            <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>{totalSales !== null ? totalSales : 'Loading...'}</h1>
-          </div>{console.log(totalSales)}
-          <div className="h-[40%] flex justify-start items-start">
-          <h2 className="text-1xl text-[white] font-semibold">Total Sales</h2>
-          </div>
-          </div>
+            <div className="h-full w-full">
+              <div className="h-[60%] flex justify-start items-end">
+                <h1 className='text-[50px] md:text-[60px] lg:text-[60px] font-bold font-sans text-[white]'>{totalSales !== null ? totalSales : 'Loading...'}</h1>
+              </div>{console.log(totalSales)}
+              <div className="h-[40%] flex justify-start items-start">
+                  <h2 className="text-1xl text-[white] font-semibold">Total Sales</h2>
+              </div>
+            </div>
           </div>
         }/>
 
         <ControlledCard children ={
          <div className='flex h-full w-full bg-[#FBD85D] bg-opacity-75 '>
-         <div className=" h-full w-full flex justify-center items-center">
-           <div className="h-32 w-32 ">
-              {/* icons */}
-              <RiCustomerService2Line size={130} className=' text-[#b5be88] opacity-[0.5] hover:scale-125 duration-500'/>
-           </div>
-         </div>
+          <div className=" h-full w-full flex justify-center items-center">
+            <div className="h-32 w-32 ">
+                {/* icons */}
+                <RiCustomerService2Line size={130} className=' text-[#b5be88] opacity-[0.5] hover:scale-125 duration-500'/>
+            </div>
+          </div>
          <div className="h-full w-full">
-         <div className="h-[60%] flex justify-start items-end">
-           <h1 className='text-[50px] font-bold font-sans text-[white]'>{criticalStock !== null ? criticalStock : 'Loading...'}</h1>
-         </div>
-         <div className="h-[40%] flex justify-start items-start">
-         <h2 className="text-1 xl text-[white] font-semibold">Critical Stock</h2>
-         </div>
+          <div className="h-[60%] flex justify-start items-end">
+            <h1 className='text-[50px] font-bold font-sans text-[white]'>{criticalStock !== null ? criticalStock : 'Loading...'}</h1>
+          </div>
+          <div className="h-[40%] flex justify-start items-start">
+              <h2 className="text-1 xl text-[white] font-semibold">Critical Stock</h2>
+          </div>
          </div>
          </div>
         }/>
-
-        </div>
+      </div>
       </div>
         <div className="grid h-[650px] w-full p-4">
-        <ControlledCard children ={
-                <ResponsiveContainer width="100%" height="100%">
+          <ControlledCard children ={
+            <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   width={500}
                   height={300}
@@ -253,16 +247,16 @@ const DashboardContent = () => {
                     bottom: 5,
                   }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                  <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                </LineChart>
-              </ResponsiveContainer>
-        }/>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+              </LineChart>
+            </ResponsiveContainer>
+          }/>
         </div>
     </section>
 

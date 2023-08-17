@@ -19,12 +19,16 @@ const Footer = () => {
               <FaFacebookF size={20}/>
             </div>
           </a>
+          <a href="https://twitter.com/" className="">
           <div className="border-2 border-[#C88EA7] text-[#C88EA7] rounded-full p-1 hover:bg-[#C88EA7] hover:border-white hover:shadow-md hover:shadow-[#C88EA7] hover:text-white duration-300 cursor-pointer">
             <FaTwitter size={20}/>
           </div>
+          </a>
+          <a href="https://www.instagram.com/" className="">
           <div className="border-2 border-[#C88EA7] text-[#C88EA7] rounded-full p-1 hover:bg-[#C88EA7] hover:border-white hover:shadow-md hover:shadow-[#C88EA7] hover:text-white duration-300 cursor-pointer">
             <FaInstagram size={20}/>
           </div>
+          </a>
           <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#search/theroyalcharm9%40gmail.com?compose=new" className="">
           <div className="border-2 border-[#C88EA7] text-[#C88EA7] rounded-full p-1 hover:bg-[#C88EA7] hover:border-white hover:shadow-md hover:shadow-[#C88EA7] hover:text-white duration-300 cursor-pointer">
             <MdOutlineEmail size={20}/>

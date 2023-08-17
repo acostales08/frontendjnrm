@@ -27,6 +27,9 @@ const MemberContent = () => {
     username: "",
     password: "",
   });
+  useEffect(() => {
+    console.log(newMember)
+  }, [newMember])
 
   const openModal = (modalType, memberId = null) => {
     setModalState({ ...modalState, [modalType]: true });
@@ -56,8 +59,10 @@ const MemberContent = () => {
   };
 
   const createMember = async () => {
+
     try {
       const response = await axios.post("http://localhost:8000/api/member", newMember);
+
       if (response.status === 200) {
         closeModal("AddModal");
         const Toast = Swal.mixin({
@@ -208,6 +213,7 @@ const MemberContent = () => {
         open={modalState.AddModal}
         onClose={() => closeModal("AddModal")}
       >
+
         <ControlledTypography text="Add Member" />
         <div className="flex flex-col justify-center p-5">
           <form onSubmit={createMember}>

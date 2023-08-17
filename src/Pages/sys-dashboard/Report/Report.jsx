@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
-import { ControlledDataTable } from '../../../Components'
+import { ControlledDataTable, ControlledModal } from '../../../Components'
 
 const ReportPage = () => {
   const [data, setData] = useState([])
+  const [open, setOpen] = useState(false)
 
+  const openModal = () => {
+    setOpen(true)
+  }
+
+  const closeModal = () => {
+    setOpen(false)
+  }
   
   // const columns = [
   //   {
@@ -64,9 +72,18 @@ const ReportPage = () => {
   
   return (
     <div>
+      <button onClick={openModal}>open</button>
       
       <ControlledDataTable title = "Hello" />
-      
+
+      <ControlledModal open={open} onClose={closeModal}
+      children={
+        <>
+        <h1>Hello</h1>
+        <button onClick={closeModal}>close</button>
+        </>
+      }
+      />
     </div>
   )
 }
